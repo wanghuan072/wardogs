@@ -106,6 +106,13 @@ export const equipmentCategoryMap: Record<string, CatalogKind[]> = {
   deployables: ["deployable"],
 };
 
+export const vehicleCategoryMap: Record<string, (item: CatalogItem) => boolean> = {
+  "ground-vehicles": (item) => !String(item.type).toLowerCase().includes("air"),
+  tanks: (item) => /tank|tracked|armou?r/i.test(`${item.name} ${item.type} ${item.category}`),
+  helicopters: (item) => /rotary|helicopter/i.test(`${item.name} ${item.type} ${item.category}`),
+  logistics: (item) => /logistic|supply|cargo|ural|pickup/i.test(`${item.name} ${item.type} ${item.role} ${item.category}`) || (item.stats.passengers ?? 0) >= 5,
+};
+
 export function getItem(slug: string) {
   return catalogBySlug.get(slug);
 }

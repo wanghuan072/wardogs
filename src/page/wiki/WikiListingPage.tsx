@@ -3,7 +3,7 @@ import { Check, Filter, Grid3X3, List, Search } from "lucide-react";
 import { CatalogCard } from "@/components/content/CatalogCard";
 import { CatalogSort } from "@/components/content/CatalogSort";
 import { PageHero } from "@/components/common/PageHero";
-import { catalogItems, equipmentCategoryMap, getAmmunitionFacet, listingGroups, weaponCategoryMap } from "@/lib/data/catalog";
+import { catalogItems, equipmentCategoryMap, getAmmunitionFacet, listingGroups, vehicleCategoryMap, weaponCategoryMap } from "@/lib/data/catalog";
 import { titleFromSlug } from "@/lib/formatting/format-values";
 import type { CatalogItem } from "@/types/catalog";
 import styles from "@/style/page/wiki/wiki-listing.module.css";
@@ -14,24 +14,15 @@ type ListingContext = { section: string; sub?: string; title: string; metaTitle:
 type ListingCategory = { slug: string; label: string; test: (item: CatalogItem) => boolean };
 
 const attachmentSlots: Record<string, string> = { optics: "Sight", muzzles: "Muzzle", grips: "Underbarrel", magazines: "Magazine", stocks: "Stock" };
-const vehicleFilters: Record<string, (item: CatalogItem) => boolean> = {
-  "ground-vehicles": (item) => !String(item.type).toLowerCase().includes("air"),
-  tanks: (item) => /tank|tracked|armou?r/i.test(`${item.name} ${item.type} ${item.category}`),
-  helicopters: (item) => /rotary|helicopter/i.test(`${item.name} ${item.type} ${item.category}`),
-  artillery: (item) => /artillery|mortar/i.test(`${item.name} ${item.type} ${item.category}`),
-  logistics: (item) => /logistic|supply|cargo|ural|pickup/i.test(`${item.name} ${item.type} ${item.role} ${item.category}`) || (item.stats.passengers ?? 0) >= 5,
-  transport: (item) => (item.stats.passengers || 0) > 1 || /transport/i.test(`${item.name} ${item.type}`),
-};
-
 export const listingCategories: Record<string, ListingCategory[]> = {
   weapons: Object.entries(weaponCategoryMap).map(([slug, values]) => ({ slug, label: titleFromSlug(slug), test: (item) => values.includes(item.type || "") })),
   attachments: Object.entries(attachmentSlots).map(([slug, slot]) => ({ slug, label: titleFromSlug(slug), test: (item) => item.slot === slot })),
   equipment: Object.entries(equipmentCategoryMap).map(([slug, kinds]) => ({ slug, label: titleFromSlug(slug), test: (item) => kinds.includes(item.kind) })),
   vehicles: [
-    { slug: "ground-vehicles", label: "Ground", test: vehicleFilters["ground-vehicles"] },
-    { slug: "tanks", label: "Tanks / Armored", test: vehicleFilters.tanks },
-    { slug: "helicopters", label: "Helicopters", test: vehicleFilters.helicopters },
-    { slug: "logistics", label: "Logistics", test: vehicleFilters.logistics },
+    { slug: "ground-vehicles", label: "Ground", test: vehicleCategoryMap["ground-vehicles"] },
+    { slug: "tanks", label: "Tanks / Armored", test: vehicleCategoryMap.tanks },
+    { slug: "helicopters", label: "Helicopters", test: vehicleCategoryMap.helicopters },
+    { slug: "logistics", label: "Logistics", test: vehicleCategoryMap.logistics },
   ],
 };
 
@@ -105,10 +96,10 @@ export function WikiListingPage({ segments, searchParams }: { segments: string[]
 
   return (
     <main id="main-content">
-      <PageHero eyebrow="WARDOGS item lists" title={`WARDOGS Wiki – ${context.title.replace("WARDOGS ", "")}`} description={context.description} image={context.image} crumbs={[{ label: "Wiki", href: "/wiki" }, { label: context.title.replace("WARDOGS ", "") }]} />
+      <PageHero eyebrow="WARDOGS item lists" title={context.title} description={context.description} image={context.image} crumbs={[{ label: "Wiki", href: "/wiki" }, { label: context.title.replace("WARDOGS ", "") }]} />
       <section className={`container ${styles.listingShell}`}>
         <aside className={styles.filters}>
-          <div className={styles.filterTitle}><Filter aria-hidden="true" /><h2>Filter {listingGroups[context.section].singular}</h2><Link href={context.canonical}>Reset</Link></div>
+          <div className={styles.filterTitle}><Filter aria-hidden="true" /><h2>Filter {context.section}</h2><Link href={context.canonical}>Reset</Link></div>
           {listingCategories[context.section]?.length ? <div className={styles.filterBlock}><h3>Category <span>⌃</span></h3><Link className={!category ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { category: "", type: "" })}><i /><span>All {context.section}</span><b>{context.items.length}</b></Link>{listingCategories[context.section].map((entry) => <Link className={category === entry.slug ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { category: entry.slug, type: "" })} key={entry.slug}><i /><span>{entry.label}</span><b>{context.items.filter(entry.test).length}</b></Link>)}</div> : <div className={styles.filterBlock}><h3>Type / category <span>⌃</span></h3><Link className={!type ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { type: "" })}><i /><span>All {context.section}</span><b>{context.items.length}</b></Link>{types.slice(0, 9).map((entry) => <Link className={type === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { type: entry })} key={entry}><i /><span>{titleFromSlug(entry)}</span><b>{countBy("type", entry)}</b></Link>)}</div>}
           {calibers.length > 0 && <div className={styles.filterBlock}><h3>Caliber <span>⌃</span></h3><Link className={!caliber ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { caliber: "" })}><i /><span>All calibers</span><b>{categoryItems.length}</b></Link>{calibers.slice(0, 7).map((entry) => <Link className={caliber === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { caliber: entry })} key={entry}><i /><span>{entry}</span><b>{countBy("caliber", entry)}</b></Link>)}</div>}
           <div className={styles.filterBlock}><h3>Price range <span>⌃</span></h3><Link className={!price ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { price: "" })}><i /><span>Any price</span><b>{categoryItems.length}</b></Link>{priceOptions.map((entry) => <Link className={price === entry.value ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { price: entry.value })} key={entry.value}><i /><span>{entry.label}</span><b>{entry.count}</b></Link>)}</div>
@@ -117,7 +108,7 @@ export function WikiListingPage({ segments, searchParams }: { segments: string[]
         </aside>
 
         <div className={styles.results}>
-          <div className={styles.resultIntro}><div><h2>{context.section === "weapons" ? `All WARDOGS Weapons (${filtered.length})` : `${filtered.length} ${listingGroups[context.section].title.replace("WARDOGS ", "")}`}</h2><span>All matching records are shown below</span></div><p>{context.section === "weapons" ? "Use this WARDOGS weapons list to compare a kit before you buy." : "Compare the details that matter to your kit."}</p></div>
+          <div className={styles.resultIntro}><div><h2>All {context.title} ({filtered.length})</h2><span>All matching records are shown below</span></div><p>{context.section === "weapons" ? "Use this WARDOGS weapons list to compare a kit before you buy." : "Compare the details that matter to your kit."}</p></div>
           <div className={styles.databaseToolbar}><form className={styles.primarySearch} action={context.canonical}><Search aria-hidden="true" /><input name="q" defaultValue={value(searchParams, "q")} placeholder={`Search ${context.section} by name, caliber, or keyword...`} /><input type="hidden" name="category" value={category} /><input type="hidden" name="type" value={type} /><input type="hidden" name="caliber" value={caliber} /><input type="hidden" name="price" value={price} /><input type="hidden" name="status" value={status} /><input type="hidden" name="sort" value={sort} /><button type="submit" aria-label="Search database">Search</button></form><CatalogSort value={sort} /><div className={styles.viewToggle}><Link className={view === "grid" ? styles.activeView : ""} href={linkWith(context.canonical, preserved, { view: "grid" })} aria-label="Grid view"><Grid3X3 size={17} /><span>Grid</span></Link><Link className={view === "list" ? styles.activeView : ""} href={linkWith(context.canonical, preserved, { view: "list" })} aria-label="List view"><List size={17} /><span>List</span></Link></div></div>
           <div className={styles.quickFilters}><Link href={linkWith(context.canonical, preserved, { sort: "price-asc" })}>★ Best budget</Link><Link href={linkWith(context.canonical, preserved, { price: "under-1000" })}>● Beginner picks</Link><Link href={linkWith(context.canonical, preserved, { sort: "rpm" })}>◆ High fire rate</Link><Link href={linkWith(context.canonical, preserved, { sort: "" })}>◷ Recently checked</Link></div>
           {visible.length ? <div className={view === "list" ? styles.listView : styles.cardGrid}>{visible.map((item) => <CatalogCard key={item.slug} item={item} view={view === "list" ? "list" : "grid"} />)}</div> : <div className={styles.empty}><Search aria-hidden="true" /><h2>No records on this frequency</h2><p>Clear one or more filters to return to the full database.</p><Link href={context.canonical}>Reset filters</Link></div>}

@@ -56,7 +56,7 @@ export default function HomePage() {
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroCopy}>
             <span className={styles.eyebrow}>Independent WARDOGS game guide</span>
-            <h1><span>WARDOGS Game</span>Plan your next<br />deployment.</h1>
+            <h1><span>WARDOGS Game</span>{" "}Plan your next<br />deployment.</h1>
             <p>Find the gear you want, build a kit that fits, and get ready for your next WARDOGS match with practical guides and current update notes.</p>
             <GlobalSearch />
             <div className={styles.heroActions}><Link href="/wiki">Browse the database <ArrowRight aria-hidden="true" /></Link><Link href="/builder">Open builder</Link></div>
