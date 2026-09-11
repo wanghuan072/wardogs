@@ -1,0 +1,24 @@
+.section { padding-top: 66px; }
+.toolGroups { display: grid; gap: 38px; }
+.toolGroups > section { display: grid; grid-template-columns: 240px 1fr; padding-top: 15px; gap: 26px; border-top: 1px solid var(--line); }
+.groupLabel span { color: var(--cash-pale); font-family: var(--font-display); font-size: 38px; text-transform: uppercase; }
+.groupLabel p { color: var(--muted); font-size: 14px; }
+.toolGrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 11px; }
+.toolGrid > a { position: relative; display: grid; grid-template-columns: auto 1fr; min-height: 205px; padding: 22px 58px 22px 20px; gap: 18px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(20,40,47,.8), rgba(8,19,24,.92)); }
+.toolGrid > a:hover { border-color: var(--cash); }
+.toolGrid > a > svg:first-child { width: 31px; height: 31px; color: var(--ice); }
+.toolGrid > a > svg:last-child { position: absolute; right: 18px; bottom: 18px; width: 18px; }
+.toolGrid span { color: var(--cash-pale); font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+.toolGrid h2 { margin: 9px 0 8px; font-size: 24px; text-transform: uppercase; }
+.toolGrid p { color: var(--fog); font-size: 14px; }
+.toolGrid small { display: flex; align-items: center; gap: 5px; color: var(--status); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
+.toolGrid small svg { width: 12px; }
+.workbenchSection { padding-top: 40px; }
+.method { display: grid; grid-template-columns: 1fr 1fr; margin-top: 35px; gap: 10px; }
+.method > div { display: grid; grid-template-columns: auto 1fr; padding: 20px; column-gap: 13px; border: 1px solid var(--line); background: rgba(12,28,34,.58); }
+.method svg { grid-row: 1/3; color: var(--status); }
+.method > div:last-child svg { color: var(--cash); }
+.method h2 { margin: 2px 0 7px; font-size: 17px; text-transform: uppercase; }
+.method p { margin: 0; color: var(--muted); font-size: 14px; }
+@media (max-width: 1024px) { .toolGroups > section { grid-template-columns: 1fr; } .groupLabel p { max-width: 540px; } }
+@media (max-width: 768px) { .toolGrid, .method { grid-template-columns: 1fr; } }

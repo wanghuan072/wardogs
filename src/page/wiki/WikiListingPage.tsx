@@ -1,0 +1,128 @@
+import Link from "next/link";
+import { Check, Filter, Grid3X3, List, Search } from "lucide-react";
+import { CatalogCard } from "@/components/content/CatalogCard";
+import { CatalogSort } from "@/components/content/CatalogSort";
+import { PageHero } from "@/components/common/PageHero";
+import { catalogItems, equipmentCategoryMap, getAmmunitionFacet, listingGroups, weaponCategoryMap } from "@/lib/data/catalog";
+import { titleFromSlug } from "@/lib/formatting/format-values";
+import type { CatalogItem } from "@/types/catalog";
+import styles from "@/style/page/wiki/wiki-listing.module.css";
+import { tdk } from "@/seo/tdk";
+
+type Query = Record<string, string | string[] | undefined>;
+type ListingContext = { section: string; sub?: string; title: string; metaTitle: string; description: string; image: string; items: CatalogItem[]; canonical: string };
+type ListingCategory = { slug: string; label: string; test: (item: CatalogItem) => boolean };
+
+const attachmentSlots: Record<string, string> = { optics: "Sight", muzzles: "Muzzle", grips: "Underbarrel", magazines: "Magazine", stocks: "Stock" };
+const vehicleFilters: Record<string, (item: CatalogItem) => boolean> = {
+  "ground-vehicles": (item) => !String(item.type).toLowerCase().includes("air"),
+  tanks: (item) => /tank|tracked|armou?r/i.test(`${item.name} ${item.type} ${item.category}`),
+  helicopters: (item) => /rotary|helicopter/i.test(`${item.name} ${item.type} ${item.category}`),
+  artillery: (item) => /artillery|mortar/i.test(`${item.name} ${item.type} ${item.category}`),
+  logistics: (item) => /logistic|supply|cargo|ural|pickup/i.test(`${item.name} ${item.type} ${item.role} ${item.category}`) || (item.stats.passengers ?? 0) >= 5,
+  transport: (item) => (item.stats.passengers || 0) > 1 || /transport/i.test(`${item.name} ${item.type}`),
+};
+
+export const listingCategories: Record<string, ListingCategory[]> = {
+  weapons: Object.entries(weaponCategoryMap).map(([slug, values]) => ({ slug, label: titleFromSlug(slug), test: (item) => values.includes(item.type || "") })),
+  attachments: Object.entries(attachmentSlots).map(([slug, slot]) => ({ slug, label: titleFromSlug(slug), test: (item) => item.slot === slot })),
+  equipment: Object.entries(equipmentCategoryMap).map(([slug, kinds]) => ({ slug, label: titleFromSlug(slug), test: (item) => kinds.includes(item.kind) })),
+  vehicles: [
+    { slug: "ground-vehicles", label: "Ground", test: vehicleFilters["ground-vehicles"] },
+    { slug: "tanks", label: "Tanks / Armored", test: vehicleFilters.tanks },
+    { slug: "helicopters", label: "Helicopters", test: vehicleFilters.helicopters },
+    { slug: "logistics", label: "Logistics", test: vehicleFilters.logistics },
+  ],
+};
+
+export function isListingCategory(section: string, category: string) {
+  return Boolean(listingCategories[section]?.some((entry) => entry.slug === category)) || (section === "ammunition" && getAmmunitionFacet(category).length > 0);
+}
+
+const heroImages: Record<string, string> = { weapons: "/images/home/wardogs-command-overlook.png", ammunition: "/images/official/wardogs-12.jpg", attachments: "/images/official/wardogs-13.jpg", equipment: "/images/official/wardogs-04.jpg", vehicles: "/images/official/wardogs-03.jpg" };
+
+export function resolveListing(segments: string[]): ListingContext | null {
+  const [section] = segments;
+  const group = listingGroups[section];
+  if (!group || segments.length !== 1) return null;
+  const items = catalogItems.filter((item) => group.kinds.includes(item.kind));
+  const seo = tdk.wikiListings[section as keyof typeof tdk.wikiListings];
+  return { section, title: group.title, metaTitle: seo.title, description: seo.description, image: heroImages[section], items, canonical: group.href };
+}
+
+function value(query: Query, key: string) {
+  const result = query[key];
+  return Array.isArray(result) ? result[0] || "" : result || "";
+}
+
+function linkWith(canonical: string, query: URLSearchParams, updates: Record<string, string>) {
+  const next = new URLSearchParams(query);
+  for (const [key, val] of Object.entries(updates)) {
+    if (val) next.set(key, val);
+    else next.delete(key);
+  }
+  const output = next.toString();
+  return output ? `${canonical}?${output}` : canonical;
+}
+
+export function WikiListingPage({ segments, searchParams }: { segments: string[]; searchParams: Query }) {
+  const context = resolveListing(segments);
+  if (!context) return null;
+  const q = value(searchParams, "q").toLowerCase();
+  const category = value(searchParams, "category");
+  const type = value(searchParams, "type");
+  const caliber = value(searchParams, "caliber");
+  const price = value(searchParams, "price");
+  const status = value(searchParams, "status");
+  const sort = value(searchParams, "sort") || "name";
+  const view = value(searchParams, "view") || "grid";
+
+  const categoryConfig = listingCategories[context.section]?.find((entry) => entry.slug === category);
+  const ammunitionCategory = context.section === "ammunition" && category ? getAmmunitionFacet(category) : [];
+  const categoryItems = categoryConfig ? context.items.filter(categoryConfig.test) : ammunitionCategory.length ? ammunitionCategory : context.items;
+  let filtered = categoryItems.filter((item) => {
+    const matchesQuery = !q || `${item.name} ${item.type} ${item.caliber} ${item.summary}`.toLowerCase().includes(q);
+    const matchesType = !type || item.type === type || item.kind === type || item.slot === type;
+    const matchesCaliber = !caliber || item.caliber === caliber;
+    const matchesPrice = !price || (item.price !== null && (price === "under-1000" ? item.price < 1000 : price === "1000-2500" ? item.price >= 1000 && item.price <= 2500 : price === "2501-5000" ? item.price > 2500 && item.price <= 5000 : item.price > 5000));
+    const matchesStatus = !status || item.dataStatus === status;
+    return matchesQuery && matchesType && matchesCaliber && matchesPrice && matchesStatus;
+  });
+
+  filtered = [...filtered].sort((a, b) => sort === "price-asc" ? (a.price ?? Infinity) - (b.price ?? Infinity) : sort === "price-desc" ? (b.price ?? -1) - (a.price ?? -1) : sort === "rpm" ? (b.stats.rpm ?? -1) - (a.stats.rpm ?? -1) : a.name.localeCompare(b.name));
+  const visible = filtered;
+  const types = [...new Set(categoryItems.map((item) => item.type || item.kind).filter(Boolean))].sort();
+  const calibers = [...new Set(categoryItems.map((item) => item.caliber).filter((entry): entry is string => Boolean(entry)))].sort();
+  const preserved = new URLSearchParams();
+  for (const key of ["q", "category", "type", "caliber", "price", "status", "sort", "view"]) if (value(searchParams, key)) preserved.set(key, value(searchParams, key));
+  const countBy = (key: "type" | "caliber" | "dataStatus", entry: string) => categoryItems.filter((item) => item[key] === entry).length;
+  const priceOptions = [
+    { value: "under-1000", label: "$0 – $1,000", count: categoryItems.filter((item) => item.price !== null && item.price < 1000).length },
+    { value: "1000-2500", label: "$1,001 – $2,500", count: categoryItems.filter((item) => item.price !== null && item.price >= 1000 && item.price <= 2500).length },
+    { value: "2501-5000", label: "$2,501 – $5,000", count: categoryItems.filter((item) => item.price !== null && item.price > 2500 && item.price <= 5000).length },
+    { value: "5001", label: "$5,001+", count: categoryItems.filter((item) => item.price !== null && item.price > 5000).length },
+  ];
+
+  return (
+    <main id="main-content">
+      <PageHero eyebrow="WARDOGS item lists" title={`WARDOGS Wiki – ${context.title.replace("WARDOGS ", "")}`} description={context.description} image={context.image} crumbs={[{ label: "Wiki", href: "/wiki" }, { label: context.title.replace("WARDOGS ", "") }]} />
+      <section className={`container ${styles.listingShell}`}>
+        <aside className={styles.filters}>
+          <div className={styles.filterTitle}><Filter aria-hidden="true" /><h2>Filter {listingGroups[context.section].singular}</h2><Link href={context.canonical}>Reset</Link></div>
+          {listingCategories[context.section]?.length ? <div className={styles.filterBlock}><h3>Category <span>⌃</span></h3><Link className={!category ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { category: "", type: "" })}><i /><span>All {context.section}</span><b>{context.items.length}</b></Link>{listingCategories[context.section].map((entry) => <Link className={category === entry.slug ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { category: entry.slug, type: "" })} key={entry.slug}><i /><span>{entry.label}</span><b>{context.items.filter(entry.test).length}</b></Link>)}</div> : <div className={styles.filterBlock}><h3>Type / category <span>⌃</span></h3><Link className={!type ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { type: "" })}><i /><span>All {context.section}</span><b>{context.items.length}</b></Link>{types.slice(0, 9).map((entry) => <Link className={type === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { type: entry })} key={entry}><i /><span>{titleFromSlug(entry)}</span><b>{countBy("type", entry)}</b></Link>)}</div>}
+          {calibers.length > 0 && <div className={styles.filterBlock}><h3>Caliber <span>⌃</span></h3><Link className={!caliber ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { caliber: "" })}><i /><span>All calibers</span><b>{categoryItems.length}</b></Link>{calibers.slice(0, 7).map((entry) => <Link className={caliber === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { caliber: entry })} key={entry}><i /><span>{entry}</span><b>{countBy("caliber", entry)}</b></Link>)}</div>}
+          <div className={styles.filterBlock}><h3>Price range <span>⌃</span></h3><Link className={!price ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { price: "" })}><i /><span>Any price</span><b>{categoryItems.length}</b></Link>{priceOptions.map((entry) => <Link className={price === entry.value ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { price: entry.value })} key={entry.value}><i /><span>{entry.label}</span><b>{entry.count}</b></Link>)}</div>
+          <div className={styles.filterBlock}><h3>Data status <span>⌃</span></h3>{["community", "observed", "verified"].map((entry) => <Link className={status === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { status: status === entry ? "" : entry })} key={entry}><i /><span>{titleFromSlug(entry)}</span><b>{countBy("dataStatus", entry)}</b></Link>)}</div>
+          <div className={styles.sourceNote}><Check aria-hidden="true" /><strong>Unknown stays unknown</strong><p>Missing values never become zero. Every record keeps its source state.</p></div>
+        </aside>
+
+        <div className={styles.results}>
+          <div className={styles.resultIntro}><div><h2>{filtered.length} {listingGroups[context.section].title.replace("WARDOGS ", "")}</h2><span>All matching records are shown below</span></div><p>Compare the details that matter to your kit.</p></div>
+          <div className={styles.databaseToolbar}><form className={styles.primarySearch} action={context.canonical}><Search aria-hidden="true" /><input name="q" defaultValue={value(searchParams, "q")} placeholder={`Search ${context.section} by name, caliber, or keyword...`} /><input type="hidden" name="category" value={category} /><input type="hidden" name="type" value={type} /><input type="hidden" name="caliber" value={caliber} /><input type="hidden" name="price" value={price} /><input type="hidden" name="status" value={status} /><input type="hidden" name="sort" value={sort} /><button type="submit" aria-label="Search database">Search</button></form><CatalogSort value={sort} /><div className={styles.viewToggle}><Link className={view === "grid" ? styles.activeView : ""} href={linkWith(context.canonical, preserved, { view: "grid" })} aria-label="Grid view"><Grid3X3 size={17} /><span>Grid</span></Link><Link className={view === "list" ? styles.activeView : ""} href={linkWith(context.canonical, preserved, { view: "list" })} aria-label="List view"><List size={17} /><span>List</span></Link></div></div>
+          <div className={styles.quickFilters}><Link href={linkWith(context.canonical, preserved, { sort: "price-asc" })}>★ Best budget</Link><Link href={linkWith(context.canonical, preserved, { price: "under-1000" })}>● Beginner picks</Link><Link href={linkWith(context.canonical, preserved, { sort: "rpm" })}>◆ High fire rate</Link><Link href={linkWith(context.canonical, preserved, { sort: "" })}>◷ Recently checked</Link></div>
+          {visible.length ? <div className={view === "list" ? styles.listView : styles.cardGrid}>{visible.map((item) => <CatalogCard key={item.slug} item={item} view={view === "list" ? "list" : "grid"} />)}</div> : <div className={styles.empty}><Search aria-hidden="true" /><h2>No records on this frequency</h2><p>Clear one or more filters to return to the full database.</p><Link href={context.canonical}>Reset filters</Link></div>}
+        </div>
+      </section>
+    </main>
+  );
+}

@@ -1,0 +1,283 @@
+[
+  {
+    "slug": "beginner-guide",
+    "title": "WARDOGS Beginner Guide",
+    "description": "A complete first-deployment manual for choosing a role, reaching the objective, surviving the cash economy and learning from every life.",
+    "seo": {
+      "title": "WARDOGS Beginner Guide - Your First Successful Match",
+      "description": "Start your first WARDOGS match with a clear role, affordable kit and objective routine. Learn to move with a squad, spend wisely and improve after every life."
+    },
+    "category": "Getting Started",
+    "image": "/images/official/wardogs-04.jpg",
+    "publishedAt": "2026-08-20",
+    "updatedAt": "2026-09-10",
+    "patchVersion": "Early Access launch snapshot",
+    "quickAnswer": "Start with a kit you can afford to replace, move with a squad, and contribute to the Control Zone through pressure, revives, transport or logistics. Your persistent cash makes each life a tactical investment, so buy for the job you intend to do.",
+    "sections": [
+      {
+        "heading": "Understand the match before buying",
+        "body": [
+          "WARDOGS is a three-team combined-arms fight built around an active Control Zone. The team with the strongest presence earns progress, so the battle is not simply a race for eliminations. Read the objective, the terrain around it and your squad's missing capability before opening the armory.",
+          "Ask three questions: how will I reach the fight, what will I do when I arrive, and how will I return after a loss? A basic rifleman who travels with support and holds useful ground often contributes more than an expensive specialist operating alone."
+        ],
+        "image": "/images/official/wardogs-05.jpg",
+        "caption": "Objective pressure is created by routes, reinforcements and sustained presence—not isolated fights."
+      },
+      {
+        "heading": "Choose one clear battlefield job",
+        "body": [
+          "New players learn fastest when each life has one clear purpose. Infantry can screen an approach, medical players can keep a push alive, drivers can shorten reinforcement time, and logistics players can turn a temporary foothold into a position the team can sustain.",
+          "Watch the map and squad movement before changing roles. If several teammates are already flying or driving, another crew member may create less value than a medic or rifleman. Roles in WARDOGS are flexible; use that freedom to solve the current problem rather than to repeat the same purchase."
+        ]
+      },
+      {
+        "heading": "Build the first kit from the weapon outward",
+        "body": [
+          "Pick a primary weapon for the range and task you expect, then use the Builder to reveal only the ammunition and attachments connected to that weapon in the current data snapshot. Add protection, storage, medical supplies and utility after the core weapon package is viable.",
+          "Do not fill every slot automatically. An attachment or explosive should solve a known problem, and its price should be compared with the value of another complete life. If a field is unverified, the site leaves it unknown instead of turning a missing value into a false advantage."
+        ],
+        "image": "/images/official/wardogs-09.jpg",
+        "caption": "A readable kit starts with weapon compatibility, then adds only mission-relevant equipment."
+      },
+      {
+        "heading": "Move as part of a reinforcement chain",
+        "body": [
+          "The active objective matters, but the route into it decides whether presence can be maintained. Use transport when it saves meaningful time, dismount before the vehicle is forced into a predictable kill zone, and avoid creating a single crowded approach that the enemy can repeatedly punish.",
+          "When the team gains ground, look backward as well as forward. A safe spawn route, a medic near cover, ammunition in reach and a vehicle with a planned exit can preserve more pressure than one additional player sprinting into the center."
+        ]
+      },
+      {
+        "heading": "Learn from the cost of each life",
+        "body": [
+          "Every player begins with a cash reserve and the wallet persists, so repeated losses change future options. Track the complete cost of the life—not just the rifle—and keep a dependable fallback build that can be fielded several times without exhausting the bank.",
+          "After a death, identify whether the failure came from route choice, information, equipment or execution. Change one variable at a time. Rebuying the same expensive kit without changing the situation converts a tactical mistake into an economic one."
+        ],
+        "image": "/images/official/wardogs-12.jpg",
+        "caption": "A healthy reserve lets you adapt after a bad sequence instead of becoming locked out of useful roles."
+      },
+      {
+        "heading": "A simple first-session routine",
+        "body": [
+          "For the first few deployments, use a repeatable loop: read the objective, choose a squad need, assemble a modest kit, move with teammates, and review the result before purchasing again. This creates reliable feedback without changing weapon, role and route all at once.",
+          "Use the Wiki when you need a factual record, the Builder when you need a compatible kit, and the Guides when you need a decision framework. Treat all beta-era numbers as a snapshot until the public build confirms them."
+        ]
+      }
+    ],
+    "relatedWiki": ["/wiki/mechanics/economy", "/wiki/mechanics/control-zone", "/wiki/progression"],
+    "relatedTools": ["/builder", "/tools/budget-planner"],
+    "faq": [
+      { "question": "How much cash does a new WARDOGS player start with?", "answer": "The official game description states that each player begins with $10,000. Use it as a reserve for multiple lives, not a target to spend in one purchase." },
+      { "question": "What is the best beginner role?", "answer": "There is no fixed best role. Start with a clear, observable job such as staying with infantry, reviving nearby teammates or driving a safe reinforcement route, then expand as you understand the map." },
+      { "question": "Should I buy every available attachment?", "answer": "No. Equip a part only when its recorded effect supports the intended engagement and the complete kit remains affordable to replace." }
+    ]
+  },
+  {
+    "slug": "cash-economy",
+    "title": "WARDOGS Cash Economy Guide",
+    "description": "A detailed plan for managing the persistent wallet, pricing a complete life and deciding when expensive equipment is worth the risk.",
+    "seo": {
+      "title": "WARDOGS Cash Economy Guide - Spend Without Going Broke",
+      "description": "Manage your WARDOGS cash reserve with a complete-life budget, a fallback kit and smarter specialist purchases, so one bad run does not close your options."
+    },
+    "category": "Economy",
+    "image": "/images/official/wardogs-12.jpg",
+    "publishedAt": "2026-08-22",
+    "updatedAt": "2026-09-10",
+    "patchVersion": "Early Access launch snapshot",
+    "quickAnswer": "Treat cash as future battlefield access. Price the weapon, ammunition, protection, utility and transport together; protect a reserve of several dependable lives; and spend above that reserve only when the purchase has a clear team purpose and an exit plan.",
+    "sections": [
+      {
+        "heading": "Think in complete lives, not item prices",
+        "body": [
+          "A weapon's sticker price is only the visible part of the purchase. Compatible ammunition, magazines, armor, medical items, storage, specialist utility and a vehicle can all draw from the same persistent bank. The useful number is the total amount exposed when that life is lost.",
+          "Assemble the intended kit in the Builder before spawning, then compare the total with the $10,000 starting reference. If any price is unknown, keep that uncertainty visible and leave extra reserve rather than assuming the missing item is free."
+        ],
+        "image": "/images/official/wardogs-09.jpg",
+        "caption": "The total risk is the complete equipment manifest, not the headline weapon price."
+      },
+      {
+        "heading": "Create a reserve floor",
+        "body": [
+          "Choose a dependable fallback kit and decide how many copies you want to protect. That amount becomes a reserve floor: spending above it is available for opportunity, while spending through it reduces your ability to recover from a losing sequence.",
+          "The floor should change with the match. A stable squad with reliable transport may justify a specialist purchase; a disorganized team repeatedly losing the same route usually calls for cheaper, more flexible lives until the situation improves."
+        ]
+      },
+      {
+        "heading": "Match spending to expected value",
+        "body": [
+          "Expensive equipment is worthwhile when it multiplies team output: a transport shortens many reinforcement trips, a protected crew controls a decisive lane, or specialist tools unlock a task ordinary infantry cannot perform. Price should follow purpose, crew and route—not excitement.",
+          "Before purchasing a vehicle or premium kit, define the job, the people needed to operate it, the route to the objective, and the point at which you will disengage. If one of those is missing, the purchase is carrying avoidable risk."
+        ],
+        "image": "/images/official/wardogs-03.jpg",
+        "caption": "A high-cost asset needs a crew, route, task and recovery plan before it leaves the armory."
+      },
+      {
+        "heading": "Earn through repeatable team actions",
+        "body": [
+          "Official descriptions identify objective play, revives and transport as meaningful contributions to the economy. Build a role around actions the match will repeatedly need rather than relying on a single high-risk engagement to fund the next purchase.",
+          "When the battlefield changes, change the income route. A blocked transport corridor may make medical support more reliable; a secured approach may create a window for supplies or construction. Economic play and tactical play are the same decision viewed over several lives."
+        ]
+      },
+      {
+        "heading": "Use a loss-streak protocol",
+        "body": [
+          "After two costly losses, pause before rebuying. Reduce optional attachments, step down from a vehicle, choose a cheaper primary or switch to a support job that can contribute from safer positions. The goal is to restore useful participation without gambling the remaining reserve.",
+          "When income and team control stabilize, add capability in stages. This avoids the common cycle of buying one premium life, losing it on an unchanged route and entering the next deployment with fewer choices."
+        ],
+        "image": "/images/official/wardogs-02.jpg",
+        "caption": "A fallback build protects future choices while the team re-establishes a viable route."
+      }
+    ],
+    "relatedWiki": ["/wiki/mechanics/economy", "/wiki/equipment", "/wiki/vehicles"],
+    "relatedTools": ["/builder", "/tools/budget-planner"],
+    "faq": [
+      { "question": "Does WARDOGS cash persist between matches?", "answer": "Yes. The official description presents cash as persistent, which makes replacement cost and reserve planning important beyond a single round." },
+      { "question": "How much of my bank should one life cost?", "answer": "There is no universal percentage. Protect several copies of a reliable fallback kit, then spend the amount above that floor when a more expensive purchase has a clear battlefield purpose." },
+      { "question": "Are unknown prices counted as zero?", "answer": "The Builder separates known totals from unknown-price items. An incomplete total should be treated as a minimum, not the final bill." }
+    ]
+  },
+  {
+    "slug": "helicopter-controls",
+    "title": "WARDOGS Helicopter Controls",
+    "description": "A full pre-flight, hover, transit, approach and landing routine for learning current controls without wasting a valuable team asset.",
+    "seo": {
+      "title": "WARDOGS Helicopter Guide - Fly, Land and Support Your Team",
+      "description": "Learn WARDOGS helicopter controls from takeoff to landing, including approach routes, passenger coordination and habits that protect a valuable team transport."
+    },
+    "category": "Vehicles",
+    "image": "/images/official/wardogs-06.jpg",
+    "publishedAt": "2026-08-28",
+    "updatedAt": "2026-09-10",
+    "patchVersion": "Early Access launch snapshot",
+    "quickAnswer": "Use the current in-game bindings as the authority, learn lift, pitch, roll and yaw separately, and practice a low-risk circuit before carrying passengers. A safe pilot plans the route, landing zone and escape before takeoff.",
+    "sections": [
+      {
+        "heading": "Confirm the live control bindings",
+        "body": [
+          "Do not memorize a beta-era key chart from a guide. Open the current settings screen and identify the bindings for collective or lift, pitch, roll, yaw, throttle-related controls, camera and any available countermeasure or vehicle actions. Resolve conflicts before entering a live transport run.",
+          "Make small inputs while grounded and observe each response. If an axis is reversed or too sensitive for precise corrections, adjust it in settings before practicing. The purpose of this stage is to build a reliable link between one input and one aircraft movement."
+        ],
+        "image": "/images/official/wardogs-01.jpg",
+        "caption": "The live settings screen—not a static key list—is the authority for current helicopter bindings."
+      },
+      {
+        "heading": "Find a stable hover",
+        "body": [
+          "Increase lift gradually and keep corrections small. Practice holding a low hover without adding forward speed, then use yaw to turn the nose while maintaining position. Large alternating inputs usually create a growing oscillation instead of cancelling the first mistake.",
+          "Pick a visual reference near the horizon and another on the ground. The horizon helps read attitude; the ground reference reveals sideways drift. Hold the hover for several seconds before adding the next control axis."
+        ]
+      },
+      {
+        "heading": "Build a repeatable flight circuit",
+        "body": [
+          "Use the same short circuit: lift, stable hover, gentle forward transition, wide turn, approach and touchdown. Repeating one route makes changes in speed, altitude and control input easier to recognize than improvising a new maneuver every flight.",
+          "Climb only as high as the route requires and avoid abrupt banking near the ground. Learn to stop forward movement at a chosen point before trying faster terrain-following or confined landings."
+        ],
+        "image": "/images/official/wardogs-06.jpg",
+        "caption": "A consistent training circuit exposes mistakes without adding a new route on every attempt."
+      },
+      {
+        "heading": "Plan transport around the passengers",
+        "body": [
+          "A transport flight begins with a destination and dismount plan. Choose a landing area that provides cover, room to correct the approach and a path for passengers to leave without crossing the most obvious open ground.",
+          "Communicate before takeoff and again before landing. If the landing zone becomes unsafe, abort early, gain separation and select another approach. A go-around costs seconds; a destroyed aircraft costs cash, time and the passengers' equipment."
+        ]
+      },
+      {
+        "heading": "Approach and land in stages",
+        "body": [
+          "Begin reducing forward speed before the final descent. Keep the landing area visible, align the aircraft while there is still room to correct, and descend only after horizontal drift is controlled. Trying to remove speed, turn and descend at the same moment creates unnecessary workload.",
+          "Touch down with small inputs, confirm the aircraft is settled and give passengers time to clear. On departure, use a preselected exit direction instead of turning blindly into the terrain or incoming route."
+        ],
+        "image": "/images/official/wardogs-02.jpg",
+        "caption": "Separate deceleration, alignment and descent to keep the final approach readable."
+      },
+      {
+        "heading": "Protect and recover the aircraft",
+        "body": [
+          "Treat the helicopter as a team investment. Monitor the route, avoid repeating a compromised approach and leave enough distance to disengage before damage or terrain removes the option. A pilot's best decision may be not to land.",
+          "After a difficult flight, identify the specific phase that failed: hover, transit, route reading, approach or touchdown. Return to that phase in a low-risk circuit instead of using a full passenger load as the next practice attempt."
+        ]
+      }
+    ],
+    "relatedWiki": ["/wiki/vehicles?category=helicopters", "/wiki/mechanics/logistics", "/wiki/mechanics/economy"],
+    "relatedTools": ["/builder", "/tools/budget-planner"],
+    "faq": [
+      { "question": "What are the exact helicopter keys?", "answer": "Check the current in-game bindings. Controls can change between builds and player configurations, so this guide teaches the control axes and flight sequence rather than publishing a brittle key chart." },
+      { "question": "What should I practice first?", "answer": "Learn a stable low hover, then add yaw, gentle forward movement, a wide turn and a controlled landing in that order." },
+      { "question": "When should I abort a landing?", "answer": "Abort when the zone becomes unsafe, the approach is unstable, drift cannot be corrected with small inputs or the exit route is no longer clear." }
+    ]
+  },
+  {
+    "slug": "control-zone-guide",
+    "title": "WARDOGS Control Zone Guide",
+    "description": "A detailed objective guide for reading randomized battle space, building reinforcement pressure and adapting when the fight shifts.",
+    "seo": {
+      "title": "WARDOGS Control Zone Guide - Hold Ground and Keep Pressure",
+      "description": "Win more WARDOGS Control Zone fights by reading the approach, keeping a reinforcement route alive and changing your squad job when the objective shifts."
+    },
+    "category": "Strategy",
+    "image": "/images/official/wardogs-05.jpg",
+    "publishedAt": "2026-09-02",
+    "updatedAt": "2026-09-10",
+    "patchVersion": "Early Access launch snapshot",
+    "quickAnswer": "Win the route into the Control Zone as well as the ground inside it. Presence creates progress, but transport, spawn access, supplies, cover and safe reinforcement paths determine whether that presence survives long enough to matter.",
+    "sections": [
+      {
+        "heading": "Read the three scales of the objective",
+        "body": [
+          "Start with the whole battlefield: identify broad terrain, long transport routes and the direction each team is likely to reinforce from. Then read the Control Zone as the main scoring space, and finally identify the smaller pieces of cover, road access and elevation that shape the immediate fight.",
+          "Because the active area can vary, do not carry a fixed opening from one match into the next. Re-evaluate distance, exposed crossings, vehicle access and destructible cover before committing the first expensive wave."
+        ],
+        "image": "/images/official/wardogs-10.jpg",
+        "caption": "Read the battlefield, the scoring area and the immediate cover as three connected scales."
+      },
+      {
+        "heading": "Secure an approach before crowding the center",
+        "body": [
+          "More players inside the objective can create progress, but a concentrated group with one exposed route is easy to isolate. Establish at least one covered infantry approach and, where possible, a separate path for transport or supplies.",
+          "Use overwatch to protect movement rather than to chase distant targets. The useful question is whether each engagement helps teammates enter, remain in or return to the scoring area."
+        ]
+      },
+      {
+        "heading": "Build a reinforcement chain",
+        "body": [
+          "Sustained control comes from a sequence: rear supply, transport, a survivable forward access point, medical support and players able to replace losses. If one link is consistently failing, sending more people into the final link rarely fixes the problem.",
+          "Watch travel time after each death. If the route has become too long or predictable, shift transport, create a safer dismount or establish another direction of pressure before the current position is exhausted."
+        ],
+        "image": "/images/official/wardogs-02.jpg",
+        "caption": "Objective pressure is a chain; a broken reinforcement route eventually empties even a strong position."
+      },
+      {
+        "heading": "Divide the squad by function",
+        "body": [
+          "A balanced squad can separate into close presence, a support element and a mobile element without losing cohesion. The close group holds useful cover, support sustains the position, and the mobile group watches a flank, escorts logistics or reacts to a new attack route.",
+          "Avoid spreading so far that revives, communication and mutual support disappear. Functional separation should create multiple useful angles while preserving the ability to recombine quickly."
+        ]
+      },
+      {
+        "heading": "Know when to rotate or disengage",
+        "body": [
+          "A position stops being valuable when it no longer protects presence, reinforcement or a route the team can use. If the enemy controls the approach and the squad is buying expensive isolated lives, fall back far enough to restore a coherent entry rather than feeding the same angle.",
+          "When the active fight shifts, leave in an order that preserves mobility and supplies. Vehicles and specialist kits should not be abandoned merely because the scoring focus moved; they are the tools needed to establish pressure at the next location."
+        ],
+        "image": "/images/official/wardogs-03.jpg",
+        "caption": "A controlled rotation preserves vehicles, specialist gear and the ability to contest the next approach."
+      },
+      {
+        "heading": "Review the objective with evidence",
+        "body": [
+          "After the match, separate verified rules from assumptions about a particular route or location. Treat unverified terrain markers as observations rather than fixed tactical facts.",
+          "Use the review to form a conditional plan: if the zone favors open approaches, bring transport and long-range support; if it compresses around structures, prioritize safe access, medical support and short reinforcement time."
+        ]
+      }
+    ],
+    "relatedWiki": ["/wiki/vehicles"],
+    "relatedTools": ["/builder", "/tools/weapon-compare"],
+    "faq": [
+      { "question": "How do teams score in the Control Zone?", "answer": "The current project record describes progress through team presence in the active zone. Verify exact live scoring behavior against the public build because balance and interface details can change." },
+      { "question": "Should everyone stay inside the objective?", "answer": "No. Some players need to protect approaches, transport reinforcements, sustain supplies or stop an enemy flank. Those jobs should still directly support continued presence." },
+      { "question": "Why are fixed tactical markers not shown on the map?", "answer": "The available local image is a visual battlefield reference rather than a verified georeferenced map. The site does not invent spawn, supply or objective coordinates." }
+    ]
+  }
+]

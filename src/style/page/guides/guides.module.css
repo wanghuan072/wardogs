@@ -1,0 +1,24 @@
+.section { padding-top: 44px; padding-bottom: 20px; }
+.guideGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.guideCard { display: grid; grid-template-columns: 42% minmax(0, 1fr); min-height: 286px; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(135deg, rgba(20, 42, 49, .86), rgba(7, 18, 23, .96)); transition: border-color 180ms ease, transform 180ms ease; }
+.guideCard:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.cardImage { position: relative; display: block; min-height: 100%; overflow: hidden; border-right: 1px solid var(--line); background: #101d22; }
+.cardImage::after { position: absolute; inset: 0; content: ""; background: linear-gradient(90deg, transparent 46%, rgba(7, 18, 23, .9)); }
+.cardImage img { object-fit: cover; filter: saturate(.65) contrast(1.06); transition: transform 240ms ease; }
+.guideCard:hover .cardImage img { transform: scale(1.045); }
+.cardImage span { position: absolute; z-index: 1; top: 12px; left: 12px; padding: 5px 7px; color: var(--cash-pale); border: 1px solid rgba(240, 180, 61, .38); background: rgba(6, 16, 21, .82); font-family: var(--font-mono); font-size: 12px; }
+.cardBody { display: flex; flex-direction: column; padding: 22px 23px 19px; }
+.guideCard small { color: var(--cash-pale); font-family: var(--font-mono); font-size: 12px; letter-spacing: .09em; text-transform: uppercase; }
+.guideCard h2 { margin: 9px 0 8px; font-size: clamp(21px, 2vw, 27px); line-height: 1.03; text-transform: uppercase; }
+.guideCard h2 a:hover { color: var(--ice); }
+.guideCard p { margin: 0; color: var(--fog); font-size: 14px; line-height: 1.55; }
+.cardMeta { display: flex; align-items: center; flex-wrap: wrap; margin-top: auto; padding-top: 17px; gap: 7px 12px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
+.cardMeta span { display: inline-flex; align-items: center; gap: 5px; }
+.cardMeta svg { width: 12px; color: var(--ice); }
+.readLink { display: flex; align-items: center; justify-content: space-between; margin-top: 13px; color: var(--bone); font-family: var(--font-hud); font-size: 12px; font-weight: 800; letter-spacing: .035em; text-transform: uppercase; }
+.readLink svg { width: 15px; transition: transform 180ms ease; }
+.guideCard:hover .readLink { color: var(--ice); }
+.guideCard:hover .readLink svg { transform: translateX(3px); }
+@media (max-width: 1024px) { .guideCard { grid-template-columns: 39% minmax(0, 1fr); } }
+@media (max-width: 768px) { .guideGrid { grid-template-columns: 1fr; } .guideCard { min-height: 260px; } }
+@media (max-width: 768px) { .section { padding-top: 30px; } .guideCard { grid-template-columns: 1fr; } .cardImage { min-height: 160px; border-right: 0; border-bottom: 1px solid var(--line); } .cardImage::after { background: linear-gradient(0deg, rgba(7, 18, 23, .72), transparent 60%); } .cardBody { min-height: 230px; padding: 20px; } }

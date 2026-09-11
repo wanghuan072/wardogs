@@ -1,0 +1,17 @@
+.page { position: relative; min-height: 780px; overflow: hidden; border-bottom: 1px solid var(--line); }
+.backdrop { position: absolute; inset: 0; opacity: .4; background: linear-gradient(90deg, #061014 10%, rgba(6,16,20,.74) 58%, #061014), linear-gradient(0deg, #061014, transparent 68%), url('/images/official/wardogs-08.jpg') center / cover; filter: saturate(.45); }
+.content { position: relative; z-index: 1; padding-block: 110px 90px; }
+.content > span { color: var(--danger); font-family: var(--font-mono); font-size: 12px; letter-spacing: .2em; }
+.content h1 { max-width: 1024px; margin: 9px 0 16px; font-family: var(--font-display); font-size: clamp(68px, 10vw, 132px); font-weight: 400; line-height: .86; text-transform: uppercase; }
+.content > p { max-width: 768px; margin-bottom: 26px; color: var(--fog); font-size: 17px; line-height: 1.55; }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1020px; margin-top: 28px; gap: 9px; }
+.grid > a { display: grid; grid-template-columns: 35px 1fr auto; align-items: start; min-height: 112px; padding: 17px; gap: 10px; border: 1px solid var(--line); background: rgba(7,18,22,.88); }
+.grid > a:hover { border-color: var(--cash); background: rgba(19,39,46,.94); }
+.grid > a > svg:first-child { color: var(--cash); }
+.grid > a > svg:last-child { width: 15px; }
+.grid strong, .grid span { display: block; }
+.grid strong { font-family: var(--font-hud); text-transform: uppercase; }
+.grid span { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.home { display: inline-flex; align-items: center; margin-top: 25px; gap: 8px; color: var(--cash-pale); font-family: var(--font-hud); font-weight: 800; text-transform: uppercase; }
+@media (max-width: 1024px) { .grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }

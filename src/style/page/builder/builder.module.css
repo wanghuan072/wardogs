@@ -1,0 +1,1238 @@
+.builderPage {
+  min-height: calc(100vh - 70px);
+  padding: 22px 0 72px;
+  background:
+    linear-gradient(rgba(4, 9, 10, .86), rgba(4, 9, 10, .94)),
+    url("/images/official/wardogs-12.jpg") center 20% / cover fixed;
+}
+
+.builderContainer {
+  width: min(1620px, calc(100% - 36px));
+  margin-inline: auto;
+}
+
+.builderShell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #5f6563;
+  color: #d6d8d3;
+  background: #101313;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .58), inset 0 1px rgba(255, 255, 255, .05);
+}
+
+.builderShell::after {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .014) 0 1px, transparent 1px 4px);
+  content: "";
+  mix-blend-mode: screen;
+}
+
+.commandBar {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) 168px 168px auto;
+  align-items: stretch;
+  min-height: 94px;
+  border-bottom: 1px solid #686c68;
+  background:
+    repeating-linear-gradient(105deg, rgba(255, 255, 255, .024) 0 1px, transparent 1px 8px),
+    linear-gradient(90deg, #313534, #1b1f1f 54%, #111515);
+}
+
+.commandTitle {
+  padding: 15px 24px 13px;
+  border-right: 1px solid rgba(190, 194, 188, .22);
+}
+
+.commandTitle > span,
+.readout > span,
+.cornerIndex,
+.cardCode,
+.cardCopy small,
+.cardCopy em,
+.statusStrip,
+.manifestBar span,
+.manifestBar p {
+  font-family: var(--font-mono);
+  letter-spacing: .095em;
+  text-transform: uppercase;
+}
+
+.commandTitle > span {
+  color: #91aa8a;
+  font-size: 12px;
+}
+
+.commandTitle h2 {
+  margin: 3px 0 1px;
+  color: #e5e6e1;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3vw, 43px);
+  font-weight: 400;
+  letter-spacing: .035em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.commandTitle p {
+  margin: 0;
+  color: #9b9f9b;
+  font-size: 14px;
+}
+
+.readout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px 17px;
+  border-right: 1px solid rgba(190, 194, 188, .18);
+  background: rgba(0, 0, 0, .14);
+}
+
+.readout > span {
+  color: #8f9692;
+  font-size: 12px;
+}
+
+.readout > strong {
+  margin: 2px 0 1px;
+  color: #d5e5d0;
+  font-family: var(--font-hud);
+  font-size: 22px;
+  letter-spacing: .025em;
+}
+
+.readout > strong em {
+  color: #87908b;
+  font-size: 12px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.readout small {
+  color: #7f8582;
+  font-size: 12px;
+}
+
+.readout .negative {
+  color: #df7770;
+}
+
+.resetButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 116px;
+  padding: 0 18px;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: #c2c5c0;
+  font-family: var(--font-hud);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.resetButton:hover {
+  color: #101411;
+  background: #a9b0a9;
+}
+
+.resetButton svg {
+  width: 15px;
+}
+
+.loadoutStage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(380px, .72fr);
+  min-height: 440px;
+  border-bottom: 1px solid #5a5f5c;
+}
+
+.equipmentPanel,
+.backpackPanel,
+.armoryPanel {
+  min-width: 0;
+}
+
+.equipmentPanel {
+  padding: 13px 14px 14px;
+  border-right: 1px solid #626763;
+  background:
+    radial-gradient(circle at 44% 45%, rgba(96, 102, 95, .11), transparent 38%),
+    #131616;
+}
+
+.panelHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  padding: 0 7px;
+  border-bottom: 1px solid rgba(158, 164, 158, .26);
+}
+
+.panelHeading > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panelHeading > div > span {
+  color: #82bb73;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.panelHeading h2 {
+  margin: 0;
+  color: #d8dad5;
+  font-size: 16px;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+
+.panelHeading p,
+.panelHeading > strong {
+  margin: 0;
+  color: #949995;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.panelHeading > strong {
+  color: #d7d9d4;
+  font-size: 12px;
+}
+
+.panelHeading > .fullCapacity {
+  color: #ef9b4c;
+}
+
+.equipmentGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-top: 13px;
+  gap: 9px;
+}
+
+.equipmentSlot {
+  position: relative;
+  min-width: 0;
+  border: 1px solid #393e3b;
+  background: #171a19;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .55);
+}
+
+.equipmentSlot::before,
+.armoryCard::before,
+.packItem::before {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 17px;
+  height: 17px;
+  border-top: 1px solid #858a84;
+  border-left: 1px solid #858a84;
+  content: "";
+}
+
+.filledSlot {
+  border-color: #716441;
+  background: linear-gradient(145deg, #1b1d1c, #111414);
+  box-shadow: inset 0 0 30px rgba(144, 107, 36, .055);
+}
+
+.slotMain {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 244px;
+  padding: 12px 11px 10px;
+  overflow: hidden;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+}
+
+.slotMain:hover {
+  background: rgba(181, 153, 87, .06);
+}
+
+.cornerIndex {
+  position: relative;
+  z-index: 2;
+  color: #858b86;
+  font-size: 12px;
+}
+
+.priceTag,
+.cardPrice,
+.packItem > span {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  z-index: 3;
+  padding: 5px 8px 4px 13px;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%);
+  color: #e2efdc;
+  background: #357b2a;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .035em;
+}
+
+.slotVisual {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 152px;
+  margin-top: 2px;
+}
+
+.slotVisual img,
+.cardImage img {
+  padding: 11px;
+  object-fit: contain;
+  filter: saturate(.68) contrast(1.08) drop-shadow(0 9px 7px rgba(0, 0, 0, .52));
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.slotMain:hover .slotVisual img,
+.armoryCard:hover .cardImage img {
+  filter: saturate(.94) contrast(1.08) drop-shadow(0 10px 8px rgba(0, 0, 0, .58));
+  transform: scale(1.035);
+}
+
+.slotVisual > svg {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 42px;
+  height: 42px;
+  color: #4a4e4b;
+  transform: translate(-50%, -50%);
+}
+
+.slotName {
+  z-index: 2;
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  color: #d7d9d5;
+  font-family: var(--font-hud);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.slotMain > small {
+  z-index: 2;
+  margin-top: 3px;
+  overflow: hidden;
+  color: #7f8581;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.slotActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid #454a47;
+}
+
+.slotActions button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  min-height: 40px;
+  padding: 6px 8px;
+  gap: 5px;
+  border: 0;
+  border-right: 1px solid #454a47;
+  color: #aeb2ae;
+  background: #202322;
+  text-align: left;
+}
+
+.slotActions button:last-child {
+  border-right: 0;
+}
+
+.slotActions button:not(:disabled):hover {
+  color: #f0c16a;
+  background: #292820;
+}
+
+.slotActions button:disabled {
+  color: #555a57;
+  cursor: default;
+}
+
+.slotActions span {
+  font-family: var(--font-hud);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.slotActions strong {
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statusStrip {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 43px;
+  margin-top: 12px;
+  padding: 8px 11px;
+  gap: 9px;
+  border: 1px solid #333a36;
+  color: #949a95;
+  background: #0d1110;
+  font-size: 12px;
+}
+
+.statusStrip i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #72cc69;
+  box-shadow: 0 0 8px rgba(114, 204, 105, .65);
+}
+
+.statusStrip p {
+  margin: 0;
+}
+
+.statusStrip > span {
+  color: #6f7772;
+}
+
+.statusStrip > span strong {
+  color: #c8cbc6;
+}
+
+.backpackPanel {
+  padding: 13px 14px 14px;
+  background: #0d1010;
+}
+
+.packInterior {
+  position: relative;
+  height: 376px;
+  margin-top: 13px;
+  overflow: hidden;
+  border: 1px solid #4a4f4c;
+  background: #111414;
+}
+
+.packInterior::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(circle at 58% 47%, transparent 5%, rgba(5, 7, 7, .37) 55%, rgba(5, 7, 7, .88));
+  content: "";
+}
+
+.operatorBackdrop {
+  object-fit: cover;
+  object-position: 70% center;
+  opacity: .2;
+  filter: grayscale(1) contrast(1.4) brightness(.65);
+}
+
+.packFrame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(54px, 1fr));
+  width: min(92%, 366px);
+  min-height: 205px;
+  padding: 8px;
+  gap: 5px;
+  border: 1px solid #717670;
+  background: rgba(12, 15, 14, .75);
+  box-shadow: 0 13px 34px rgba(0, 0, 0, .7), inset 0 0 0 4px rgba(78, 83, 78, .18);
+  transform: translate(-50%, -48%);
+}
+
+.packFrame::before {
+  position: absolute;
+  top: -7px;
+  left: 18px;
+  width: 56px;
+  height: 6px;
+  border: 1px solid #626762;
+  border-bottom: 0;
+  content: "";
+}
+
+.packItem,
+.emptyPackCell {
+  position: relative;
+  min-width: 0;
+  height: 91px;
+  border: 1px solid #454a46;
+  background: rgba(23, 26, 24, .94);
+}
+
+.emptyPackCell {
+  background:
+    linear-gradient(135deg, transparent 48%, rgba(255, 255, 255, .025) 49% 51%, transparent 52%),
+    rgba(14, 17, 16, .74);
+}
+
+.emptyPackCell span {
+  position: absolute;
+  right: 5px;
+  bottom: 3px;
+  color: #3c423e;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.packItem > span {
+  padding: 3px 5px 2px 8px;
+  font-size: 12px;
+}
+
+.packItem > div {
+  position: relative;
+  height: 54px;
+}
+
+.packItem > div img {
+  padding: 7px;
+  object-fit: contain;
+  filter: saturate(.72) contrast(1.1);
+}
+
+.packItem > strong {
+  display: block;
+  padding: 0 4px;
+  overflow: hidden;
+  color: #c8cbc6;
+  font-family: var(--font-hud);
+  font-size: 12px;
+  line-height: 11px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.packItem footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 19px 1fr 19px;
+  height: 18px;
+  border-top: 1px solid #404541;
+  background: #232724;
+}
+
+.packItem footer button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  color: #bec2bd;
+  background: #171b18;
+}
+
+.packItem footer button:hover:not(:disabled) {
+  color: #111510;
+  background: #82bb73;
+}
+
+.packItem footer button:disabled {
+  opacity: .28;
+}
+
+.packItem footer svg {
+  width: 9px;
+}
+
+.packItem footer b {
+  color: #d8dad5;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.emptyPackCopy {
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #656b67;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.emptyPackCopy svg {
+  width: 14px;
+}
+
+.emptyPackCopy strong {
+  color: #8b918c;
+}
+
+.armoryPanel {
+  position: relative;
+  padding: 12px 14px 14px;
+  background: #0f1211;
+}
+
+.armoryTopline {
+  display: grid;
+  grid-template-columns: auto minmax(200px, 1fr) auto;
+  align-items: center;
+  min-height: 36px;
+  gap: 18px;
+}
+
+.armoryTopline .panelHeading {
+  min-width: 210px;
+  border-bottom: 0;
+}
+
+.armoryTopline > p {
+  margin: 0;
+  color: #858b87;
+  font-size: 14px;
+}
+
+.armoryTopline > span {
+  color: #808680;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.armoryTabs {
+  display: flex;
+  align-items: flex-end;
+  min-height: 37px;
+  padding: 0 34px;
+  gap: 3px;
+  border-bottom: 1px solid #696d68;
+}
+
+.armoryTabs button {
+  display: flex;
+  align-items: center;
+  min-height: 29px;
+  padding: 5px 12px;
+  gap: 6px;
+  border: 1px solid #393e3a;
+  border-bottom: 0;
+  color: #919691;
+  background: #242725;
+  font-family: var(--font-hud);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+
+.armoryTabs button svg {
+  width: 12px;
+}
+
+.armoryTabs button:hover {
+  color: #d8dad5;
+  background: #303330;
+}
+
+.armoryTabs .activeTab {
+  color: #f1c568;
+  border-color: #86692e;
+  background: #49391d;
+  box-shadow: inset 0 2px #c78b25;
+}
+
+.carouselFrame {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 30px;
+  align-items: stretch;
+  min-height: 248px;
+  padding-top: 8px;
+}
+
+.scrollHint {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  color: #a9ada8;
+  background: #1c201e;
+}
+
+button.scrollHint:disabled {
+  color: #444946;
+}
+
+.scrollHint svg {
+  width: 15px;
+}
+
+.itemRail {
+  display: grid;
+  grid-auto-columns: minmax(188px, 1fr);
+  grid-auto-flow: column;
+  min-width: 0;
+  gap: 7px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-color: #737973 #1e221f;
+  scrollbar-width: thin;
+}
+
+.armoryCard,
+.lockedCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 235px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #4a4f4b;
+  color: #d4d6d1;
+  background: #191c1b;
+  text-align: left;
+}
+
+.armoryCard:hover {
+  border-color: #8a7a54;
+  background: #202320;
+}
+
+.armoryCard.selectedCard {
+  border-color: #79bd69;
+  box-shadow: inset 0 0 0 1px rgba(121, 189, 105, .24);
+}
+
+.cardCode {
+  position: absolute;
+  top: 7px;
+  left: 8px;
+  z-index: 2;
+  color: #757b76;
+  font-size: 12px;
+}
+
+.cardPrice {
+  padding: 4px 6px 3px 10px;
+  font-size: 12px;
+}
+
+.cardImage {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 148px;
+  flex: 0 0 148px;
+  border-bottom: 1px solid #434844;
+  background: radial-gradient(circle at 50% 58%, #2d312f, #141716 72%);
+}
+
+.cardCopy {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  padding: 7px 9px 8px;
+}
+
+.cardCopy small {
+  color: #747b76;
+  font-size: 12px;
+}
+
+.cardCopy strong {
+  margin-top: 2px;
+  overflow: hidden;
+  color: #d8dad5;
+  font-family: var(--font-hud);
+  font-size: 12px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cardCopy em {
+  margin-top: auto;
+  color: #8a908b;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.selectedCard .cardCopy em {
+  color: #82c875;
+}
+
+.selectedMark {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border-radius: 50%;
+  color: #101510;
+  background: #80c773;
+}
+
+.selectedMark svg {
+  width: 11px;
+}
+
+.lockedCard {
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 4px;
+  border-color: #3f4340;
+  color: #707671;
+  background: #272a28;
+  text-align: center;
+}
+
+.lockedCard::after {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 9px);
+  content: "";
+}
+
+.lockedCard svg {
+  width: 28px;
+}
+
+.lockedCard strong {
+  margin-top: 7px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.lockedCard span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.noItems {
+  position: absolute;
+  right: 44px;
+  bottom: 14px;
+  left: 44px;
+  display: flex;
+  height: 235px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  color: #747a75;
+  background: #171a19;
+}
+
+.noItems strong {
+  color: #b9bdb8;
+  text-transform: uppercase;
+}
+
+.noItems span {
+  font-size: 12px;
+}
+
+.manifestBar {
+  display: grid;
+  grid-template-columns: repeat(3, 185px) minmax(240px, 1fr);
+  min-height: 54px;
+  border-top: 1px solid #555a56;
+  background: #242826;
+}
+
+.manifestBar > div {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  align-content: center;
+  padding: 7px 14px;
+  border-right: 1px solid #444945;
+}
+
+.manifestBar svg {
+  grid-row: 1 / 3;
+  align-self: center;
+  width: 15px;
+  color: #8e968f;
+}
+
+.manifestBar span {
+  color: #747b76;
+  font-size: 12px;
+}
+
+.manifestBar strong {
+  color: #d4d7d1;
+  font-family: var(--font-hud);
+  font-size: 12px;
+}
+
+.manifestBar p {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 8px 18px;
+  gap: 7px;
+  color: #778079;
+  font-size: 14px;
+}
+
+.manifestBar p svg {
+  color: #78bd6c;
+}
+
+@media (max-width: 1024px) {
+  .commandBar {
+    grid-template-columns: minmax(280px, 1fr) 150px 150px auto;
+  }
+
+  .loadoutStage {
+    grid-template-columns: minmax(0, 1.4fr) minmax(340px, .8fr);
+  }
+
+  .slotMain {
+    height: 222px;
+  }
+
+  .slotVisual {
+    height: 132px;
+  }
+
+  .armoryTabs {
+    overflow-x: auto;
+  }
+
+  .manifestBar {
+    grid-template-columns: repeat(3, 165px) minmax(220px, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .commandBar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .resetButton {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    min-width: auto;
+    min-height: 30px;
+    border: 1px solid rgba(190, 194, 188, .28);
+  }
+
+  .commandTitle {
+    grid-column: 1 / -1;
+    padding-right: 120px;
+    border-bottom: 1px solid rgba(190, 194, 188, .18);
+  }
+
+  .loadoutStage {
+    grid-template-columns: 1fr;
+  }
+
+  .equipmentPanel {
+    border-right: 0;
+    border-bottom: 1px solid #626763;
+  }
+
+  .packInterior {
+    height: 430px;
+  }
+
+  .packFrame {
+    width: min(78%, 520px);
+    grid-template-columns: repeat(4, minmax(70px, 1fr));
+  }
+
+  .manifestBar {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .manifestBar p {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .builderPage {
+    padding-top: 10px;
+  }
+
+  .builderContainer {
+    width: min(100% - 16px, 1620px);
+  }
+
+  .commandBar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .commandTitle {
+    grid-column: 1 / -1;
+    min-height: 94px;
+    padding: 15px 105px 13px 16px;
+    border-bottom: 1px solid rgba(190, 194, 188, .18);
+  }
+
+.commandTitle h2 {
+    font-size: 32px;
+  }
+
+  .readout {
+    min-height: 74px;
+  }
+
+  .equipmentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .slotMain {
+    height: 210px;
+  }
+
+  .slotVisual {
+    height: 125px;
+  }
+
+  .statusStrip {
+    grid-template-columns: 7px 1fr;
+  }
+
+  .statusStrip > span {
+    display: none;
+  }
+
+  .armoryTopline {
+    grid-template-columns: 1fr auto;
+  }
+
+  .armoryTopline > p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding: 0 7px 7px;
+  }
+
+  .armoryTabs {
+    padding: 0;
+  }
+
+  .armoryTabs button {
+    flex: 0 0 auto;
+  }
+
+  .carouselFrame {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .scrollHint {
+    display: none;
+  }
+
+  .itemRail {
+    grid-auto-columns: 168px;
+  }
+
+  .packFrame {
+    width: calc(100% - 24px);
+    grid-template-columns: repeat(4, minmax(50px, 1fr));
+  }
+
+  .emptyPackCopy span {
+    display: none;
+  }
+
+  .manifestBar {
+    grid-template-columns: 1fr;
+  }
+
+  .manifestBar > div {
+    grid-template-columns: 24px 1fr auto;
+    min-height: 48px;
+    border-right: 0;
+    border-bottom: 1px solid #414642;
+  }
+
+  .manifestBar > div svg {
+    grid-row: auto;
+  }
+
+  .manifestBar > div span {
+    align-self: center;
+  }
+
+  .manifestBar > div strong {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slotVisual img,
+  .cardImage img {
+    transition: none;
+  }
+}
+
+/* Game inventory composition: player kit / equipment / storage. */
+.builderShell {
+  background: rgba(11, 13, 13, .94);
+}
+
+.commandBar {
+  min-height: 58px;
+  grid-template-columns: minmax(250px, 1fr) 135px 135px 108px;
+  background: rgba(19, 21, 21, .94);
+}
+
+.commandTitle { padding: 9px 17px; }
+.commandTitle > span, .commandTitle p { display: none; }
+.commandTitle h2 { margin: 0; font-family: var(--font-hud); font-size: 19px; letter-spacing: .01em; }
+.readout { padding: 8px 12px; }
+.readout > strong { font-size: 16px; }
+.resetButton { min-width: 108px; font-size: 12px; }
+
+.loadoutStage {
+  grid-template-columns: 270px minmax(390px, 1fr) minmax(330px, .76fr);
+  min-height: 502px;
+  background: linear-gradient(rgba(7, 9, 9, .67), rgba(7, 9, 9, .82)), url("/images/home/wardogs-command-overlook.png") center / cover;
+}
+
+.operatorPanel {
+  min-width: 0;
+  padding: 12px;
+  border-right: 1px solid #595d5a;
+  background: rgba(18, 20, 20, .84);
+}
+
+.playerHeader { display: grid; padding: 7px 9px 9px; border-bottom: 1px solid #555a56; background: #202322; }
+.playerHeader small, .playerHeader span, .gearHeading, .quickSlots > span { color: #8e948e; font-family: var(--font-mono); font-size: 12px; letter-spacing: .09em; text-transform: uppercase; }
+.playerHeader strong { margin: 1px 0; color: #e0e2dc; font-family: var(--font-hud); font-size: 21px; text-transform: uppercase; }
+.playerStatus { display: grid; grid-template-columns: 1fr 1fr; margin-top: 7px; gap: 5px; }
+.playerStatus span { display: grid; padding: 5px 7px; border: 1px solid #454a46; color: #808681; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
+.playerStatus b { margin-top: 1px; color: #dbddd7; font-size: 12px; }
+.gearHeading { margin-top: 12px; padding: 5px 7px; border-bottom: 1px solid #555a56; }
+.gearGrid { display: grid; grid-template-columns: repeat(3, 1fr); padding-top: 7px; gap: 5px; }
+.gearTile { position: relative; display: flex; min-width: 0; height: 98px; align-items: flex-end; padding: 5px; overflow: hidden; border: 1px solid #474c48; color: #ced1ca; background: rgba(20, 23, 22, .92); text-align: left; }
+.gearTile:hover { border-color: #bea55d; background: rgba(46, 43, 29, .85); }
+.gearTile small { position: absolute; top: 4px; left: 5px; z-index: 2; color: #7d837e; font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.gearTile img { padding: 16px 7px 17px; object-fit: contain; filter: saturate(.62) contrast(1.12); }
+.gearTile > svg { position: absolute; inset: 36px auto auto 50%; width: 20px; color: #59605b; transform: translateX(-50%); }
+.gearTile strong { position: relative; z-index: 2; width: 100%; overflow: hidden; color: #d4d6d0; font-family: var(--font-hud); font-size: 12px; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.quickSlots { display: grid; grid-template-columns: 1fr repeat(4, 28px); align-items: center; margin-top: 11px; gap: 4px; }
+.quickSlots i { height: 28px; border: 1px solid #454a46; background: rgba(15, 17, 16, .85); }
+
+.equipmentPanel { padding: 12px; background: rgba(17, 19, 19, .78); }
+.equipmentPanel .panelHeading { min-height: 26px; }
+.equipmentPanel .panelHeading p { font-size: 14px; }
+.equipmentGrid { grid-template-columns: 1fr; padding-top: 7px; gap: 6px; }
+.equipmentSlot { display: grid; grid-template-columns: minmax(0, 1fr) 123px; min-height: 112px; }
+.slotMain { height: 112px; padding: 8px 11px; }
+.slotVisual { position: absolute; top: 2px; right: 114px; bottom: 0; left: 34px; width: auto; height: auto; margin: 0; }
+.slotVisual img { padding: 11px; }
+.slotName { position: absolute; bottom: 29px; left: 11px; max-width: calc(100% - 15px); font-size: 12px; }
+.slotMain > small { position: absolute; bottom: 13px; left: 11px; }
+.slotActions { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid #454a47; }
+.slotActions { grid-template-rows: repeat(3, 1fr); }
+.slotActions button { min-height: 0; border-right: 0; border-bottom: 1px solid #454a47; }
+.slotActions button:last-child { border-bottom: 0; }
+.priceTag { font-size: 12px; }
+.statusStrip { min-height: 32px; margin-top: 7px; padding: 5px 8px; }
+
+.backpackPanel { padding: 12px; background: rgba(14, 16, 16, .82); }
+.backpackPanel .panelHeading { min-height: 26px; }
+.packInterior { height: 450px; margin-top: 7px; }
+.operatorBackdrop { object-position: 65% center; opacity: .16; }
+.packFrame { width: min(84%, 300px); grid-template-columns: repeat(3, minmax(58px, 1fr)); min-height: 264px; transform: translate(-50%, -46%); }
+.packItem, .emptyPackCell { height: 112px; }
+.packItem > div { height: 73px; }
+.emptyPackCopy { bottom: 26px; }
+
+.armoryPanel { padding: 9px 12px 12px; background: #161918; }
+.armoryTopline { min-height: 28px; }
+.armoryTabs { min-height: 31px; padding: 0 30px; }
+.armoryTabs button { min-height: 24px; padding: 3px 9px; font-size: 12px; }
+.carouselFrame { min-height: 185px; padding-top: 6px; }
+.armoryCard, .lockedCard { height: 173px; }
+.cardImage { height: 101px; flex-basis: 101px; }
+.cardCopy { padding: 5px 7px; }
+.cardCopy strong { font-size: 12px; }
+
+@media (max-width: 1024px) {
+  .loadoutStage { grid-template-columns: 220px minmax(330px, 1fr) minmax(290px, .8fr); }
+  .operatorPanel { padding: 9px; }
+  .gearTile { height: 85px; }
+}
+
+@media (max-width: 1024px) {
+  .commandBar { grid-template-columns: 1fr 1fr; }
+  .commandTitle { grid-column: 1 / -1; }
+  .loadoutStage { grid-template-columns: 230px 1fr; }
+  .backpackPanel { grid-column: 1 / -1; border-top: 1px solid #595d5a; }
+  .packInterior { height: 340px; }
+}
+
+@media (max-width: 768px) {
+  .loadoutStage { grid-template-columns: 1fr; }
+  .operatorPanel { border-right: 0; border-bottom: 1px solid #595d5a; }
+  .gearGrid { grid-template-columns: repeat(5, 1fr); }
+  .gearTile { height: 76px; }
+  .equipmentSlot { grid-template-columns: minmax(0, 1fr) 105px; }
+  .slotVisual { right: 96px; }
+  .backpackPanel { grid-column: auto; }
+}

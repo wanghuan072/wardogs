@@ -1,0 +1,24 @@
+.results { padding-top: 48px; }
+.resultSummary { display: flex; align-items: center; margin-bottom: 35px; gap: 14px; }
+.resultSummary > svg { width: 28px; color: var(--cash); }
+.resultSummary span { color: var(--muted); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
+.resultSummary h2 { margin: 4px 0 0; font-size: 28px; text-transform: uppercase; }
+.results > section { display: grid; grid-template-columns: 150px 1fr; padding: 22px 0; gap: 22px; border-top: 1px solid var(--line); }
+.groupTitle { display: flex; align-items: start; justify-content: space-between; color: var(--cash-pale); font-family: var(--font-hud); font-weight: 800; text-transform: uppercase; }
+.groupTitle strong { color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+.resultGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.resultGrid > a { position: relative; min-height: 135px; padding: 15px 42px 14px 112px; border: 1px solid var(--line); background: rgba(12,28,34,.65); }
+.resultGrid > a:hover { border-color: var(--cash); }
+.resultGrid > a > div { position: absolute; top: 0; bottom: 0; left: 0; display: grid; width: 98px; place-items: center; border-right: 1px solid var(--line); background: var(--iron); }
+.resultGrid img { padding: 9px; object-fit: contain; }
+.resultGrid > a > span { color: var(--cash-pale); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
+.resultGrid h3 { margin: 5px 0; font-size: 16px; }
+.resultGrid p { display: -webkit-box; margin: 0; overflow: hidden; color: var(--muted); font-size: 14px; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.resultGrid > a > svg { position: absolute; right: 13px; bottom: 12px; width: 14px; }
+.empty { min-height: 300px; padding: 60px; border: 1px dashed var(--line-strong); text-align: center; }
+.empty h2 { text-transform: uppercase; }
+.empty p { color: var(--muted); }
+.empty a { display: inline-flex; align-items: center; gap: 8px; color: var(--cash-pale); font-family: var(--font-hud); text-transform: uppercase; }
+.empty a svg { width: 15px; }
+@media (max-width: 1024px) { .resultGrid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .results > section { grid-template-columns: 1fr; } .resultGrid { grid-template-columns: 1fr; } }

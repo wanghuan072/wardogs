@@ -1,0 +1,45 @@
+[
+  {
+    "slug": "early-access-launch-briefing",
+    "title": "Early Access Launch Briefing",
+    "label": "Launch readiness",
+    "version": "EA 1.0.0",
+    "date": "2026-09-10",
+    "sourceUrl": "https://store.steampowered.com/app/1867240/WARDOGS/",
+    "sourceLabel": "Official Steam page",
+    "summary": "WARDOGS entered Steam Early Access on September 10, 2026. Database values remain visibly tagged as pre-launch observations until each record is checked against the public build.",
+    "categories": ["Systems", "Database"],
+    "changes": [
+      { "area": "Release", "description": "WARDOGS entered Steam Early Access on September 10, 2026." },
+      { "area": "Database", "description": "All item records remain visibly tagged as beta-era community data pending launch verification." }
+    ]
+  },
+  {
+    "slug": "open-beta-status",
+    "title": "Closed Beta 02 Opened to More Players",
+    "label": "Beta",
+    "version": "CB 0.2.0",
+    "date": "2026-09-05",
+    "sourceUrl": "https://steamcommunity.com/app/1867240/announcements/",
+    "sourceLabel": "Official Steam announcements",
+    "summary": "The pre-launch beta moved into a broader access period for final scale testing. Observations from that build may differ from Early Access values.",
+    "categories": ["Systems"],
+    "changes": [
+      { "area": "Testing", "description": "Server scale, browser, VOIP, entitlements and queue behavior were part of the announced test focus." }
+    ]
+  },
+  {
+    "slug": "preorder-and-launch-date",
+    "title": "WARDOGS Launch Date Announced",
+    "label": "Announcement",
+    "version": "PRE 0.1.0",
+    "date": "2026-08-11",
+    "sourceUrl": "https://steamcommunity.com/app/1867240/announcements/",
+    "sourceLabel": "Official Steam announcements",
+    "summary": "BULKHEAD announced the September 10 Early Access launch and described the supporter edition as cosmetic support rather than cash or power monetization.",
+    "categories": ["Systems", "Economy"],
+    "changes": [
+      { "area": "Monetization", "description": "Official communication states that in-game cash and gold bars will not be sold for real money." }
+    ]
+  }
+]
