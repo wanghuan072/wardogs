@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { toolDefinitions } from "@/config/tools";
-import { catalogItems, itemHref } from "@/lib/data/catalog";
 import { guides } from "@/lib/data/editorial";
 
 const pages: { path: string; lastModified: string; priority: number; frequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
@@ -20,6 +19,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...pages.map((page) => entry(page.path, page.lastModified, page.priority, page.frequency)),
     ...guides.map((guide) => entry(`/guides/${guide.slug}`, guide.updatedAt, .78, "monthly")),
     ...toolDefinitions.map((tool) => entry(`/tools/${tool.slug}`, "2026-09-10", .72, "monthly")),
-    ...catalogItems.map((item) => entry(itemHref(item), item.lastChecked, .55, "monthly")),
   ];
 }

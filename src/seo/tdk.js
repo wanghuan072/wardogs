@@ -2,8 +2,8 @@
 // descriptions useful at search-result length; article-level copy stays with its data.
 export const tdk = {
   home: {
-    title: "WARDOGS - Weapons, Gear, Guides & Updates",
-    description: "Plan your next WARDOGS deployment with clear weapon and gear lists, compatible loadouts, player-written guides, practical tools, tier picks and patch notes.",
+    title: "WARDOGS Game Wiki, Loadout Builder & Guides",
+    description: "Explore the WARDOGS game with a player-built wiki, compatible loadout builder, weapon comparison tools, tactical guides and patch updates for every deployment.",
     path: "/",
   },
   wiki: {
@@ -12,7 +12,7 @@ export const tdk = {
     path: "/wiki",
   },
   wikiListings: {
-    weapons: { title: "WARDOGS Weapons - Prices, Stats and Full List", description: "Browse WARDOGS weapons with prices, calibers, fire rates, range and compatible ammunition. Compare rifles, SMGs, pistols and launchers before you spend." },
+    weapons: { title: "WARDOGS Weapons - Prices, Stats and Full List", description: "This WARDOGS weapons list helps you compare prices, calibers, fire rates, effective range and compatible ammunition before you spend cash on a kit." },
     ammunition: { title: "WARDOGS Ammunition - Calibers, Mags and Full List", description: "Check WARDOGS ammunition by caliber, magazine and round type. See which weapons use each option, then choose a supply that matches the kit you plan to deploy." },
     attachments: { title: "WARDOGS Attachments - Optics, Muzzles and Full List", description: "Compare WARDOGS attachments by slot, including optics, muzzles, grips, magazines and stocks. Check the practical fit before you buy parts for your next weapon." },
     equipment: { title: "WARDOGS Equipment - Armor, Medical and Full List", description: "Browse WARDOGS equipment including armor, medical supplies, storage, throwables and deployables. Find useful details for each kit slot before deployment." },

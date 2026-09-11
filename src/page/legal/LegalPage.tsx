@@ -69,7 +69,6 @@ export const legalPages: Record<string, InfoPage> = {
   },
 };
 
-export const legacyLegalPaths: Record<string, string> = { about: "/legal/about-us", contact: "/legal/contact-us", privacy: "/legal/privacy-policy", terms: "/legal/terms-of-service", copyright: "/legal/copyright" };
 const icons = [Database, ShieldCheck, FileCheck2, Radio];
 
 export function LegalPage({ slug }: { slug: string }) {

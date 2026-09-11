@@ -55,9 +55,9 @@ export default function HomePage() {
         <div className={styles.heroShade} />
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroCopy}>
-            <span className={styles.eyebrow}>Weapons, gear, guides and updates</span>
-            <h1><span>WARDOGS</span>Weapons, gear<br />and guides.</h1>
-            <p>Find the items you want to use, put together a kit that works, and check what changed before your next match.</p>
+            <span className={styles.eyebrow}>Independent WARDOGS game guide</span>
+            <h1><span>WARDOGS Game</span>Plan your next<br />deployment.</h1>
+            <p>Find the gear you want, build a kit that fits, and get ready for your next WARDOGS match with practical guides and current update notes.</p>
             <GlobalSearch />
             <div className={styles.heroActions}><Link href="/wiki">Browse the database <ArrowRight aria-hidden="true" /></Link><Link href="/builder">Open builder</Link></div>
           </div>
@@ -114,7 +114,7 @@ export default function HomePage() {
         <div className={styles.aboutCopy}>
           <span>About this site</span>
           <h2>Built for the questions players ask between matches.</h2>
-          <p>WARDOGS Field Intel brings item lists, a kit builder, practical tools and a small set of long-form guides together so you can spend less time hunting through menus and more time deciding what to take into the next round.</p>
+          <p>WARDOGS Field Intel is an independent WARDOGS game companion with item lists, a kit builder, practical tools and a small set of long-form guides. It is built to help you spend less time hunting through menus and more time deciding what to take into the next round.</p>
           <p>The game is in Early Access, so some prices, compatibility details and balance values can change. We update pages as the game changes and leave uncertain values blank rather than filling them in with a guess.</p>
           <Link href="/legal/about-us">How the site stays up to date <ArrowRight aria-hidden="true" /></Link>
         </div>
