@@ -5,7 +5,22 @@ export const catalogRecords = rawItems as unknown as CatalogItem[];
 export const catalogItems = catalogRecords;
 export const catalogBySlug = new Map(catalogRecords.map((item) => [item.slug, item]));
 const provisionalRecordSlugs = new Set(["a-91", "bushmaster-m17s", "kh-2002"]);
-const suppressedDisplaySlugs = new Set(["amphetamine"]);
+// These raw records are retained for later verification, but are not ready for
+// a public database. The list removes debug objects, internal UI objects and
+// duplicate source variants whose public fields do not identify a distinct item.
+const suppressedDisplaySlugs = new Set([
+  "amphetamine",
+  "rockettesting-84mm", "70mm", "battery-charge",
+  "ammo-1", "ammo-10", "ammo-25", "ammo-50", "ammo-100",
+  "stingray-stn-05-mainbarrel",
+  "stanag-30-rnd-magazine-a91mag", "stanag-30-rnd-magazine-tar21mag",
+  "155mm-he-shell-155mm-standard", "81mm-120x800mm-expensive", "81mm-120x800mm-standard",
+  "at4-mag", "at4-mag-at4rocket", "g60-magazine", "g60-extended-magazine",
+  "adrenaline-pen-adrenalinepen", "alpha-card-keycard-alpha-2", "bravo-card-keycard-bravo-2", "charlie-card-keycard-charlie-2",
+  "fuel-can-item", "level-4-helmet-helm-005", "improvised-explosive-device-ied-explosive",
+  "m113-apc-sv-land-tracked-spawnvehicle-manticore", "m113-apc-sv-land-tracked-spawnvehicle-valkyra",
+  "at4", "browning-mg", "g60", "m12g",
+]);
 
 function displayRecordKey(item: CatalogItem) {
   const { id: _id, slug: _slug, ...displayFields } = item;

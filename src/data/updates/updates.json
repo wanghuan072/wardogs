@@ -7,11 +7,11 @@
     "date": "2026-09-10",
     "sourceUrl": "https://store.steampowered.com/app/1867240/WARDOGS/",
     "sourceLabel": "Official Steam page",
-    "summary": "WARDOGS entered Steam Early Access on September 10, 2026. Database values remain visibly tagged as pre-launch observations until each record is checked against the public build.",
+    "summary": "WARDOGS entered Steam Early Access on September 10, 2026. Community-marked records remain separate from values checked against the public Early Access build while individual items are reviewed.",
     "categories": ["Systems", "Database"],
     "changes": [
       { "area": "Release", "description": "WARDOGS entered Steam Early Access on September 10, 2026." },
-      { "area": "Database", "description": "All item records remain visibly tagged as beta-era community data pending launch verification." }
+      { "area": "Database", "description": "Community records remain clearly labeled until each value is checked against the public Early Access build." }
     ]
   },
   {

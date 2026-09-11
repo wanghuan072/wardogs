@@ -49,10 +49,7 @@ export const headerDropdowns: Record<string, readonly (readonly [string, string]
   ],
   "Tier List": [
     ["Tier List Overview", "/tier-list"],
-    ["Weapons", "/tier-list/weapons"],
-    ["Ammunition", "/tier-list/ammunition"],
-    ["Attachments", "/tier-list/attachments"],
-    ["Vehicles", "/tier-list/vehicles"],
+    ["Weapons Tier List", "/tier-list/weapons"],
   ],
   Tools: [
     ["All Tools", "/tools"],

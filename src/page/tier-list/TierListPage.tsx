@@ -4,14 +4,16 @@ import Link from "next/link";
 import { ArrowRight, BarChart3, CheckCircle2, Layers3, Scale } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { SectionHeading } from "@/components/common/SectionHeading";
-import { ammunition, attachments, equipment, facetSlug, itemListingHref, vehicles, weapons } from "@/lib/data/catalog";
-import { formatMoney, formatNumber, titleFromSlug } from "@/lib/formatting/format-values";
+import { facetSlug, itemListingHref, weapons } from "@/lib/data/catalog";
+import { formatCatalogLabel, formatMoney, formatNumber } from "@/lib/formatting/format-values";
 import { buildMetadata } from "@/seo/metadata";
 import { tdk } from "@/seo/tdk";
 import type { CatalogItem } from "@/types/catalog";
 import styles from "@/style/page/tier-list/tier-list.module.css";
 
-export const tierSections = ["weapons", "ammunition", "attachments", "equipment", "vehicles"];
+// Weapons are the only category with an editorially reviewed board. Other
+// records remain available in the Wiki until there is enough evidence to rank them.
+export const tierSections = ["weapons"];
 export const metadata: Metadata = buildMetadata(tdk.tierList);
 
 type Query = Record<string, string | string[] | undefined>;
@@ -20,10 +22,6 @@ type TierSection = { label: string; singular: string; description: string; items
 
 const sectionData: Record<string, TierSection> = {
   weapons: { label: "Weapons", singular: "weapon", description: "Every weapon is kept on one board and grouped by weapon type.", items: weapons },
-  ammunition: { label: "Ammunition", singular: "ammunition", description: "Compare ammunition by caliber or ammunition family.", items: ammunition },
-  attachments: { label: "Attachments", singular: "attachment", description: "Compare attachments by mounting slot and what they are made for.", items: attachments },
-  equipment: { label: "Equipment", singular: "item", description: "Armor, medical gear, storage, supplies and deployables grouped by role.", items: equipment },
-  vehicles: { label: "Vehicles", singular: "vehicle", description: "Compare air and ground vehicles by vehicle type.", items: vehicles },
 };
 
 const tierRows: { key: TierKey; label: string }[] = [
@@ -47,34 +45,15 @@ function queryValue(query: Query, key: string) {
 }
 
 function categoryName(section: string, item: CatalogItem) {
-  if (section === "weapons") return item.type || "Unclassified";
-  if (section === "ammunition") return item.caliber || item.type || "Unclassified";
-  if (section === "attachments") return item.slot || item.category || "Unclassified";
-  if (section === "vehicles") return item.type || item.category || "Unclassified";
-  return titleFromSlug(item.kind);
+  return section === "weapons" ? item.type || "Unclassified" : "Unclassified";
 }
 
 function metricFor(section: string, item: CatalogItem) {
-  if (section === "weapons") return formatNumber(item.stats.rpm, " RPM");
-  if (section === "vehicles") return formatNumber(item.stats.maxSpeed, " km/h");
-  if (section === "ammunition") return item.ammoType || item.type || "Unknown type";
-  if (section === "attachments") return item.slot || "Unknown slot";
-  return formatNumber(item.weight, " kg");
+  return section === "weapons" ? formatNumber(item.stats.rpm, " RPM") : "Unknown";
 }
 
 function rankFor(section: string, item: CatalogItem): TierKey {
   return section === "weapons" ? editorialTier.get(item.slug) || "U" : "U";
-}
-
-function FamilyRail({ active }: { active?: string }) {
-  return (
-    <nav className={`container ${styles.familyRail}`} aria-label="Tier list databases">
-      {tierSections.map((slug) => {
-        const data = sectionData[slug];
-        return <Link className={active === slug ? styles.activeFamily : ""} href={`/tier-list/${slug}`} key={slug}><span>{data.items.length}</span><strong>{data.label}</strong><small>Open board</small></Link>;
-      })}
-    </nav>
-  );
 }
 
 function TierBoard({ items, section, showEmpty = false }: { items: CatalogItem[]; section: string; showEmpty?: boolean }) {
@@ -94,7 +73,7 @@ function TierBoard({ items, section, showEmpty = false }: { items: CatalogItem[]
                     <span>{item.dataStatus}</span>
                   </div>
                   <strong>{item.name}</strong>
-                  <span>{item.type || item.category || titleFromSlug(item.kind)}</span>
+                  <span>{formatCatalogLabel(item.type || item.category, item.kind)}</span>
                   <small>{formatMoney(item.price)} <i /> {metricFor(section, item)}</small>
                 </Link>
               ))}
@@ -119,8 +98,7 @@ export function TierListPage({ section, searchParams = {} }: { section?: string;
 
   return (
     <main id="main-content">
-      <PageHero eyebrow="Community picks by item type" title={`WARDOGS Tier List – ${data.label}`} description={`${data.description} Use it as a starting point for your own choice, not a replacement for trying a kit in the current game build.`} image="/images/official/wardogs-09.jpg" crumbs={[{ label: "Tier List", href: "/tier-list" }, { label: data.label }]} />
-      <FamilyRail active={section} />
+      <PageHero eyebrow="Reviewed weapon placements" title={`WARDOGS Tier List – ${data.label}`} description={`${data.description} Use it as a starting point for your own choice, not a replacement for trying a kit in the current game build.`} image="/images/official/wardogs-09.jpg" crumbs={[{ label: "Tier List", href: "/tier-list" }, { label: data.label }]} />
 
       <nav className={`container ${styles.categoryBar}`} aria-label={`${data.label} categories`}>
         <span>Filter class</span>
@@ -160,13 +138,12 @@ function TierHub() {
   const preview = weapons.filter((item) => editorialTier.has(item.slug));
   return (
     <main id="main-content">
-      <PageHero eyebrow="Community picks by category" title="WARDOGS Tier Lists – Compare your options" description="Pick a category, then see the community board for its items. Use the rankings as a quick starting point and adjust for your role, budget and squad." image="/images/official/wardogs-09.jpg" crumbs={[{ label: "Tier List" }]} />
-      <FamilyRail />
+      <PageHero eyebrow="Reviewed weapon placements" title="WARDOGS Weapons Tier List" description="A compact field ranking for weapons with an editorial placement. Use it as a starting point, then check your budget, role and the current game build." image="/images/official/wardogs-09.jpg" crumbs={[{ label: "Tier List" }]} />
       <section className={`container ${styles.hubBoard}`}>
         <header><div><span>Featured board / weapons</span><h2>Current field ranking</h2><p>A compact preview of records with an editorial placement.</p></div><Link href="/tier-list/weapons">Open all 38 weapons <ArrowRight /></Link></header>
         <TierBoard items={preview} section="weapons" showEmpty />
       </section>
-      <section className={`container ${styles.hubGuide}`}><SectionHeading eyebrow="Choose a category" title="Five boards to explore" description="Every category stays on one page, with item types used as filters instead of extra pages." /><div>{tierSections.map((slug) => { const data = sectionData[slug]; return <Link href={`/tier-list/${slug}`} key={slug}><span>{data.items.length} items</span><strong>{data.label}</strong><p>{data.description}</p><ArrowRight /></Link>; })}</div></section>
+      <section className={`container ${styles.methodology}`}><SectionHeading eyebrow="Ranking discipline" title="How to read the board" /><div><article><Scale /><h3>Compare by role</h3><p>Each weapon is placed for how it performs in its intended job, not against unrelated classes.</p></article><article><BarChart3 /><h3>Check the record</h3><p>Price and rate of fire stay visible beside every placement for a quick comparison.</p></article><article><CheckCircle2 /><h3>Unverified stays out</h3><p>Items without enough evidence are kept in the Wiki, not presented as a finished ranking.</p></article></div></section>
     </main>
   );
 }
