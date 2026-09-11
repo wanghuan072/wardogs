@@ -1,6 +1,6 @@
 # WARDOGS Field Intel
 
-[WARDOGS Field Intel](https://wardogs.com/) is an independent player resource for **WARDOGS**. It is built for the moments between deployments: checking a weapon, putting together a legal kit, protecting a cash reserve, learning a system, or catching up after a patch.
+[WARDOGS Field Intel](https://wardogsdb.org/) is an independent player resource for **WARDOGS**. It is built for the moments between deployments: checking a weapon, putting together a legal kit, protecting a cash reserve, learning a system, or catching up after a patch.
 
 The site is a fan project. It is not affiliated with, endorsed by, or connected to the official WARDOGS game or its rights holders.
 
@@ -20,20 +20,20 @@ Field Intel keeps those decisions practical:
 
 | Page | What it is for |
 | --- | --- |
-| [Home](https://wardogs.com/) | A quick route to the most useful player resources, current field notes and commonly checked items. |
-| [Wiki](https://wardogs.com/wiki) | Weapons, ammunition, attachments, equipment and vehicles with the information needed before a purchase. |
-| [Guides](https://wardogs.com/guides) | Four detailed play guides: first match, cash economy, helicopter controls and Control Zone play. |
-| [Loadout Builder](https://wardogs.com/builder) | Build a compatible kit from weapon through ammunition, attachments and backpack space. |
-| [Tier Lists](https://wardogs.com/tier-list) | Community-oriented category picks, intended as a starting point for comparison rather than a final verdict. |
-| [Tools](https://wardogs.com/tools) | Weapon comparison and a deployment budget planner for clearer pre-match choices. |
-| [Updates](https://wardogs.com/updates) | One timeline for listed versions, dates and player-relevant changes. |
+| [Home](https://wardogsdb.org/) | A quick route to the most useful player resources, current field notes and commonly checked items. |
+| [Wiki](https://wardogsdb.org/wiki) | Weapons, ammunition, attachments, equipment and vehicles with the information needed before a purchase. |
+| [Guides](https://wardogsdb.org/guides) | Four detailed play guides: first match, cash economy, helicopter controls and Control Zone play. |
+| [Loadout Builder](https://wardogsdb.org/builder) | Build a compatible kit from weapon through ammunition, attachments and backpack space. |
+| [Tier Lists](https://wardogsdb.org/tier-list) | Community-oriented category picks, intended as a starting point for comparison rather than a final verdict. |
+| [Tools](https://wardogsdb.org/tools) | Weapon comparison and a deployment budget planner for clearer pre-match choices. |
+| [Updates](https://wardogsdb.org/updates) | One timeline for listed versions, dates and player-relevant changes. |
 
 ## Featured guides
 
-- [WARDOGS Beginner Guide](https://wardogs.com/guides/beginner-guide) — choose a role, buy an affordable first kit and learn from every life.
-- [WARDOGS Cash Economy Guide](https://wardogs.com/guides/cash-economy) — protect a reserve while deciding when specialist equipment is worth the risk.
-- [WARDOGS Helicopter Guide](https://wardogs.com/guides/helicopter-controls) — prepare, fly, land and support a squad without throwing away a team asset.
-- [WARDOGS Control Zone Guide](https://wardogs.com/guides/control-zone-guide) — create objective pressure with routes, presence and reinforcement timing.
+- [WARDOGS Beginner Guide](https://wardogsdb.org/guides/beginner-guide) — choose a role, buy an affordable first kit and learn from every life.
+- [WARDOGS Cash Economy Guide](https://wardogsdb.org/guides/cash-economy) — protect a reserve while deciding when specialist equipment is worth the risk.
+- [WARDOGS Helicopter Guide](https://wardogsdb.org/guides/helicopter-controls) — prepare, fly, land and support a squad without throwing away a team asset.
+- [WARDOGS Control Zone Guide](https://wardogsdb.org/guides/control-zone-guide) — create objective pressure with routes, presence and reinforcement timing.
 
 ## Frequently asked questions
 
@@ -51,14 +51,14 @@ The Builder follows weapon compatibility. When the selected weapon changes, ammu
 
 ### How can I report an issue?
 
-Send the page URL, the value or relationship that needs attention, the game version or date and any public evidence to [wyong@wardogs.com](mailto:wyong@wardogs.com). See [Contact Us](https://wardogs.com/legal/contact-us) and [Copyright](https://wardogs.com/legal/copyright) for attribution or rights requests.
+Send the page URL, the value or relationship that needs attention, the game version or date and any public evidence to [wyong@wardogsdb.org](mailto:wyong@wardogsdb.org). See [Contact Us](https://wardogsdb.org/legal/contact-us) and [Copyright](https://wardogsdb.org/legal/copyright) for attribution or rights requests.
 
 ## Legal
 
-- [Privacy Policy](https://wardogs.com/legal/privacy-policy)
-- [Terms of Service](https://wardogs.com/legal/terms-of-service)
-- [Copyright Notice](https://wardogs.com/legal/copyright)
-- [About Us](https://wardogs.com/legal/about-us)
-- [Contact Us](https://wardogs.com/legal/contact-us)
+- [Privacy Policy](https://wardogsdb.org/legal/privacy-policy)
+- [Terms of Service](https://wardogsdb.org/legal/terms-of-service)
+- [Copyright Notice](https://wardogsdb.org/legal/copyright)
+- [About Us](https://wardogsdb.org/legal/about-us)
+- [Contact Us](https://wardogsdb.org/legal/contact-us)
 
 Copyright © 2026 WARDOGS Field Intel. All rights reserved.
