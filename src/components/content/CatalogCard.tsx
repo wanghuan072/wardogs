@@ -1,18 +1,25 @@
 import Image from "next/image";
-import { formatMoney, formatNumber } from "@/lib/formatting/format-values";
+import { formatCatalogLabel, formatMoney, formatNumber, formatStatEffect } from "@/lib/formatting/format-values";
+import { isProvisionalRecord } from "@/lib/data/catalog";
 import type { CatalogItem } from "@/types/catalog";
 import styles from "@/style/common/common.module.css";
 
 function keyFacts(item: CatalogItem) {
-  if (item.kind === "weapon") return [{ label: "Rate of fire", value: formatNumber(item.stats.rpm, " RPM") }, { label: "Effective range", value: formatNumber(item.stats.effectiveRange, " m") }, { label: "Magazine", value: formatNumber(item.stats.magazineSize, " rounds") }, { label: "Weight", value: formatNumber(item.weight, " kg") }];
-  if (item.kind === "vehicle") return [{ label: "Top speed", value: formatNumber(item.stats.maxSpeed, " km/h") }, { label: "Seats", value: formatNumber(item.stats.seats) }, { label: "Range", value: formatNumber(item.stats.rangeKm, " km") }, { label: "Weight", value: formatNumber(item.weight, " kg") }];
-  if (item.kind === "ammo") return [{ label: "Damage", value: formatNumber(item.stats.damage) }, { label: "Penetration", value: formatNumber(item.stats.penetration) }, { label: "Velocity", value: formatNumber(item.stats.muzzleVelocity, " m/s") }, { label: "Weight", value: formatNumber(item.weight, " kg") }];
+  const known = (facts: { label: string; value: number | null | undefined; suffix?: string }[]) => facts.filter((fact) => typeof fact.value === "number").map((fact) => ({ label: fact.label, value: formatNumber(fact.value, fact.suffix) }));
+  if (item.kind === "weapon") return known([{ label: "Rate of fire", value: item.stats.rpm, suffix: " RPM" }, { label: "Effective range", value: item.stats.effectiveRange, suffix: " m" }, { label: "Magazine", value: item.stats.magazineSize, suffix: " rounds" }, { label: "Weight", value: item.weight, suffix: " kg" }]);
+  if (item.kind === "vehicle") return known([{ label: "Top speed", value: item.stats.maxSpeed, suffix: " km/h" }, { label: "Seats", value: item.stats.seats }, { label: "Range", value: item.stats.rangeKm, suffix: " km" }, { label: "Weight", value: item.weight, suffix: " kg" }]);
+  if (item.kind === "ammo") return known([{ label: "Damage", value: item.stats.damage }, { label: "Penetration", value: item.stats.penetration }, { label: "Velocity", value: item.stats.muzzleVelocity, suffix: " m/s" }, { label: "Weight", value: item.weight, suffix: " kg" }]);
   const [effectName, effect] = Object.entries(item.statEffects || {})[0] || [];
-  return [{ label: "Slot", value: item.slot || "Unknown" }, { label: "Role", value: item.role || item.type || item.kind }, { label: effectName ? effectName.replaceAll("-", " ") : "Effect", value: effect ? `${effect.op || "value"} ${effect.v ?? "Unknown"}` : "Unknown" }, { label: "Weight", value: formatNumber(item.weight, " kg") }];
+  const facts = item.slot ? [{ label: "Slot", value: formatCatalogLabel(item.slot) }] : [];
+  if (effectName && effect) facts.push(formatStatEffect(effectName, effect));
+  if (typeof item.weight === "number") facts.push({ label: "Weight", value: formatNumber(item.weight, " kg") });
+  return facts;
 }
 
 export function CatalogCard({ item, compact = false, view = "grid" }: { item: CatalogItem; compact?: boolean; view?: "grid" | "list" }) {
   const facts = keyFacts(item);
+  const price = isProvisionalRecord(item) ? "Needs review" : formatMoney(item.price);
+  const itemType = formatCatalogLabel(item.type || item.category || item.kind, item.kind);
   if (view === "list") {
     return (
       <article className={styles.catalogListCard}>
@@ -21,12 +28,12 @@ export function CatalogCard({ item, compact = false, view = "grid" }: { item: Ca
           <span>{item.dataStatus}</span>
         </div>
         <div className={styles.catalogListBody}>
-          <span>{item.type || item.category || item.kind}{item.caliber ? ` · ${item.caliber}` : ""}</span>
-          <div><h3>{item.name}</h3><strong>{formatMoney(item.price)}</strong></div>
+          <span>{itemType}{item.caliber ? ` · ${item.caliber}` : ""}</span>
+          <div><h3>{item.name}</h3><strong>{price}</strong></div>
         </div>
-        <dl className={styles.catalogListFacts}>
+        {facts.length > 0 && <dl className={styles.catalogListFacts}>
           {facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
-        </dl>
+        </dl>}
       </article>
     );
   }
@@ -44,11 +51,11 @@ export function CatalogCard({ item, compact = false, view = "grid" }: { item: Ca
         <div className={styles.catalogTitleRow}>
           <div>
             <h3>{item.name}</h3>
-            <span>{item.type || item.category || item.kind}{item.caliber ? ` · ${item.caliber}` : ""}</span>
+            <span>{itemType}{item.caliber ? ` · ${item.caliber}` : ""}</span>
           </div>
-          {compact ? <strong className={styles.compactPrice}>{formatMoney(item.price)}</strong> : <strong className={styles.cardPrice}>{formatMoney(item.price)}</strong>}
+          {compact ? <strong className={styles.compactPrice}>{price}</strong> : <strong className={styles.cardPrice}>{price}</strong>}
         </div>
-        {!compact && (
+        {!compact && facts.length > 0 && (
           <div className={styles.miniStats}>
             {facts.map((fact) => <span key={fact.label}><small>{fact.label}</small><b>{fact.value}</b></span>)}
           </div>

@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import styles from "@/style/page/wiki/wiki-listing.module.css";
 
-export function CatalogSort({ value }: { value: string }) {
+export function CatalogSort({ value, showRateOfFire = false }: { value: string; showRateOfFire?: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -22,7 +22,7 @@ export function CatalogSort({ value }: { value: string }) {
         <option value="name">Name</option>
         <option value="price-asc">Price: low to high</option>
         <option value="price-desc">Price: high to low</option>
-        <option value="rpm">Rate of fire</option>
+        {showRateOfFire && <option value="rpm">Rate of fire</option>}
       </select>
     </label>
   );

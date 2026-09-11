@@ -53,27 +53,27 @@ export const tdk = {
   about: {
     title: "About WARDOGS Field Intel - Player Guide and Tools",
     description: "Learn how WARDOGS Field Intel organizes item lists, compatible kits, practical guides and updates, plus how to send a useful correction when a record changes.",
-    path: "/legal/about-us",
+    path: "/about",
   },
   privacy: {
     title: "Privacy Policy - WARDOGS Field Intel Player Site",
     description: "Read the WARDOGS Field Intel privacy policy for local tool inputs, routine hosting data and external links on this independent resource for WARDOGS players.",
-    path: "/legal/privacy-policy",
+    path: "/privacy",
   },
   terms: {
     title: "Terms of Service - WARDOGS Field Intel Player Site",
     description: "Read the WARDOGS Field Intel terms of service, including informational use, acceptable use, availability and responsibilities when using this player guide.",
-    path: "/legal/terms-of-service",
+    path: "/terms",
   },
   copyright: {
     title: "Copyright Notice - WARDOGS Field Intel Fan Site",
     description: "Read the WARDOGS Field Intel copyright notice covering game names, fan-site materials, attribution and how rights holders can request a correction or removal.",
-    path: "/legal/copyright",
+    path: "/copyright",
   },
   contact: {
     title: "Contact WARDOGS Field Intel - Corrections and Rights",
     description: "Contact WARDOGS Field Intel about an item correction, a technical issue, attribution or rights concern. Include the page URL and context to check the report.",
-    path: "/legal/contact-us",
+    path: "/contact",
   },
   search: {
     title: "Search WARDOGS Items, Guides and Player Tools",

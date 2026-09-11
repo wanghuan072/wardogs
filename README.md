@@ -51,14 +51,14 @@ The Builder follows weapon compatibility. When the selected weapon changes, ammu
 
 ### How can I report an issue?
 
-Send the page URL, the value or relationship that needs attention, the game version or date and any public evidence to [wyong@wardogsdb.org](mailto:wyong@wardogsdb.org). See [Contact Us](https://wardogsdb.org/legal/contact-us) and [Copyright](https://wardogsdb.org/legal/copyright) for attribution or rights requests.
+Send the page URL, the value or relationship that needs attention, the game version or date and any public evidence to [wyong@wardogsdb.org](mailto:wyong@wardogsdb.org). See [Contact Us](https://wardogsdb.org/contact) and [Copyright](https://wardogsdb.org/copyright) for attribution or rights requests.
 
 ## Legal
 
-- [Privacy Policy](https://wardogsdb.org/legal/privacy-policy)
-- [Terms of Service](https://wardogsdb.org/legal/terms-of-service)
-- [Copyright Notice](https://wardogsdb.org/legal/copyright)
-- [About Us](https://wardogsdb.org/legal/about-us)
-- [Contact Us](https://wardogsdb.org/legal/contact-us)
+- [Privacy Policy](https://wardogsdb.org/privacy)
+- [Terms of Service](https://wardogsdb.org/terms)
+- [Copyright Notice](https://wardogsdb.org/copyright)
+- [About Us](https://wardogsdb.org/about)
+- [Contact Us](https://wardogsdb.org/contact)
 
 Copyright © 2026 WARDOGS Field Intel. All rights reserved.

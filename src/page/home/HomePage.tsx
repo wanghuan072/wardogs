@@ -116,7 +116,7 @@ export default function HomePage() {
           <h2>Built for the questions players ask between matches.</h2>
           <p>WARDOGS Field Intel is an independent WARDOGS game companion with item lists, a kit builder, practical tools and a small set of long-form guides. It is built to help you spend less time hunting through menus and more time deciding what to take into the next round.</p>
           <p>The game is in Early Access, so some prices, compatibility details and balance values can change. We update pages as the game changes and leave uncertain values blank rather than filling them in with a guess.</p>
-          <Link href="/legal/about-us">How the site stays up to date <ArrowRight aria-hidden="true" /></Link>
+          <Link href="/about">How the site stays up to date <ArrowRight aria-hidden="true" /></Link>
         </div>
         <div className={styles.faqPanel}>
           <span>Quick answers</span>

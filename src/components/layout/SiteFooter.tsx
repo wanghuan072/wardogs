@@ -25,11 +25,11 @@ export function SiteFooter() {
           <p>Copyright © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.<br />WARDOGS Field Intel is an independent fan site and is not affiliated with, endorsed by, or connected to the official WARDOGS game or its rights holders.</p>
           <nav className={styles.footerLinks} aria-label="Legal information">
             <span>Legal</span>
-            <a href="/legal/privacy-policy" rel="noopener noreferrer nofollow">Privacy Policy</a>
-            <a href="/legal/terms-of-service" rel="noopener noreferrer nofollow">Terms of Service</a>
-            <a href="/legal/copyright" rel="noopener noreferrer nofollow">Copyright</a>
-            <a href="/legal/about-us" rel="noopener noreferrer nofollow">About Us</a>
-            <a href="/legal/contact-us" rel="noopener noreferrer nofollow">Contact Us</a>
+            <a href="/privacy" rel="noopener noreferrer nofollow">Privacy Policy</a>
+            <a href="/terms" rel="noopener noreferrer nofollow">Terms of Service</a>
+            <a href="/copyright" rel="noopener noreferrer nofollow">Copyright</a>
+            <a href="/about" rel="noopener noreferrer nofollow">About Us</a>
+            <a href="/contact" rel="noopener noreferrer nofollow">Contact Us</a>
           </nav>
         </div>
       </div>

@@ -56,7 +56,7 @@ export function UpdatesPage() {
       <div className="container"><RelatedLinks links={[
         { label: "Official WARDOGS updates", href: "https://steamcommunity.com/app/1867240/announcements/", text: "Read announcements from the WARDOGS team on Steam." },
         { label: "Browse game items", href: "/wiki", text: "Look up weapons, gear and vehicles for your next match." },
-        { label: "About this site", href: "/legal/about-us", text: "See what WARDOGS Field Intel covers and how pages are updated." },
+        { label: "About this site", href: "/about", text: "See what WARDOGS Field Intel covers and how pages are updated." },
       ]} /></div>
     </main>
   );

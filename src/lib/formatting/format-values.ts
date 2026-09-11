@@ -6,6 +6,26 @@ export function formatNumber(value: number | null | undefined, suffix = "") {
   return typeof value === "number" ? `${value.toLocaleString("en-US")}${suffix}` : "Unknown";
 }
 
+export function formatStatEffect(name: string, effect: { op?: string; v?: number }) {
+  const value = effect.v;
+  if (typeof value !== "number") return { label: "Recorded effect", value: "Needs review" };
+  const labels: Record<string, string> = { vRecoil: "Vertical recoil", hRecoil: "Horizontal recoil", spread: "Spread", ads: "ADS time", equip: "Equip time" };
+  if (effect.op === "mul" && labels[name]) {
+    const percentage = Math.round((value - 1) * 100);
+    return { label: labels[name], value: `${percentage > 0 ? "+" : ""}${percentage}%` };
+  }
+  if (name === "zoom") return { label: "Magnification", value: `${value}×` };
+  if (name === "zeroMin") return { label: "Minimum zero", value: `${value} m` };
+  if (name === "zeroMax") return { label: "Maximum zero", value: `${value} m` };
+  return { label: "Recorded effect", value: effect.op === "set" ? String(value) : `${value}` };
+}
+
+export function formatCatalogLabel(value: string | null | undefined, fallback = "Unclassified") {
+  if (!value || value === "None") return fallback;
+  const labels: Record<string, string> = { "Stationary STN_05": "Stationary Defense", DustCover: "Dust Cover", CantedSight: "Canted Sight" };
+  return labels[value] || value.replace(/([a-z])([A-Z])/g, "$1 $2").replaceAll("_", " ");
+}
+
 export function titleFromSlug(value: string) {
   return value
     .split("-")

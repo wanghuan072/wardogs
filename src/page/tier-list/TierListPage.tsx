@@ -37,7 +37,7 @@ const tierRows: { key: TierKey; label: string }[] = [
 const editorialTier = new Map<string, TierKey>([
   ["t-21", "S"], ["fal", "S"],
   ["svd", "A"], ["pkm", "A"], ["super-45", "A"], ["m4", "A"],
-  ["ak74", "B"], ["a-91", "B"], ["bushmaster-m17s", "B"], ["kh-2002", "B"],
+  ["ak74", "B"],
   ["mp5", "C"], ["m249-saw", "C"], ["rpg-7", "C"], ["sv98", "C"], ["compound-bow", "C"],
 ]);
 

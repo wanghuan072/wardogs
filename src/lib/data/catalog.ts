@@ -3,6 +3,11 @@ import type { CatalogItem, CatalogKind } from "@/types/catalog";
 
 export const catalogItems = rawItems as unknown as CatalogItem[];
 export const catalogBySlug = new Map(catalogItems.map((item) => [item.slug, item]));
+const provisionalRecordSlugs = new Set(["a-91", "bushmaster-m17s", "kh-2002"]);
+
+export function isProvisionalRecord(item: Pick<CatalogItem, "slug">) {
+  return provisionalRecordSlugs.has(item.slug);
+}
 
 export const weapons = catalogItems.filter((item) => item.kind === "weapon");
 export const ammunition = catalogItems.filter((item) => item.kind === "ammo");
