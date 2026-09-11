@@ -1,19 +1,35 @@
 import rawItems from "@/data/catalog/items.json";
 import type { CatalogItem, CatalogKind } from "@/types/catalog";
 
-export const catalogItems = rawItems as unknown as CatalogItem[];
-export const catalogBySlug = new Map(catalogItems.map((item) => [item.slug, item]));
+export const catalogRecords = rawItems as unknown as CatalogItem[];
+export const catalogItems = catalogRecords;
+export const catalogBySlug = new Map(catalogRecords.map((item) => [item.slug, item]));
 const provisionalRecordSlugs = new Set(["a-91", "bushmaster-m17s", "kh-2002"]);
+const suppressedDisplaySlugs = new Set(["amphetamine"]);
+
+function displayRecordKey(item: CatalogItem) {
+  const { id: _id, slug: _slug, ...displayFields } = item;
+  return JSON.stringify(displayFields);
+}
+
+const seenDisplayRecords = new Set<string>();
+export const catalogDisplayItems = catalogRecords.filter((item) => {
+  if (item.id.startsWith("musictape-") || suppressedDisplaySlugs.has(item.slug)) return false;
+  const key = displayRecordKey(item);
+  if (seenDisplayRecords.has(key)) return false;
+  seenDisplayRecords.add(key);
+  return true;
+});
 
 export function isProvisionalRecord(item: Pick<CatalogItem, "slug">) {
   return provisionalRecordSlugs.has(item.slug);
 }
 
-export const weapons = catalogItems.filter((item) => item.kind === "weapon");
-export const ammunition = catalogItems.filter((item) => item.kind === "ammo");
-export const attachments = catalogItems.filter((item) => item.kind === "attachment");
-export const vehicles = catalogItems.filter((item) => item.kind === "vehicle");
-export const equipment = catalogItems.filter((item) =>
+export const weapons = catalogDisplayItems.filter((item) => item.kind === "weapon");
+export const ammunition = catalogDisplayItems.filter((item) => item.kind === "ammo");
+export const attachments = catalogDisplayItems.filter((item) => item.kind === "attachment");
+export const vehicles = catalogDisplayItems.filter((item) => item.kind === "vehicle");
+export const equipment = catalogDisplayItems.filter((item) =>
   ["armor", "medical", "storage", "throwable", "explosive", "utility", "supplies", "deployable", "melee", "other"].includes(item.kind),
 );
 
@@ -40,12 +56,12 @@ export function getAmmunitionFacet(slug: string) {
   return facet ? ammunition.filter((item) => item[facet.field] === facet.value) : [];
 }
 
-export const catalogCounts = catalogItems.reduce<Record<string, number>>(
+export const catalogCounts = catalogDisplayItems.reduce<Record<string, number>>(
   (counts, item) => {
     counts[item.kind] = (counts[item.kind] || 0) + 1;
     return counts;
   },
-  { total: catalogItems.length },
+  { total: catalogDisplayItems.length },
 );
 
 export const listingGroups: Record<

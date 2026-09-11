@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { formatCatalogLabel, formatMoney, formatNumber, formatStatEffect } from "@/lib/formatting/format-values";
+import { formatCaliber, formatCatalogLabel, formatMoney, formatNumber, formatStatEffect } from "@/lib/formatting/format-values";
 import { isProvisionalRecord } from "@/lib/data/catalog";
 import type { CatalogItem } from "@/types/catalog";
 import styles from "@/style/common/common.module.css";
@@ -28,7 +28,7 @@ export function CatalogCard({ item, compact = false, view = "grid" }: { item: Ca
           <span>{item.dataStatus}</span>
         </div>
         <div className={styles.catalogListBody}>
-          <span>{itemType}{item.caliber ? ` · ${item.caliber}` : ""}</span>
+          <span>{itemType}{item.caliber ? ` · ${formatCaliber(item.caliber)}` : ""}</span>
           <div><h3>{item.name}</h3><strong>{price}</strong></div>
         </div>
         {facts.length > 0 && <dl className={styles.catalogListFacts}>
@@ -51,12 +51,22 @@ export function CatalogCard({ item, compact = false, view = "grid" }: { item: Ca
         <div className={styles.catalogTitleRow}>
           <div>
             <h3>{item.name}</h3>
-            <span>{itemType}{item.caliber ? ` · ${item.caliber}` : ""}</span>
+            <span>{itemType}{item.caliber ? ` · ${formatCaliber(item.caliber)}` : ""}</span>
           </div>
           {compact ? <strong className={styles.compactPrice}>{price}</strong> : <strong className={styles.cardPrice}>{price}</strong>}
         </div>
         {!compact && facts.length > 0 && (
-          <div className={styles.miniStats}>
+          <div
+            className={`${styles.miniStats} ${
+              facts.length === 1
+                ? styles.miniStatsOne
+                : facts.length === 2
+                  ? styles.miniStatsTwo
+                  : facts.length === 3
+                    ? styles.miniStatsThree
+                    : ""
+            }`}
+          >
             {facts.map((fact) => <span key={fact.label}><small>{fact.label}</small><b>{fact.value}</b></span>)}
           </div>
         )}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { catalogItems } from "@/lib/data/catalog";
+import { catalogDisplayItems } from "@/lib/data/catalog";
 import { EquipmentBuilder } from "@/page/builder/components/EquipmentBuilder";
 import { PageHero } from "@/components/common/PageHero";
 import { buildMetadata } from "@/seo/metadata";
@@ -21,7 +21,7 @@ export default async function BuilderPage({ searchParams }: { searchParams: Prom
           meta="BUILD YOUR KIT / EARLY ACCESS"
           containerClassName={styles.builderContainer}
         />
-        <EquipmentBuilder items={catalogItems} initialItem={item} />
+        <EquipmentBuilder items={catalogDisplayItems} initialItem={item} />
       </section>
     </main>
   );

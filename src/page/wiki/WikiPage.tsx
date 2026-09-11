@@ -6,7 +6,7 @@ import { CatalogCard } from "@/components/content/CatalogCard";
 import { GlobalSearch } from "@/components/common/GlobalSearch";
 import { PageHero } from "@/components/common/PageHero";
 import { SectionHeading } from "@/components/common/SectionHeading";
-import { catalogCounts, catalogItems, equipment, equipmentCategoryMap, getItemsBySlugs, itemListingHref, vehicleCategoryMap, vehicles, weaponCategoryMap, weapons } from "@/lib/data/catalog";
+import { catalogCounts, catalogDisplayItems, equipment, equipmentCategoryMap, getItemsBySlugs, itemListingHref, vehicleCategoryMap, vehicles, weaponCategoryMap, weapons } from "@/lib/data/catalog";
 import { guides } from "@/lib/data/editorial";
 import { buildMetadata } from "@/seo/metadata";
 import { tdk } from "@/seo/tdk";
@@ -26,7 +26,7 @@ const groups = [
 
 const popular = getItemsBySlugs(["m4", "ak74", "svd", "super-45", "ah-6m-miniguns", "forward-operating-base"]);
 const databaseSummary = [
-  { icon: Database, count: catalogItems.length, label: "Total records" },
+  { icon: Database, count: catalogDisplayItems.length, label: "Total records" },
   { icon: Crosshair, count: catalogCounts.weapon, label: "Weapons" },
   { icon: Boxes, count: catalogCounts.ammo, label: "Ammunition" },
   { icon: Wrench, count: catalogCounts.attachment, label: "Attachments" },
@@ -41,7 +41,7 @@ const actions = [
 ];
 
 export default function WikiPage() {
-  const recentlyUpdated = [...catalogItems].sort((a, b) => b.lastChecked.localeCompare(a.lastChecked)).slice(0, 6);
+  const recentlyUpdated = [...catalogDisplayItems].sort((a, b) => b.lastChecked.localeCompare(a.lastChecked)).slice(0, 6);
   return (
     <main id="main-content">
       <PageHero eyebrow="Weapons, ammo, gear and vehicles" title="WARDOGS Wiki – Find the item you need" description="Browse weapons, ammunition, attachments, equipment and vehicles. Each list keeps the useful details in one place, so you can compare options without opening a stack of pages." image="/images/official/wardogs-10.jpg" crumbs={[{ label: "Wiki" }]} />

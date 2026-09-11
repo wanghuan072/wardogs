@@ -64,7 +64,7 @@
 .dataStatus strong, .dataStatusCompact strong { color: var(--bone); font-family: var(--font-hud); font-size: 12px; letter-spacing: .02em; }
 .dataStatus p { grid-column: 1 / -1; margin: 0; padding: 10px 18px; color: var(--muted); border-top: 1px solid var(--line); font-size: 14px; }
 .catalogCard, .catalogCardCompact { min-width: 0; overflow: hidden; border: 1px solid var(--line); background: repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px), linear-gradient(145deg, rgba(28,44,49,.94), rgba(8,20,24,.98)); box-shadow: inset 0 1px rgba(255,255,255,.045); transition: transform 160ms ease, border-color 160ms ease, background 160ms ease; }
-.catalogCard { display: flex; height: 282px; flex-direction: column; }
+.catalogCard { display: flex; align-self: start; flex-direction: column; }
 .catalogCard:hover, .catalogCardCompact:hover { border-color: var(--line-strong); background: var(--panel); transform: translateY(-2px); }
 .catalogImage { position: relative; display: block; overflow: hidden; aspect-ratio: 16 / 6.6; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 50% 42%, rgba(105,135,140,.18), transparent 58%), linear-gradient(145deg, #1a2a2e, #0a171b 68%); }
 .catalogCard .catalogImage { height: 112px; flex: none; aspect-ratio: auto; }
@@ -74,7 +74,7 @@
 .catalogImage strong { position: absolute; right: 11px; bottom: 9px; z-index: 2; padding: 3px 7px; color: var(--cash-pale); background: rgba(4,11,14,.86); font-family: var(--font-hud); font-size: 20px; }
 .catalogStatus { position: absolute; top: 9px; right: 9px; z-index: 2; padding: 3px 6px; color: #bde9c9; background: rgba(8,41,25,.8); font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .catalogBody { padding: 9px 10px 0; }
-.catalogCard .catalogBody { position: relative; flex: 1; padding-bottom: 64px; }
+.catalogCard .catalogBody { display: flex; flex-direction: column; padding-bottom: 0; }
 .catalogTitleRow { display: flex; justify-content: space-between; gap: 10px; }
 .catalogTitleRow h3 { margin-bottom: 2px; font-size: 18px; }
 .catalogTitleRow > div > span { color: var(--muted); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
@@ -83,8 +83,14 @@
 .arrowLink:hover { color: var(--night); border-color: var(--cash); background: var(--cash); }
 .catalogBody > p { display: -webkit-box; min-height: 29px; margin: 6px 0 7px; overflow: hidden; color: var(--fog); font-size: 14px; line-height: 1.35; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .miniStats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-inline: -10px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
-.catalogCard .miniStats { position: absolute; right: 0; bottom: 0; left: 0; margin-inline: 0; }
+.catalogCard .miniStats { position: static; margin: 9px -10px 0; }
 .miniStats span { display: grid; min-height: 31px; padding: 5px 8px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); gap: 1px; }.miniStats span:nth-child(even) { border-right: 0; }.miniStats span:nth-last-child(-n + 2) { border-bottom: 0; }.miniStats small { overflow: hidden; color: var(--muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }.miniStats b { overflow: hidden; color: var(--bone); font-family: var(--font-hud); font-size: 12px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.miniStatsOne { grid-template-columns: minmax(0, 1fr); }
+.miniStatsTwo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.miniStatsThree { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.miniStatsOne span, .miniStatsTwo span, .miniStatsThree span { border-bottom: 0; }
+.miniStatsOne span:nth-child(even), .miniStatsTwo span:nth-child(even), .miniStatsThree span:nth-child(even) { border-right: 1px solid var(--line); }
+.miniStatsOne span:last-child, .miniStatsTwo span:last-child, .miniStatsThree span:last-child { border-right: 0; }
 .catalogCardCompact { height: 159px; }
 .catalogCardCompact .catalogBody { padding: 7px 8px 8px; }
 .catalogCardCompact .catalogImage { height: 91px; aspect-ratio: auto; }

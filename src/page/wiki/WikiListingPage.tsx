@@ -3,8 +3,8 @@ import { Check, Filter, Grid3X3, List, Search } from "lucide-react";
 import { CatalogCard } from "@/components/content/CatalogCard";
 import { CatalogSort } from "@/components/content/CatalogSort";
 import { PageHero } from "@/components/common/PageHero";
-import { catalogItems, equipmentCategoryMap, getAmmunitionFacet, listingGroups, vehicleCategoryMap, weaponCategoryMap } from "@/lib/data/catalog";
-import { titleFromSlug } from "@/lib/formatting/format-values";
+import { catalogDisplayItems, equipmentCategoryMap, getAmmunitionFacet, listingGroups, vehicleCategoryMap, weaponCategoryMap } from "@/lib/data/catalog";
+import { formatCaliber, titleFromSlug } from "@/lib/formatting/format-values";
 import type { CatalogItem } from "@/types/catalog";
 import styles from "@/style/page/wiki/wiki-listing.module.css";
 import { tdk } from "@/seo/tdk";
@@ -36,7 +36,7 @@ export function resolveListing(segments: string[]): ListingContext | null {
   const [section] = segments;
   const group = listingGroups[section];
   if (!group || segments.length !== 1) return null;
-  const items = catalogItems.filter((item) => group.kinds.includes(item.kind));
+  const items = catalogDisplayItems.filter((item) => group.kinds.includes(item.kind));
   const seo = tdk.wikiListings[section as keyof typeof tdk.wikiListings];
   return { section, title: group.title, metaTitle: seo.title, description: seo.description, image: heroImages[section], items, canonical: group.href };
 }
@@ -102,7 +102,7 @@ export function WikiListingPage({ segments, searchParams }: { segments: string[]
         <aside className={styles.filters}>
           <div className={styles.filterTitle}><Filter aria-hidden="true" /><h2>Filter {context.section}</h2><Link href={context.canonical}>Reset</Link></div>
           {listingCategories[context.section]?.length ? <div className={styles.filterBlock}><h3>Category <span>⌃</span></h3><Link className={!category ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { category: "", type: "" })}><i /><span>All {context.section}</span><b>{context.items.length}</b></Link>{listingCategories[context.section].map((entry) => <Link className={category === entry.slug ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { category: entry.slug, type: "" })} key={entry.slug}><i /><span>{entry.label}</span><b>{context.items.filter(entry.test).length}</b></Link>)}</div> : <div className={styles.filterBlock}><h3>Type / category <span>⌃</span></h3><Link className={!type ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { type: "" })}><i /><span>All {context.section}</span><b>{context.items.length}</b></Link>{types.slice(0, 9).map((entry) => <Link className={type === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { type: entry })} key={entry}><i /><span>{titleFromSlug(entry)}</span><b>{countBy("type", entry)}</b></Link>)}</div>}
-          {calibers.length > 0 && <div className={styles.filterBlock}><h3>Caliber <span>⌃</span></h3><Link className={!caliber ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { caliber: "" })}><i /><span>All calibers</span><b>{categoryItems.length}</b></Link>{calibers.slice(0, 7).map((entry) => <Link className={caliber === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { caliber: entry })} key={entry}><i /><span>{entry}</span><b>{countBy("caliber", entry)}</b></Link>)}</div>}
+          {calibers.length > 0 && <div className={styles.filterBlock}><h3>Caliber <span>⌃</span></h3><Link className={!caliber ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { caliber: "" })}><i /><span>All calibers</span><b>{categoryItems.length}</b></Link>{calibers.slice(0, 7).map((entry) => <Link className={caliber === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { caliber: entry })} key={entry}><i /><span>{formatCaliber(entry)}</span><b>{countBy("caliber", entry)}</b></Link>)}</div>}
           <div className={styles.filterBlock}><h3>Price range <span>⌃</span></h3><Link className={!price ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { price: "" })}><i /><span>Any price</span><b>{categoryItems.length}</b></Link>{priceOptions.map((entry) => <Link className={price === entry.value ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { price: entry.value })} key={entry.value}><i /><span>{entry.label}</span><b>{entry.count}</b></Link>)}</div>
           <div className={styles.filterBlock}><h3>Data status <span>⌃</span></h3>{["community", "observed", "verified"].map((entry) => <Link className={status === entry ? styles.activeFilter : ""} href={linkWith(context.canonical, preserved, { status: status === entry ? "" : entry })} key={entry}><i /><span>{titleFromSlug(entry)}</span><b>{countBy("dataStatus", entry)}</b></Link>)}</div>
           <div className={styles.sourceNote}><Check aria-hidden="true" /><strong>{context.section === "vehicles" ? "Vehicle filters can overlap" : "Unknown stays unknown"}</strong><p>{context.section === "vehicles" ? "Ground includes armored and logistics vehicles, so category totals are not meant to be added together." : "Missing values never become zero. Every record keeps its source state."}</p></div>

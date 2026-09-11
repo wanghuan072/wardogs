@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { toolDefinitions } from "@/config/tools";
-import { catalogItems } from "@/lib/data/catalog";
+import { catalogDisplayItems } from "@/lib/data/catalog";
 import type { ToolItem } from "@/lib/tools/calculations";
 import { ToolDetailPage } from "@/page/tools/ToolDetailPage";
 import { buildMetadata } from "@/seo/metadata";
@@ -12,6 +12,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> { c
 export default async function ToolRoute({ params, searchParams }: Props) {
   const { slug } = await params;
   const tool = toolDefinitions.find((entry) => entry.slug === slug); if (!tool) notFound(); const query = await searchParams;
-  const items: ToolItem[] = catalogItems.map((item) => ({ slug: item.slug, name: item.name, kind: item.kind, type: item.type, role: item.role, slot: item.slot, caliber: item.caliber, price: item.price, weight: item.weight, image: item.image, rpm: item.stats.rpm, damage: item.stats.damage, range: item.stats.effectiveRange, velocity: item.stats.muzzleVelocity, recoil: item.stats.recoil, ammoIds: item.ammoIds, compatibleWeaponIds: item.compatibleWeaponIds }));
+  const items: ToolItem[] = catalogDisplayItems.map((item) => ({ slug: item.slug, name: item.name, kind: item.kind, type: item.type, role: item.role, slot: item.slot, caliber: item.caliber, price: item.price, weight: item.weight, image: item.image, rpm: item.stats.rpm, damage: item.stats.damage, range: item.stats.effectiveRange, velocity: item.stats.muzzleVelocity, recoil: item.stats.recoil, ammoIds: item.ammoIds, compatibleWeaponIds: item.compatibleWeaponIds }));
   return <ToolDetailPage tool={tool} items={items} query={query} />;
 }

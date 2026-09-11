@@ -1,4 +1,4 @@
-import { catalogItems, itemListingHref } from "@/lib/data/catalog";
+import { catalogDisplayItems, itemListingHref } from "@/lib/data/catalog";
 import { guides } from "@/lib/data/editorial";
 
 export type SearchResult = {
@@ -10,7 +10,7 @@ export type SearchResult = {
 };
 
 const index: SearchResult[] = [
-  ...catalogItems.map((item) => ({
+  ...catalogDisplayItems.map((item) => ({
     title: item.name,
     description: [item.type || item.kind, item.caliber, item.price === null ? null : `$${item.price.toLocaleString()}`].filter(Boolean).join(" · "),
     href: itemListingHref(item),

@@ -20,10 +20,16 @@ export function formatStatEffect(name: string, effect: { op?: string; v?: number
   return { label: "Recorded effect", value: effect.op === "set" ? String(value) : `${value}` };
 }
 
-export function formatCatalogLabel(value: string | null | undefined, fallback = "Unclassified") {
-  if (!value || value === "None") return fallback;
-  const labels: Record<string, string> = { "Stationary STN_05": "Stationary Defense", DustCover: "Dust Cover", CantedSight: "Canted Sight" };
+export function formatCatalogLabel(value: string | null | undefined, fallback = "Unclassified"): string {
+  if (!value || value === "None") return fallback === "Unclassified" ? fallback : formatCatalogLabel(fallback);
+  const labels: Record<string, string> = { "Stationary STN_05": "Stationary Defense", DustCover: "Dust Cover", CantedSight: "Canted Sight", Pistolgrip: "Pistol Grip", FMJTracer: "FMJ Tracer", attachment: "Attachment", medical: "Medical", storage: "Storage", offensive: "Offensive", utility: "Utility", explosive: "Explosive", supplies: "Supplies", throwable: "Throwable", deployable: "Deployable", other: "Other" };
   return labels[value] || value.replace(/([a-z])([A-Z])/g, "$1 $2").replaceAll("_", " ");
+}
+
+export function formatCaliber(value: string | null | undefined) {
+  if (!value) return "";
+  const labels: Record<string, string> = { ".50Cal": ".50 Cal", "338Nor": ".338 Norma" };
+  return labels[value] || value;
 }
 
 export function titleFromSlug(value: string) {
