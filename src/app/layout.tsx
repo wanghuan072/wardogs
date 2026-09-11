@@ -18,7 +18,11 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   category: "games",
   keywords: ["WARDOGS", "WARDOGS wiki", "WARDOGS database", "WARDOGS guides", "WARDOGS tools"],
-  icons: { icon: "/images/logo.svg", shortcut: "/images/logo.svg", apple: "/images/logo.svg" },
+  icons: {
+    icon: [{ url: "/favicon.ico", type: "image/x-icon", sizes: "any" }],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/images/ico.png", type: "image/png", sizes: "180x180" }],
+  },
 };
 
 export const viewport: Viewport = {
@@ -56,7 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             "@type": "Organization",
             name: siteConfig.name,
             url: siteConfig.url,
-            logo: `${siteConfig.url}/images/logo.svg`,
+            logo: `${siteConfig.url}/images/logo.png`,
             email: siteConfig.contactEmail,
           }}
         />

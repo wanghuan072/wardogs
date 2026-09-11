@@ -27,7 +27,7 @@ export function buildMetadata({
       siteName: siteConfig.name,
       type: "website",
       locale: "en_US",
-      images: [{ url: image, width: 1200, height: 630, alt: `${siteConfig.shortName} Field Intel` }],
+      images: [{ url: image, width: 1731, height: 909, alt: `${siteConfig.shortName} Field Intel` }],
     },
     twitter: { card: "summary_large_image", title, description, images: [image] },
   };

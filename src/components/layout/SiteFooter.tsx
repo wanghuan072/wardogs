@@ -11,7 +11,7 @@ export function SiteFooter() {
       <div className={styles.footerImage} />
       <div className={`container ${styles.footerGrid}`}>
         <div className={styles.footerBrand}>
-          <div><Image src="/images/logo.svg" width={28} height={28} alt="" /><strong>WARDOGS</strong></div>
+          <div><Image src="/images/logo.png" width={36} height={36} alt="" /><strong>WARDOGS</strong></div>
           <p>Independent player tools for the next WARDOGS deployment.</p>
           <nav className={styles.footerMainLinks} aria-label="Footer navigation">
             {primaryNavigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}

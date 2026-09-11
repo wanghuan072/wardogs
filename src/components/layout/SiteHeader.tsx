@@ -10,8 +10,8 @@ export function SiteHeader() {
     <header className={styles.header}>
       <div className={`container ${styles.headerInner}`}>
         <Link href="/" className={styles.brand} aria-label="WARDOGS Field Intel home">
-          <span className={styles.brandMark}><Image src="/images/logo.svg" width={28} height={28} alt="" priority /></span>
-          <span className={styles.brandCopy}><span className={styles.wordmark}>WARDOGS</span><span className={styles.brandSuffix}>Player guide</span></span>
+          <span className={styles.brandMark}><Image src="/images/logo.png" width={34} height={34} alt="" priority /></span>
+          <span className={styles.brandCopy}><span className={styles.wordmark}>WARDOGS</span></span>
         </Link>
         <nav className={styles.desktopNav} aria-label="Primary navigation">
           <Link className={styles.navTrigger} href="/">Home</Link>
