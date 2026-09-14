@@ -11,7 +11,7 @@
     "image": "/images/official/wardogs-04.jpg",
     "publishedAt": "2026-08-20",
     "updatedAt": "2026-09-10",
-    "patchVersion": "Early Access launch snapshot",
+    "patchVersion": "Early Access",
     "quickAnswer": "Start with a kit you can afford to replace, move with a squad, and contribute to the Control Zone through pressure, revives, transport or logistics. Your persistent cash makes each life a tactical investment, so buy for the job you intend to do.",
     "sections": [
       {
@@ -33,8 +33,8 @@
       {
         "heading": "Build the first kit from the weapon outward",
         "body": [
-          "Pick a primary weapon for the range and task you expect, then use the Builder to reveal only the ammunition and attachments connected to that weapon in the current data snapshot. Add protection, storage, medical supplies and utility after the core weapon package is viable.",
-          "Do not fill every slot automatically. An attachment or explosive should solve a known problem, and its price should be compared with the value of another complete life. If a field is unverified, the site leaves it unknown instead of turning a missing value into a false advantage."
+          "Pick a primary weapon for the range and task you expect, then use the Builder to see its linked ammunition and attachments. Add protection, storage, medical supplies and utility after the core weapon package is viable.",
+          "Do not fill every slot automatically. An attachment or explosive should solve a known problem, and its price should be compared with the value of another complete life. If a detail is missing, leave room in the budget instead of assuming it gives you a free advantage."
         ],
         "image": "/images/official/wardogs-09.jpg",
         "caption": "A readable kit starts with weapon compatibility, then adds only mission-relevant equipment."
@@ -59,14 +59,14 @@
         "heading": "A simple first-session routine",
         "body": [
           "For the first few deployments, use a repeatable loop: read the objective, choose a squad need, assemble a modest kit, move with teammates, and review the result before purchasing again. This creates reliable feedback without changing weapon, role and route all at once.",
-          "Use the Wiki when you need a factual record, the Builder when you need a compatible kit, and the Guides when you need a decision framework. Treat all beta-era numbers as a snapshot until the public build confirms them."
+          "Use the Wiki when you need an item record, the Builder when you need a compatible kit, and the Guides when you need a decision framework. Recheck the in-game menu after a patch before committing to an expensive purchase."
         ]
       }
     ],
-    "relatedWiki": ["/wiki/mechanics/economy", "/wiki/mechanics/control-zone", "/wiki/progression"],
+    "relatedWiki": ["/wiki/weapons", "/wiki/equipment?category=medical", "/wiki/vehicles"],
     "relatedTools": ["/builder", "/tools/budget-planner"],
     "faq": [
-      { "question": "How much cash does a new WARDOGS player start with?", "answer": "The official game description states that each player begins with $10,000. Use it as a reserve for multiple lives, not a target to spend in one purchase." },
+      { "question": "How much cash does a new WARDOGS player start with?", "answer": "Players begin with $10,000. Treat it as a reserve for multiple lives, not a target to spend in one purchase." },
       { "question": "What is the best beginner role?", "answer": "There is no fixed best role. Start with a clear, observable job such as staying with infantry, reviving nearby teammates or driving a safe reinforcement route, then expand as you understand the map." },
       { "question": "Should I buy every available attachment?", "answer": "No. Equip a part only when its recorded effect supports the intended engagement and the complete kit remains affordable to replace." }
     ]
@@ -83,14 +83,14 @@
     "image": "/images/official/wardogs-12.jpg",
     "publishedAt": "2026-08-22",
     "updatedAt": "2026-09-10",
-    "patchVersion": "Early Access launch snapshot",
+    "patchVersion": "Early Access",
     "quickAnswer": "Treat cash as future battlefield access. Price the weapon, ammunition, protection, utility and transport together; protect a reserve of several dependable lives; and spend above that reserve only when the purchase has a clear team purpose and an exit plan.",
     "sections": [
       {
         "heading": "Think in complete lives, not item prices",
         "body": [
           "A weapon's sticker price is only the visible part of the purchase. Compatible ammunition, magazines, armor, medical items, storage, specialist utility and a vehicle can all draw from the same persistent bank. The useful number is the total amount exposed when that life is lost.",
-          "Assemble the intended kit in the Builder before spawning, then compare the total with the $10,000 starting reference. If any price is unknown, keep that uncertainty visible and leave extra reserve rather than assuming the missing item is free."
+          "Assemble the intended kit in the Builder before spawning, then compare the total with the $10,000 starting balance. If an item has no listed price, leave extra reserve rather than assuming it is free."
         ],
         "image": "/images/official/wardogs-09.jpg",
         "caption": "The total risk is the complete equipment manifest, not the headline weapon price."
@@ -114,7 +114,7 @@
       {
         "heading": "Earn through repeatable team actions",
         "body": [
-          "Official descriptions identify objective play, revives and transport as meaningful contributions to the economy. Build a role around actions the match will repeatedly need rather than relying on a single high-risk engagement to fund the next purchase.",
+          "Objective play, revives and transport all support the economy. Build a role around actions the match will repeatedly need rather than relying on a single high-risk engagement to fund the next purchase.",
           "When the battlefield changes, change the income route. A blocked transport corridor may make medical support more reliable; a secured approach may create a window for supplies or construction. Economic play and tactical play are the same decision viewed over several lives."
         ]
       },
@@ -128,12 +128,12 @@
         "caption": "A fallback build protects future choices while the team re-establishes a viable route."
       }
     ],
-    "relatedWiki": ["/wiki/mechanics/economy", "/wiki/equipment", "/wiki/vehicles"],
+    "relatedWiki": ["/wiki/weapons", "/wiki/equipment", "/wiki/vehicles"],
     "relatedTools": ["/builder", "/tools/budget-planner"],
     "faq": [
-      { "question": "Does WARDOGS cash persist between matches?", "answer": "Yes. The official description presents cash as persistent, which makes replacement cost and reserve planning important beyond a single round." },
+      { "question": "Does WARDOGS cash persist between matches?", "answer": "Yes. Cash carries forward, which makes replacement cost and reserve planning important beyond a single round." },
       { "question": "How much of my bank should one life cost?", "answer": "There is no universal percentage. Protect several copies of a reliable fallback kit, then spend the amount above that floor when a more expensive purchase has a clear battlefield purpose." },
-      { "question": "Are unknown prices counted as zero?", "answer": "The Builder separates known totals from unknown-price items. An incomplete total should be treated as a minimum, not the final bill." }
+      { "question": "Are missing prices counted as zero?", "answer": "No. The Builder only totals items with a listed price, so an incomplete total is a minimum rather than the final bill." }
     ]
   },
   {
@@ -148,13 +148,13 @@
     "image": "/images/official/wardogs-06.jpg",
     "publishedAt": "2026-08-28",
     "updatedAt": "2026-09-10",
-    "patchVersion": "Early Access launch snapshot",
+    "patchVersion": "Early Access",
     "quickAnswer": "Use the current in-game bindings as the authority, learn lift, pitch, roll and yaw separately, and practice a low-risk circuit before carrying passengers. A safe pilot plans the route, landing zone and escape before takeoff.",
     "sections": [
       {
         "heading": "Confirm the live control bindings",
         "body": [
-          "Do not memorize a beta-era key chart from a guide. Open the current settings screen and identify the bindings for collective or lift, pitch, roll, yaw, throttle-related controls, camera and any available countermeasure or vehicle actions. Resolve conflicts before entering a live transport run.",
+          "Do not memorize an old key chart from a guide. Open the current settings screen and identify the bindings for collective or lift, pitch, roll, yaw, throttle-related controls, camera and any available countermeasure or vehicle actions. Resolve conflicts before entering a live transport run.",
           "Make small inputs while grounded and observe each response. If an axis is reversed or too sensitive for precise corrections, adjust it in settings before practicing. The purpose of this stage is to build a reliable link between one input and one aircraft movement."
         ],
         "image": "/images/official/wardogs-01.jpg",
@@ -164,7 +164,7 @@
         "heading": "Find a stable hover",
         "body": [
           "Increase lift gradually and keep corrections small. Practice holding a low hover without adding forward speed, then use yaw to turn the nose while maintaining position. Large alternating inputs usually create a growing oscillation instead of cancelling the first mistake.",
-          "Pick a visual reference near the horizon and another on the ground. The horizon helps read attitude; the ground reference reveals sideways drift. Hold the hover for several seconds before adding the next control axis."
+          "Pick a visual point near the horizon and another on the ground. The horizon helps read attitude; the ground point reveals sideways drift. Hold the hover for several seconds before adding the next control axis."
         ]
       },
       {
@@ -200,7 +200,7 @@
         ]
       }
     ],
-    "relatedWiki": ["/wiki/vehicles?category=helicopters", "/wiki/mechanics/logistics", "/wiki/mechanics/economy"],
+    "relatedWiki": ["/wiki/vehicles?category=helicopters", "/wiki/equipment?category=storage", "/wiki/weapons"],
     "relatedTools": ["/builder", "/tools/budget-planner"],
     "faq": [
       { "question": "What are the exact helicopter keys?", "answer": "Check the current in-game bindings. Controls can change between builds and player configurations, so this guide teaches the control axes and flight sequence rather than publishing a brittle key chart." },
@@ -220,7 +220,7 @@
     "image": "/images/official/wardogs-05.jpg",
     "publishedAt": "2026-09-02",
     "updatedAt": "2026-09-10",
-    "patchVersion": "Early Access launch snapshot",
+    "patchVersion": "Early Access",
     "quickAnswer": "Win the route into the Control Zone as well as the ground inside it. Presence creates progress, but transport, spawn access, supplies, cover and safe reinforcement paths determine whether that presence survives long enough to matter.",
     "sections": [
       {
@@ -267,17 +267,17 @@
       {
         "heading": "Review the objective with evidence",
         "body": [
-          "After the match, separate verified rules from assumptions about a particular route or location. Treat unverified terrain markers as observations rather than fixed tactical facts.",
+          "After the match, separate reliable patterns from assumptions about a particular route or location. Treat terrain markers as flexible callouts rather than fixed tactical facts.",
           "Use the review to form a conditional plan: if the zone favors open approaches, bring transport and long-range support; if it compresses around structures, prioritize safe access, medical support and short reinforcement time."
         ]
       }
     ],
-    "relatedWiki": ["/wiki/vehicles"],
+    "relatedWiki": ["/wiki/vehicles", "/wiki/equipment?category=deployables", "/wiki/weapons"],
     "relatedTools": ["/builder", "/tools/weapon-compare"],
     "faq": [
-      { "question": "How do teams score in the Control Zone?", "answer": "The current project record describes progress through team presence in the active zone. Verify exact live scoring behavior against the public build because balance and interface details can change." },
+      { "question": "How do teams score in the Control Zone?", "answer": "Progress comes from team presence in the active zone. Exact scoring behavior can change with balance and interface updates, so check the match HUD when a patch lands." },
       { "question": "Should everyone stay inside the objective?", "answer": "No. Some players need to protect approaches, transport reinforcements, sustain supplies or stop an enemy flank. Those jobs should still directly support continued presence." },
-      { "question": "Why are fixed tactical markers not shown on the map?", "answer": "The available local image is a visual battlefield reference rather than a verified georeferenced map. The site does not invent spawn, supply or objective coordinates." }
+      { "question": "Why are fixed tactical markers not shown on the map?", "answer": "The map image is there to help you read the battlefield, not to promise exact spawn, supply or objective coordinates." }
     ]
   }
 ]

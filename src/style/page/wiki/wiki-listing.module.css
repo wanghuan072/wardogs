@@ -63,6 +63,7 @@
 .viewToggle .activeView { color: #111d21; background: linear-gradient(180deg, #e7ecea, #bdc9ca); box-shadow: inset 0 1px #fff; }
 .cardGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .listView { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.cardGrid > *, .listView > * { content-visibility: auto; contain-intrinsic-size: auto 292px; }
 .pagination { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 54px; margin-top: 14px; border: 1px solid var(--line); background: rgba(12,28,34,.72); }
 .pagination a, .pagination strong { padding: 12px 16px; font-family: var(--font-hud); font-size: 12px; text-transform: uppercase; }
 .pagination a:last-child { justify-self: end; }

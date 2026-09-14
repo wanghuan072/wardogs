@@ -1,6 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
 import { formatCaliber, formatCatalogLabel, formatMoney, formatNumber, formatStatEffect } from "@/lib/formatting/format-values";
-import { isProvisionalRecord } from "@/lib/data/catalog";
 import type { CatalogItem } from "@/types/catalog";
 import styles from "@/style/common/common.module.css";
 
@@ -16,16 +16,15 @@ function keyFacts(item: CatalogItem) {
   return facts;
 }
 
-export function CatalogCard({ item, compact = false, view = "grid" }: { item: CatalogItem; compact?: boolean; view?: "grid" | "list" }) {
+export function CatalogCard({ item, compact = false, view = "grid", href }: { item: CatalogItem; compact?: boolean; view?: "grid" | "list"; href?: string }) {
   const facts = keyFacts(item);
-  const price = isProvisionalRecord(item) ? "Needs review" : formatMoney(item.price);
+  const price = item.price === null ? "Price not listed" : formatMoney(item.price);
   const itemType = formatCatalogLabel(item.type || item.category || item.kind, item.kind);
   if (view === "list") {
-    return (
+    const card = (
       <article className={styles.catalogListCard}>
         <div className={styles.catalogListImage}>
           <Image src={item.image || "/images/official/wardogs-09.jpg"} alt={`${item.name} WARDOGS item render`} fill sizes="210px" />
-          <span>{item.dataStatus}</span>
         </div>
         <div className={styles.catalogListBody}>
           <span>{itemType}{item.caliber ? ` · ${formatCaliber(item.caliber)}` : ""}</span>
@@ -36,8 +35,9 @@ export function CatalogCard({ item, compact = false, view = "grid" }: { item: Ca
         </dl>}
       </article>
     );
+    return href ? <Link className={styles.catalogCardLink} href={href} aria-label={`Open ${item.name}`}>{card}</Link> : card;
   }
-  return (
+  const card = (
     <article className={compact ? styles.catalogCardCompact : styles.catalogCard}>
       <div className={styles.catalogImage}>
         {item.image ? (
@@ -45,7 +45,6 @@ export function CatalogCard({ item, compact = false, view = "grid" }: { item: Ca
         ) : (
           <Image src="/images/official/wardogs-09.jpg" alt="" fill sizes="320px" />
         )}
-        {!compact && <span className={styles.catalogStatus}>{item.dataStatus}</span>}
       </div>
       <div className={styles.catalogBody}>
         <div className={styles.catalogTitleRow}>
@@ -73,4 +72,5 @@ export function CatalogCard({ item, compact = false, view = "grid" }: { item: Ca
       </div>
     </article>
   );
+  return href ? <Link className={styles.catalogCardLink} href={href} aria-label={`Open ${item.name}`}>{card}</Link> : card;
 }

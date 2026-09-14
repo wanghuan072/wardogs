@@ -22,7 +22,7 @@ export function SiteFooter() {
             <a href={siteConfig.steamUrl} target="_blank" rel="noreferrer" aria-label="WARDOGS on Steam"><Disc3 /></a>
             <span aria-hidden="true">𝕏</span><span aria-hidden="true"><Youtube /></span><span aria-hidden="true"><MessageCircle /></span>
           </nav>
-          <p>Copyright © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.<br />WARDOGS Field Intel is an independent fan site and is not affiliated with, endorsed by, or connected to the official WARDOGS game or its rights holders.</p>
+          <p>Copyright © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.<br />WARDOGS Field Intel is an independent fan site and is not affiliated with, endorsed by, or connected to the WARDOGS game or its rights holders.</p>
           <nav className={styles.footerLinks} aria-label="Legal information">
             <span>Legal</span>
             <Link href="/privacy" rel="nofollow">Privacy Policy</Link>

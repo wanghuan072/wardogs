@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BarChart3, CheckCircle2, Layers3, Scale } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { SectionHeading } from "@/components/common/SectionHeading";
-import { facetSlug, itemListingHref, weapons } from "@/lib/data/catalog";
+import { facetSlug, itemHref, weapons } from "@/lib/data/catalog";
 import { formatCatalogLabel, formatMoney, formatNumber } from "@/lib/formatting/format-values";
 import { buildMetadata } from "@/seo/metadata";
 import { tdk } from "@/seo/tdk";
@@ -67,10 +67,9 @@ function TierBoard({ items, section, showEmpty = false }: { items: CatalogItem[]
             <header><strong>{row.key}</strong><span>{row.label}</span></header>
             <div className={styles.tierItems}>
               {rowItems.map((item) => (
-                <Link className={styles.tierItem} href={`${itemListingHref(item)}?q=${encodeURIComponent(item.name)}`} key={item.slug}>
+                <Link className={styles.tierItem} href={itemHref(item)} key={item.slug}>
                   <div className={styles.itemThumb}>
                     <Image src={item.image || "/images/official/wardogs-09.jpg"} alt={`${item.name} WARDOGS record`} fill sizes="132px" />
-                    <span>{item.dataStatus}</span>
                   </div>
                   <strong>{item.name}</strong>
                   <span>{formatCatalogLabel(item.type || item.category, item.kind)}</span>
@@ -143,7 +142,7 @@ function TierHub() {
         <header><div><span>Featured board / weapons</span><h2>Current field ranking</h2><p>A compact preview of records with an editorial placement.</p></div><Link href="/tier-list/weapons">Open all 38 weapons <ArrowRight /></Link></header>
         <TierBoard items={preview} section="weapons" showEmpty />
       </section>
-      <section className={`container ${styles.methodology}`}><SectionHeading eyebrow="Ranking discipline" title="How to read the board" /><div><article><Scale /><h3>Compare by role</h3><p>Each weapon is placed for how it performs in its intended job, not against unrelated classes.</p></article><article><BarChart3 /><h3>Check the record</h3><p>Price and rate of fire stay visible beside every placement for a quick comparison.</p></article><article><CheckCircle2 /><h3>Unverified stays out</h3><p>Items without enough evidence are kept in the Wiki, not presented as a finished ranking.</p></article></div></section>
+      <section className={`container ${styles.methodology}`}><SectionHeading eyebrow="Ranking discipline" title="How to read the board" /><div><article><Scale /><h3>Compare by role</h3><p>Each weapon is placed for how it performs in its intended job, not against unrelated classes.</p></article><article><BarChart3 /><h3>Compare the stats</h3><p>Price and rate of fire stay visible beside every placement for a quick comparison.</p></article><article><CheckCircle2 /><h3>Use your own kit</h3><p>Try a weapon with your budget, role and preferred range before making it a regular pick.</p></article></div></section>
     </main>
   );
 }

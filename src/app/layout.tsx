@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { DataNotice } from "@/components/layout/DataNotice";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { siteConfig } from "@/config/site";
@@ -53,7 +52,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
-        <DataNotice />
         {children}
         <SiteFooter />
         <JsonLd

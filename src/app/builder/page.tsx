@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { catalogDisplayItems } from "@/lib/data/catalog";
 import { isBuilderItem, toBuilderItem } from "@/lib/tools/loadout";
 import { EquipmentBuilder } from "@/page/builder/components/EquipmentBuilder";
-import { DataStatus } from "@/components/common/DataStatus";
 import { PageHero } from "@/components/common/PageHero";
 import { buildMetadata } from "@/seo/metadata";
 import { tdk } from "@/seo/tdk";
@@ -24,11 +23,11 @@ export default async function BuilderPage({ searchParams }: BuilderPageProps) {
         <PageHero
           eyebrow="Choose gear that works together"
           title="WARDOGS Loadout Builder – Build your kit"
-          description="Pick a weapon, then add the ammunition, attachments and equipment linked to it in the community snapshot. Keep an eye on your cash, weight and backpack space before you deploy."
+          description="Pick a weapon, then add the ammunition, attachments and equipment that work with it. Keep an eye on cash, weight and backpack space before you deploy."
           image="/images/official/wardogs-header.jpg"
-          meta="BUILD YOUR KIT / COMMUNITY BETA"
+          meta="BUILD YOUR KIT / FIELD ISSUE"
           containerClassName={styles.builderContainer}
-        ><DataStatus compact /></PageHero>
+        />
         <EquipmentBuilder items={items} initialItemSlug={initialItemSlug} />
       </section>
     </main>

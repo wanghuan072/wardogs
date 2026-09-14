@@ -1,0 +1,67 @@
+.hero { overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(circle at 78% 25%, rgba(82, 112, 116, .22), transparent 29rem), linear-gradient(120deg, #101d20, #071014 70%); }
+.heroInner { padding-block: 24px 0; }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(290px, .82fr) 216px; align-items: end; min-height: 340px; }
+.heroCopy { padding: 30px 36px 44px 0; }
+.heroCopy > span, .sectionHeading > span, .sidebarPanel > span { color: var(--cash-pale); font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.heroCopy h1 { margin: 8px 0 14px; font-family: var(--font-display); font-size: clamp(48px, 6vw, 78px); font-weight: 400; letter-spacing: .015em; line-height: .92; text-shadow: 0 1px #fff, 0 4px 5px rgba(0,0,0,.65); text-transform: uppercase; }
+.heroCopy p { max-width: 650px; margin: 0; color: var(--fog); font-size: 16px; line-height: 1.6; }
+.heroActions { display: flex; flex-wrap: wrap; margin-top: 24px; gap: 10px; }
+.heroActions a { display: inline-flex; min-height: 42px; align-items: center; padding: 10px 14px; gap: 8px; border: 1px solid var(--line-strong); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.heroActions a:first-child { color: var(--night); border-color: var(--cash-pale); background: var(--cash-pale); }
+.heroActions a:hover { border-color: var(--cash-pale); }
+.weaponRender { position: relative; align-self: stretch; min-height: 260px; overflow: hidden; border-inline: 1px solid var(--line); background: radial-gradient(ellipse at 50% 50%, rgba(82,111,116,.25), transparent 64%); }
+.weaponRender::after { position: absolute; inset: 0; background-image: linear-gradient(rgba(214,225,220,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(214,225,220,.08) 1px, transparent 1px); background-size: 32px 32px; content: ""; }
+.weaponRender img { z-index: 1; padding: 32px; object-fit: contain; filter: drop-shadow(0 24px 18px rgba(0,0,0,.72)); }
+.heroReadout { display: grid; margin: 0; border-top: 1px solid var(--line); }
+.heroReadout > div { min-height: 72px; padding: 13px 16px; border-bottom: 1px solid var(--line); }
+.heroReadout dt, .readout dt, .fieldGrid dt, .sourcePanel dt { color: var(--muted); font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.heroReadout dd, .readout dd, .fieldGrid dd, .sourcePanel dd { margin: 4px 0 0; color: var(--bone); font-family: var(--font-hud); font-size: 16px; font-weight: 700; }
+.pageGrid { display: grid; grid-template-columns: minmax(0, 1fr) 284px; padding-block: 38px 72px; gap: 28px; }
+.article { min-width: 0; }
+.section { margin-top: 46px; }
+.section:first-of-type { margin-top: 0; }
+.sectionHeading { max-width: 720px; margin-bottom: 17px; }
+.sectionHeading h2 { margin: 5px 0 7px; font-size: clamp(25px, 3vw, 34px); }
+.sectionHeading p { margin: 0; color: var(--fog); font-size: 14px; line-height: 1.55; }
+.readout { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.readout > div { min-width: 0; padding: 14px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(20,37,42,.58); }
+.readout dd { overflow-wrap: anywhere; }
+.compatibilityGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.compatibilityPanel, .attachmentBlock { border: 1px solid var(--line); background: linear-gradient(135deg, rgba(22,41,47,.8), rgba(8,18,22,.94)); }
+.compatibilityPanel > div { display: grid; grid-template-columns: 22px 1fr; align-items: center; padding: 15px; column-gap: 9px; border-bottom: 1px solid var(--line); }
+.compatibilityPanel svg, .attachmentHeading > svg, .sourcePanel > svg, .sidebarPanel > svg { color: var(--cash-pale); }
+.compatibilityPanel h3, .attachmentHeading h3 { margin: 0; font-size: 19px; }
+.compatibilityPanel small { grid-column: 2; color: var(--muted); font-size: 12px; }
+.compatibilityPanel > p, .emptyCopy { margin: 0; padding: 17px; color: var(--fog); font-size: 14px; }
+.recordLink { position: relative; display: grid; grid-template-columns: 40px minmax(0,1fr) 14px; align-items: center; min-height: 57px; padding: 7px 14px; column-gap: 9px; border-bottom: 1px solid rgba(89,104,108,.6); }
+.recordLink:last-child { border-bottom: 0; }
+.recordLink > span { position: relative; grid-row: 1 / 3; width: 40px; height: 34px; }
+.recordLink img { object-fit: contain; }
+.recordLink b { overflow: hidden; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.recordLink small { overflow: hidden; color: var(--muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.recordLink svg { grid-column: 3; grid-row: 1 / 3; width: 14px; color: var(--fog); }
+.recordLink:hover { color: var(--cash-pale); background: rgba(255,255,255,.035); }
+.attachmentBlock { margin-top: 12px; }
+.attachmentHeading { display: grid; grid-template-columns: 22px minmax(0,1fr) auto; align-items: center; padding: 16px; gap: 10px; border-bottom: 1px solid var(--line); }
+.attachmentHeading p { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.attachmentHeading > a, .sourcePanel > a, .sidebarPanel > a { display: inline-flex; align-items: center; gap: 7px; color: var(--cash-pale); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.attachmentHeading > a svg, .sourcePanel > a svg, .sidebarPanel > a svg { width: 14px; }
+.attachmentGroups { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+.attachmentGroups details { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.attachmentGroups details:nth-child(even) { border-right: 0; }
+.attachmentGroups summary { display: flex; min-height: 44px; align-items: center; justify-content: space-between; padding: 10px 14px; cursor: pointer; color: var(--bone); font-size: 13px; font-weight: 700; }
+.attachmentGroups summary span { color: var(--cash-pale); font-family: var(--font-mono); font-size: 12px; }
+.attachmentGroups details[open] summary { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.04); }
+.sidebar { align-self: start; display: grid; gap: 12px; }
+.sidebarPanel { padding: 18px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(20,39,45,.92), rgba(8,17,21,.96)); }
+.sidebarPanel > svg { width: 19px; margin-bottom: 12px; }
+.sidebarPanel > span { display: block; }
+.sidebarPanel p { margin: 9px 0 14px; color: var(--fog); font-size: 14px; line-height: 1.5; }
+.sidebarPanel > a { display: flex; min-height: 35px; align-items: center; justify-content: space-between; padding-top: 11px; border-top: 1px solid var(--line); }
+.sidebarPanel > a:not(:last-child) { display: grid; grid-template-columns: minmax(0,1fr) 13px; padding-block: 10px; }
+.sidebarPanel > a b { overflow: hidden; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.sidebarPanel > a small { grid-column: 1; color: var(--muted); font-size: 12px; }
+.sidebarPanel > a svg { grid-column: 2; grid-row: 1 / 3; width: 13px; }
+.sidebarPanel > a:hover { color: var(--cash-pale); }
+@media (max-width: 1024px) { .heroGrid { grid-template-columns: minmax(0, 1fr) minmax(255px,.7fr); } .heroReadout { grid-column: 1 / -1; grid-template-columns: repeat(4, 1fr); border-left: 1px solid var(--line); } .heroReadout > div { border-right: 1px solid var(--line); } .pageGrid { grid-template-columns: minmax(0,1fr) 250px; gap: 18px; } .readout { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 768px) { .heroInner { padding-top: 16px; } .heroGrid { grid-template-columns: 1fr; min-height: 0; } .heroCopy { padding: 20px 0 24px; } .heroCopy h1 { font-size: clamp(42px, 13vw, 60px); } .weaponRender { min-height: 224px; border: 1px solid var(--line); } .heroReadout { grid-template-columns: repeat(2,1fr); } .pageGrid { grid-template-columns: 1fr; padding-block: 24px 48px; } .sidebar { grid-template-columns: 1fr; } .section { margin-top: 34px; } .compatibilityGrid, .attachmentGroups { grid-template-columns: 1fr; } .attachmentGroups details, .attachmentGroups details:nth-child(even) { border-right: 0; } .attachmentHeading { grid-template-columns: 20px 1fr; } .attachmentHeading > a { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid var(--line); } }

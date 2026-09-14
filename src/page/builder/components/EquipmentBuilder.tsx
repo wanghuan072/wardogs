@@ -546,7 +546,7 @@ export function EquipmentBuilder({ items, initialItemSlug }: { items: BuilderIte
         <div><CircleDollarSign /><span>Deployment cost</span><strong>{money(knownCost)}</strong></div>
         <div><Weight /><span>Known weight</span><strong>{knownWeight.toFixed(2)} kg</strong></div>
         <div><Backpack /><span>Pack load</span><strong>{usedCapacity}/{packCapacity}</strong></div>
-        <p><Check /> Changes are calculated locally. Unknown source values are excluded from totals.</p>
+        <p><Check /> Changes are calculated locally. Items without a listed price are excluded from totals.</p>
       </footer>
     </div>
   );

@@ -1,5 +1,4 @@
 import { ArrowDown, CalendarDays, CheckCircle2, ExternalLink, ShieldCheck } from "lucide-react";
-import { DataStatus } from "@/components/common/DataStatus";
 import { PageHero } from "@/components/common/PageHero";
 import { RelatedLinks } from "@/components/common/RelatedLinks";
 import { updates } from "@/lib/data/editorial";
@@ -13,9 +12,7 @@ export function UpdatesPage() {
 
   return (
     <main id="main-content">
-      <PageHero eyebrow="Patches, announcements and release dates" title="WARDOGS Updates – What changed and when" description="See WARDOGS announcements in date order, from the first launch news through Early Access. Every version and its key changes are listed on this page." image="/images/official/wardogs-08.jpg" crumbs={[{ label: "Updates" }]}>
-        <DataStatus compact />
-      </PageHero>
+      <PageHero eyebrow="Patches, announcements and release dates" title="WARDOGS Updates – What changed and when" description="See WARDOGS announcements in date order, from the first launch news through Early Access. Every version and its key changes are listed on this page." image="/images/official/wardogs-08.jpg" crumbs={[{ label: "Updates" }]} />
 
       <section className={`container ${styles.archiveBand}`} aria-label="Update archive summary">
         <div className={styles.currentBuild}><span>Latest version</span><strong>{latest.version}</strong><small>{latest.label}</small></div>
@@ -42,7 +39,7 @@ export function UpdatesPage() {
               <aside className={styles.releaseMark}><span>{String(updates.length - index).padStart(2, "0")}</span><i aria-hidden="true" /></aside>
               <div className={styles.releaseVersion}><strong>{update.version}</strong><time dateTime={update.date}>{dateLabel(update.date)}</time><span>{update.label}</span></div>
               <div className={styles.releaseBody}>
-                <div className={styles.releaseTitle}><div><small>{update.categories.join(" / ")}</small><h2>{update.title}</h2></div><a href={update.sourceUrl} target="_blank" rel="noreferrer">Official update <ExternalLink aria-hidden="true" /></a></div>
+                <div className={styles.releaseTitle}><div><small>{update.categories.join(" / ")}</small><h2>{update.title}</h2></div><a href={update.sourceUrl} target="_blank" rel="noreferrer">View update <ExternalLink aria-hidden="true" /></a></div>
                 <p>{update.summary}</p>
                 <div className={styles.changeList} aria-label={`${update.version} recorded changes`}>
                   {update.changes.map((change) => <div key={`${change.area}-${change.description}`}><span>{change.area}</span><p>{change.description}</p></div>)}
@@ -54,7 +51,7 @@ export function UpdatesPage() {
       </section>
 
       <div className="container"><RelatedLinks links={[
-        { label: "Official WARDOGS updates", href: "https://steamcommunity.com/app/1867240/announcements/", text: "Read announcements from the WARDOGS team on Steam." },
+        { label: "WARDOGS updates", href: "https://steamcommunity.com/app/1867240/announcements/", text: "Read the latest WARDOGS news on Steam." },
         { label: "Browse game items", href: "/wiki", text: "Look up weapons, gear and vehicles for your next match." },
         { label: "About this site", href: "/about", text: "See what WARDOGS Field Intel covers and how pages are updated." },
       ]} /></div>

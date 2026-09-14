@@ -1,4 +1,4 @@
-import { catalogDisplayItems, itemListingHref } from "@/lib/data/catalog";
+import { catalogDisplayItems, itemHref } from "@/lib/data/catalog";
 import { guides } from "@/lib/data/editorial";
 
 export type SearchResult = {
@@ -15,7 +15,7 @@ const index: SearchResult[] = [
     id: `catalog:${item.slug}`,
     title: item.name,
     description: [item.type || item.kind, item.caliber, item.price === null ? null : `$${item.price.toLocaleString()}`].filter(Boolean).join(" · "),
-    href: `${itemListingHref(item)}?q=${encodeURIComponent(item.name)}`,
+    href: itemHref(item),
     group:
       item.kind === "weapon"
         ? "Weapons"

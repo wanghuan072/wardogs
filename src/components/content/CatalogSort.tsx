@@ -23,7 +23,6 @@ export function CatalogSort({ value, showRateOfFire = false }: { value: string; 
         <option value="price-asc">Price: low to high</option>
         <option value="price-desc">Price: high to low</option>
         {showRateOfFire && <option value="rpm">Rate of fire</option>}
-        <option value="recent">Recently checked</option>
       </select>
     </label>
   );

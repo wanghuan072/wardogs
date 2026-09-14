@@ -23,7 +23,18 @@ const suppressedDisplaySlugs = new Set([
 ]);
 
 function displayRecordKey(item: CatalogItem) {
-  return JSON.stringify(Object.fromEntries(Object.entries(item).filter(([key]) => key !== "id" && key !== "slug")));
+  // Source identifiers can differ for the same item. Compare only fields a
+  // player can use, so duplicate imports do not appear as duplicate records.
+  const { id, slug, image, dataSource, sourceUrl, patchVersion, lastChecked, dataStatus, ...publicRecord } = item;
+  void id;
+  void slug;
+  void image;
+  void dataSource;
+  void sourceUrl;
+  void patchVersion;
+  void lastChecked;
+  void dataStatus;
+  return JSON.stringify(publicRecord);
 }
 
 const seenDisplayRecords = new Set<string>();
@@ -161,12 +172,34 @@ export function getRelatedItems(item: CatalogItem) {
   return getItemsBySlugs(relationSlugs);
 }
 
+function linkedToWeapon(candidate: CatalogItem, weapon: CatalogItem) {
+  if (candidate.compatibleWeaponIds.includes(weapon.slug)) return true;
+  if (candidate.kind === "ammo" && candidate.ammoType === "magazine") return weapon.attachmentIds.includes(candidate.slug);
+  if (candidate.kind === "ammo") return weapon.ammoIds.includes(candidate.slug);
+  return weapon.attachmentIds.includes(candidate.slug);
+}
+
+export function getWeaponRelations(weapon: CatalogItem) {
+  const linked = catalogDisplayItems.filter((candidate) => linkedToWeapon(candidate, weapon));
+  return {
+    ammunition: linked.filter((candidate) => candidate.kind === "ammo" && candidate.ammoType !== "magazine"),
+    magazines: linked.filter((candidate) => candidate.kind === "ammo" && candidate.ammoType === "magazine"),
+    attachments: linked.filter((candidate) => candidate.kind === "attachment"),
+  };
+}
+
+export function attachmentGroupsForWeapon(weapon: CatalogItem) {
+  const groups = new Map<string, CatalogItem[]>();
+  for (const attachment of getWeaponRelations(weapon).attachments) {
+    const label = attachment.slot || attachment.type || "Other attachment";
+    groups.set(label, [...(groups.get(label) || []), attachment]);
+  }
+  return [...groups.entries()].sort(([left], [right]) => left.localeCompare(right));
+}
+
 export function itemHref(item: CatalogItem) {
   if (item.kind === "weapon") return `/wiki/weapons/${item.slug}`;
-  if (item.kind === "ammo") return `/wiki/ammunition/${item.slug}`;
-  if (item.kind === "attachment") return `/wiki/attachments/${item.slug}`;
-  if (item.kind === "vehicle") return `/wiki/vehicles/${item.slug}`;
-  return `/wiki/equipment/${item.slug}`;
+  return `${itemListingHref(item)}?q=${encodeURIComponent(item.name)}`;
 }
 
 export function itemListingHref(item: Pick<CatalogItem, "kind">) {

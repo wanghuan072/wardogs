@@ -5,7 +5,7 @@ import { ArrowRight, Backpack, CircleDollarSign, Crosshair, GitCompareArrows, Pl
 import { CatalogCard } from "@/components/content/CatalogCard";
 import { GlobalSearch } from "@/components/common/GlobalSearch";
 import { SectionHeading } from "@/components/common/SectionHeading";
-import { catalogCounts, equipment, getItemsBySlugs } from "@/lib/data/catalog";
+import { catalogCounts, equipment, getItemsBySlugs, itemHref } from "@/lib/data/catalog";
 import { guides, updates } from "@/lib/data/editorial";
 import { dateLabel } from "@/lib/formatting/format-values";
 import { buildMetadata } from "@/seo/metadata";
@@ -71,7 +71,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.statBand} aria-label="Database snapshot"><div className="container">
+      <section className={styles.statBand} aria-label="Database totals"><div className="container">
         {databaseStats.map(({ icon: Icon, value, label }) => <div key={label} className={styles.statItem}><Icon aria-hidden="true" /><strong>{value}</strong><span>{label}</span></div>)}
       </div></section>
 
@@ -89,7 +89,7 @@ export default function HomePage() {
         <Link href="/builder" className={styles.builderPanel}>
           <Image src="/images/official/wardogs-03.jpg" alt="WARDOGS operator preparing equipment" fill sizes="(max-width: 800px) 100vw, 620px" quality={55} />
           <span className={styles.builderShade} />
-          <div><span>Field kit / snapshot compatibility</span><h2>Build your kit</h2><p>Select a weapon, then see the ammunition and attachments linked in the community snapshot. Price and carried weight update as you assemble the kit.</p><b>Enter equipment builder <ArrowRight aria-hidden="true" /></b></div>
+          <div><span>Field kit / compatible gear</span><h2>Build your kit</h2><p>Select a weapon, then see the ammunition and attachments that fit it. Price and carried weight update as you assemble the kit.</p><b>Enter equipment builder <ArrowRight aria-hidden="true" /></b></div>
         </Link>
         <div className={styles.commandBrief}>
           <span>Start here</span>
@@ -127,8 +127,8 @@ export default function HomePage() {
 
       <section className={`container ${styles.intelGrid}`}>
         <div>
-          <SectionHeading eyebrow="Community interest" title="Popular weapons" description="A quick look at the weapons players search for most." href="/wiki/weapons" />
-          <div className={styles.weaponGrid}>{popularItems.map((item) => <CatalogCard key={item.slug} item={item} compact />)}</div>
+          <SectionHeading eyebrow="Popular picks" title="Popular weapons" description="A quick look at the weapons players search for most." href="/wiki/weapons" />
+          <div className={styles.weaponGrid}>{popularItems.map((item) => <CatalogCard key={item.slug} item={item} compact href={itemHref(item)} />)}</div>
           <Link href="/updates" className={styles.updateLink}><span>Release log</span><strong>{latestUpdate.version}</strong><p>{latestUpdate.label} · {dateLabel(latestUpdate.date)}</p><ArrowRight aria-hidden="true" /></Link>
         </div>
         <aside className={styles.guideRail}>

@@ -1,45 +1,80 @@
 [
   {
-    "slug": "early-access-launch-briefing",
-    "title": "Early Access Launch Briefing",
-    "label": "Launch readiness",
+    "slug": "patch-011-server-browser-and-economy",
+    "title": "Patch 0.11: Server Browser and Economy Response",
+    "label": "Scheduled patch",
+    "version": "0.11",
+    "date": "2026-09-12",
+    "sourceUrl": "https://steamcommunity.com/app/1867240/allnews/",
+    "sourceLabel": "WARDOGS update",
+    "summary": "The WARDOGS team announced scheduled maintenance for Patch 0.11, focused on finding community servers more easily, addressing cash exploits and improving regional capacity.",
+    "categories": ["Servers", "Economy", "Stability"],
+    "changes": [
+      { "area": "Server browser", "description": "Matchmaking and player-run servers are split into separate browser views, with text search and more reliable server filtering." },
+      { "area": "Player-run servers", "description": "Server IDs persist between matches and restarts; the announced update also includes a temporary 5% end-of-match cash bonus." },
+      { "area": "Economy", "description": "The team says several cash exploits were fixed and warns that deliberate abuse can result in cash and XP resets or bans." },
+      { "area": "Asia", "description": "Server capacity was increased for the Asian region." }
+    ]
+  },
+  {
+    "slug": "season-1-changelog",
+    "title": "Season 1 Changelog: Vehicles, Unlocks and Performance",
+    "label": "Season 1",
+    "version": "1.0",
+    "date": "2026-09-09",
+    "sourceUrl": "https://steamcommunity.com/app/1867240/allnews/",
+    "sourceLabel": "WARDOGS update",
+    "summary": "The Season 1 launch changelog adjusted helicopter handling, vehicle turrets, selected role unlocks, progression and performance features before Early Access release.",
+    "categories": ["Vehicles", "Progression", "Performance"],
+    "changes": [
+      { "area": "Vehicles", "description": "Z20 Lakota handling received a balance pass, helicopter input damping now applies to every input device, and vehicle turrets have a maximum operator rotation speed." },
+      { "area": "Loadouts", "description": "155mm, 122mm and flare deployables now use more space in a loadout." },
+      { "area": "Unlocks", "description": "Several Career, Medic, Support and Driver unlock levels were adjusted, including the Sports Parachute, Large Backpack, PP-19 drum magazine, URAL and Humvee with minigun." },
+      { "area": "Performance", "description": "The changelog includes frame-generation controls, reduced shadow-cache hitching and fixes for several crash paths." }
+    ]
+  },
+  {
+    "slug": "launch-stability-hotfix-1",
+    "title": "Launch Stability Hotfix #1",
+    "label": "Hotfix",
+    "version": "1.0.0 HF1",
+    "date": "2026-09-10",
+    "sourceUrl": "https://steamcommunity.com/app/1867240/allnews/",
+    "sourceLabel": "WARDOGS update",
+    "summary": "A launch-day client hotfix targeted join failures, unexpected server kicks and extended login queues while the team monitored server capacity.",
+    "categories": ["Stability", "Servers"],
+    "changes": [
+      { "area": "Client", "description": "Players were asked to restart and download the latest client before returning to the login queue." },
+      { "area": "Servers", "description": "The update targeted failed joins, unexpected kicks during play and extended queue times." }
+    ]
+  },
+  {
+    "slug": "early-access-launch",
+    "title": "WARDOGS Entered Steam Early Access",
+    "label": "Early Access",
     "version": "EA 1.0.0",
     "date": "2026-09-10",
     "sourceUrl": "https://store.steampowered.com/app/1867240/WARDOGS/",
-    "sourceLabel": "Official Steam page",
-    "summary": "WARDOGS entered Steam Early Access on September 10, 2026. Community-marked records remain separate from values checked against the public Early Access build while individual items are reviewed.",
-    "categories": ["Systems", "Database"],
+    "sourceLabel": "WARDOGS on Steam",
+    "summary": "WARDOGS launched in Steam Early Access on September 10, bringing its three-team combined-arms battles, persistent cash economy and player-built loadouts to the public build.",
+    "categories": ["Release", "Systems"],
     "changes": [
-      { "area": "Release", "description": "WARDOGS entered Steam Early Access on September 10, 2026." },
-      { "area": "Database", "description": "Community records remain clearly labeled until each value is checked against the public Early Access build." }
+      { "area": "Release", "description": "WARDOGS became available in Steam Early Access on September 10, 2026." },
+      { "area": "Economy", "description": "Each player begins with $10,000 and buys a custom loadout before spawning." }
     ]
   },
   {
-    "slug": "open-beta-status",
-    "title": "Closed Beta 02 Opened to More Players",
-    "label": "Beta",
+    "slug": "closed-beta-02-announcement",
+    "title": "Closed Beta 02 Announced",
+    "label": "Beta history",
     "version": "CB 0.2.0",
-    "date": "2026-09-05",
-    "sourceUrl": "https://steamcommunity.com/app/1867240/announcements/",
-    "sourceLabel": "Official Steam announcements",
-    "summary": "The pre-launch beta moved into a broader access period for final scale testing. Observations from that build may differ from Early Access values.",
-    "categories": ["Systems"],
+    "date": "2026-09-01",
+    "sourceUrl": "https://steamcommunity.com/app/1867240/allnews/",
+    "sourceLabel": "WARDOGS update",
+    "summary": "The second closed beta was announced as a scale test for server browsing, queue behaviour, voice chat and related services ahead of Early Access.",
+    "categories": ["Testing", "Servers"],
     "changes": [
-      { "area": "Testing", "description": "Server scale, browser, VOIP, entitlements and queue behavior were part of the announced test focus." }
-    ]
-  },
-  {
-    "slug": "preorder-and-launch-date",
-    "title": "WARDOGS Launch Date Announced",
-    "label": "Announcement",
-    "version": "PRE 0.1.0",
-    "date": "2026-08-11",
-    "sourceUrl": "https://steamcommunity.com/app/1867240/announcements/",
-    "sourceLabel": "Official Steam announcements",
-    "summary": "BULKHEAD announced the September 10 Early Access launch and described the supporter edition as cosmetic support rather than cash or power monetization.",
-    "categories": ["Systems", "Economy"],
-    "changes": [
-      { "area": "Monetization", "description": "Official communication states that in-game cash and gold bars will not be sold for real money." }
+      { "area": "Testing", "description": "The announced test focused on systems that only reveal issues at scale, including server capacity, browsing, voice chat, entitlements and queues." }
     ]
   }
 ]

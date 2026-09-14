@@ -6,7 +6,7 @@ import { CatalogCard } from "@/components/content/CatalogCard";
 import { GlobalSearch } from "@/components/common/GlobalSearch";
 import { PageHero } from "@/components/common/PageHero";
 import { SectionHeading } from "@/components/common/SectionHeading";
-import { catalogCounts, catalogDisplayItems, equipment, equipmentCategoryMap, getItemsBySlugs, itemListingHref, vehicleCategoryMap, vehicles, weaponCategoryMap, weapons } from "@/lib/data/catalog";
+import { catalogCounts, catalogDisplayItems, equipment, equipmentCategoryMap, getItemsBySlugs, itemHref, vehicleCategoryMap, vehicles, weaponCategoryMap, weapons } from "@/lib/data/catalog";
 import { guides } from "@/lib/data/editorial";
 import { buildMetadata } from "@/seo/metadata";
 import { tdk } from "@/seo/tdk";
@@ -36,12 +36,12 @@ const databaseSummary = [
 
 const actions = [
   { label: "Compare weapons", text: "Put weapon details side by side.", href: "/tools/weapon-compare" },
-  { label: "Build a kit", text: "Assemble equipment with snapshot compatibility rules.", href: "/builder" },
+  { label: "Build a kit", text: "Assemble a weapon, its ammunition and its compatible equipment.", href: "/builder" },
   { label: "Plan your cash", text: "Check the cost of a kit before you buy it.", href: "/tools/budget-planner" },
 ];
 
 export default function WikiPage() {
-  const recentlyUpdated = [...catalogDisplayItems].sort((a, b) => b.lastChecked.localeCompare(a.lastChecked)).slice(0, 6);
+  const kitStarters = getItemsBySlugs(["m4", "ak74", "mp5", "field-backpack", "individual-first-aid-kit", "m67-frag-grenade"]);
   return (
     <main id="main-content">
       <PageHero eyebrow="Weapons, ammo, gear and vehicles" title="WARDOGS Wiki – Find the item you need" description="Browse weapons, ammunition, attachments, equipment and vehicles. Each list keeps the useful details in one place, so you can compare options without opening a stack of pages." image="/images/official/wardogs-10.jpg" crumbs={[{ label: "Wiki" }]} />
@@ -57,8 +57,8 @@ export default function WikiPage() {
       </section>
       <section className={`container ${styles.section}`}><SectionHeading eyebrow="Browse by category" title="Choose what you want to check" description="Open a category, then filter the list by the details that matter to your kit." /><div className={styles.groupGrid}>{groups.map((group) => <article key={group.title} className={styles.groupCard}><header><span>{group.label}</span><group.icon aria-hidden="true" /></header><h3>{group.title}</h3><p>{group.description}</p><div>{group.links.map(([label, href, count]) => <Link href={href} key={href}><span>{label}</span><small>{count}</small><ArrowRight size={14} /></Link>)}</div></article>)}</div></section>
       <section className={`container ${styles.intelGrid}`}>
-        <div className={styles.popularPanel}><SectionHeading eyebrow="Popular picks" title="Items players check often" description="A quick look at common weapons, vehicles and equipment choices." href="/wiki/weapons" /><div className={styles.popularGrid}>{popular.map((item) => <CatalogCard item={item} key={item.slug} compact />)}</div></div>
-        <aside className={styles.updatePanel}><SectionHeading eyebrow="Snapshot records" title="Latest recorded checks" description="Items ordered by the community snapshot check date; values remain unverified until reviewed against the current build." /><div className={styles.updatedList}>{recentlyUpdated.map((item, index) => <Link href={itemListingHref(item)} key={item.slug}><span>{String(index + 1).padStart(2, "0")}</span>{item.image && <Image src={item.image} alt="" width={70} height={45} />}<div><strong>{item.name}</strong><small>{item.kind} · recorded {item.lastChecked}</small></div><ArrowRight size={14} aria-hidden="true" /></Link>)}</div></aside>
+        <div className={styles.popularPanel}><SectionHeading eyebrow="Popular picks" title="Items players check often" description="A quick look at common weapons, vehicles and equipment choices." href="/wiki/weapons" /><div className={styles.popularGrid}>{popular.map((item) => <CatalogCard item={item} key={item.slug} compact href={itemHref(item)} />)}</div></div>
+        <aside className={styles.updatePanel}><SectionHeading eyebrow="Start your kit" title="Useful first picks" description="A practical set of entries to open when you are putting together a straightforward field kit." /><div className={styles.updatedList}>{kitStarters.map((item, index) => <Link href={itemHref(item)} key={item.slug}><span>{String(index + 1).padStart(2, "0")}</span>{item.image && <Image src={item.image} alt="" width={70} height={45} />}<div><strong>{item.name}</strong><small>{item.type || item.kind}{item.price !== null ? ` · $${item.price.toLocaleString()}` : ""}</small></div><ArrowRight size={14} aria-hidden="true" /></Link>)}</div></aside>
       </section>
       <section className={`container ${styles.guideStrip}`}><SectionHeading eyebrow="Learn the game" title="Guides for your next match" description="Practical guides for the game systems that matter when you are playing." href="/guides" /><div>{guides.slice(0, 4).map((guide) => <Link key={guide.slug} href={`/guides/${guide.slug}`}><Image src={guide.image} alt="" fill sizes="330px" /><span /><div><small>{guide.category}</small><h3>{guide.title}</h3><p>{guide.description}</p><b>Read guide <ArrowRight size={13} aria-hidden="true" /></b></div></Link>)}</div></section>
       <section className={`container ${styles.actionBand}`}><div><span>What next?</span><h2>Use the information in your next match</h2></div><div>{actions.map((action) => <Link href={action.href} key={action.href}><span>{action.label}</span><p>{action.text}</p><ArrowRight aria-hidden="true" /></Link>)}</div></section>

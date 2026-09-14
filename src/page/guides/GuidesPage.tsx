@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
-import { DataStatus } from "@/components/common/DataStatus";
 import { PageHero } from "@/components/common/PageHero";
 import { RelatedLinks } from "@/components/common/RelatedLinks";
 import { SectionHeading } from "@/components/common/SectionHeading";
@@ -19,7 +18,7 @@ function readMinutes(guide: (typeof guides)[number]) { return Math.max(7, Math.c
 export function GuidesPage() {
   return (
     <main id="main-content">
-      <PageHero eyebrow="Start smarter, play longer" title="WARDOGS Guides – Get ready for your next match" description="Start with the basics, manage your cash, learn to fly and understand how Control Zones shape a match. These four guides cover the decisions you will make most often." image="/images/official/wardogs-02.jpg" crumbs={[{ label: "Guides" }]}><DataStatus compact /></PageHero>
+      <PageHero eyebrow="Start smarter, play longer" title="WARDOGS Guides – Get ready for your next match" description="Start with the basics, manage your cash, learn to fly and understand how Control Zones shape a match. These four guides cover the decisions you will make most often." image="/images/official/wardogs-02.jpg" crumbs={[{ label: "Guides" }]} />
       <section className={`container ${styles.section}`}>
         <SectionHeading eyebrow="Four player guides" title="Pick what you want to learn" description="Start with your first match, the cash system, helicopter controls or Control Zone play." />
         <div className={styles.guideGrid}>{guides.map((guide, index) => <article key={guide.slug} className={styles.guideCard}>
