@@ -23,21 +23,19 @@ import {
   Wrench,
   Zap,
 } from "lucide-react";
-import type { CatalogItem } from "@/types/catalog";
+import {
+  defaultPackCapacity,
+  getBuilderOptions,
+  isCompatibleWithWeapon,
+  magazineCapacity,
+  storageCapacity,
+  type BuilderItem,
+  type BuilderTab,
+} from "@/lib/tools/loadout";
+import armoryTabContent from "@/data/builder/armory-tabs.json";
 import styles from "@/style/page/builder/builder.module.css";
 
-type ArmoryTab =
-  | "primary"
-  | "sidearm"
-  | "launcher"
-  | "ammo"
-  | "magazine"
-  | "attachment"
-  | "medical"
-  | "building"
-  | "recon"
-  | "vehicle"
-  | "tactical";
+type ArmoryTab = BuilderTab;
 
 type EquipmentState = {
   primary: string;
@@ -57,42 +55,27 @@ type GearState = {
 type WeaponSlot = "primary" | "sidearm" | "special";
 type AmmoBySlot = Record<WeaponSlot, string>;
 type AttachmentsBySlot = Record<WeaponSlot, Record<string, string>>;
-type LoadedMagazine = { slug: string; ammoSlug: string; rounds: number; capacity: number };
+type LoadedMagazine = { slug: string; ammoSlug: string; rounds: number; capacity: number | null };
 type MagazinesBySlot = Record<WeaponSlot, LoadedMagazine | null>;
 
 const fieldBudget = 10000;
-const packCapacity = 8;
 
-const armoryTabs: Array<{ id: ArmoryTab; label: string; shortLabel: string; icon: typeof Crosshair }> = [
-  { id: "primary", label: "Primary weapons", shortLabel: "Primary", icon: Crosshair },
-  { id: "sidearm", label: "Sidearms", shortLabel: "Sidearm", icon: Shield },
-  { id: "launcher", label: "Launchers", shortLabel: "Launcher", icon: Zap },
-  { id: "medical", label: "Medical", shortLabel: "Medical", icon: HeartPulse },
-  { id: "building", label: "Building", shortLabel: "Building", icon: Wrench },
-  { id: "recon", label: "Recon", shortLabel: "Recon", icon: Radar },
-  { id: "vehicle", label: "Vehicles", shortLabel: "Vehicle", icon: Truck },
-  { id: "tactical", label: "Tactical gear", shortLabel: "Tactical", icon: Boxes },
-];
-
+// 文案属于可频繁调整的内容，放在 JSON 中便于复用和非逻辑修改。
+// 图标仍由代码映射，避免把 React 组件名当成字符串处理。
+const tabIcons = { primary: Crosshair, sidearm: Shield, launcher: Zap, medical: HeartPulse, building: Wrench, recon: Radar, vehicle: Truck, tactical: Boxes } as const;
+const armoryTabs = armoryTabContent.map((tab) => ({ ...tab, id: tab.id as ArmoryTab, icon: tabIcons[tab.id as keyof typeof tabIcons] }));
 const tabDescriptions: Record<ArmoryTab, string> = {
-  primary: "Select the main weapon carried in the primary sling.",
-  sidearm: "Choose a compact backup weapon for close emergencies.",
-  launcher: "Equip one specialist launcher in the utility slot.",
+  ...Object.fromEntries(armoryTabContent.map((tab) => [tab.id, tab.description])),
   ammo: "Choose compatible loose ammunition for the selected weapon.",
   magazine: "Choose a compatible magazine for the selected weapon.",
   attachment: "Only parts recorded as compatible with the selected weapon are shown.",
-  medical: "Add trauma supplies to the pack. Every unit uses one capacity.",
-  building: "Pack field construction and repair equipment.",
-  recon: "Carry navigation, observation and survival equipment.",
-  vehicle: "Choose one vehicle requisition for this deployment.",
-  tactical: "Equip an explosive or pack grenades and tactical tools.",
-};
+} as Record<ArmoryTab, string>;
 
 function money(value: number | null) {
-  return value === null || value <= 0 ? "N/A" : `$${value.toLocaleString()}`;
+  return value === null ? "N/A" : `$${value.toLocaleString()}`;
 }
 
-function itemLabel(item: CatalogItem) {
+function itemLabel(item: BuilderItem) {
   return item.type || item.category || item.slot || item.kind;
 }
 
@@ -100,13 +83,8 @@ function isPackCategory(tab: ArmoryTab) {
   return ["medical", "building", "recon", "tactical"].includes(tab);
 }
 
-function magazineCapacity(item: CatalogItem) {
-  const match = item.name.match(/(\d+)\s*RND/i);
-  return match ? Number(match[1]) : 0;
-}
-
 function looseAmmoPurchaseSize(magazine: LoadedMagazine | null) {
-  return magazine?.capacity || 30;
+  return magazine?.capacity ?? 30;
 }
 
 function EquipmentSlot({
@@ -123,10 +101,10 @@ function EquipmentSlot({
   onBrowse,
 }: {
   label: string;
-  item?: CatalogItem;
+  item?: BuilderItem;
   weaponSlot: WeaponSlot;
   browseTab: ArmoryTab;
-  ammo?: CatalogItem;
+  ammo?: BuilderItem;
   magazine?: LoadedMagazine | null;
   attachmentCount: number;
   canSelectAmmo: boolean;
@@ -136,7 +114,8 @@ function EquipmentSlot({
 }) {
   return (
     <article className={`${styles.equipmentSlot} ${item ? styles.filledSlot : ""}`}>
-      <button type="button" className={styles.slotMain} onClick={() => onBrowse(weaponSlot, browseTab)} aria-label={`Change ${label}`}>
+      <button type="button" className={styles.slotMain} onClick={() => onBrowse(weaponSlot, browseTab)}>
+        <span className="sr-only">Change </span>
         <span className={styles.cornerIndex}>{label}</span>
         {item?.price && item.price > 0 ? <strong className={styles.priceTag}>{money(item.price)}</strong> : null}
         <span className={styles.slotVisual}>
@@ -150,7 +129,7 @@ function EquipmentSlot({
           <span>Ammo</span><strong>{canSelectAmmo ? ammo?.name || "Select" : "—"}</strong>
         </button>
         <button type="button" onClick={() => onBrowse(weaponSlot, "magazine")} disabled={!canSelectMagazine}>
-          <span>Mag.</span><strong>{canSelectMagazine ? (magazine ? `${magazine.rounds}/${magazine.capacity || "?"}` : "Select") : "—"}</strong>
+          <span>Mag.</span><strong>{canSelectMagazine ? (magazine ? `${magazine.rounds}/${magazine.capacity ?? "?"}` : "Select") : "—"}</strong>
         </button>
         <button type="button" onClick={() => onBrowse(weaponSlot, "attachment")} disabled={!canSelectAttachments}>
           <span>Attc.</span><strong>{canSelectAttachments ? `${attachmentCount}/4` : "—"}</strong>
@@ -160,9 +139,10 @@ function EquipmentSlot({
   );
 }
 
-export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[]; initialItem?: string }) {
+export function EquipmentBuilder({ items, initialItemSlug }: { items: BuilderItem[]; initialItemSlug?: string }) {
+  // 目录只读；所有用户操作都保存在下面这些局部状态中，刷新页面即可恢复初始配置。
   const bySlug = useMemo(() => new Map(items.map((item) => [item.slug, item])), [items]);
-  const requestedItem = initialItem ? bySlug.get(initialItem) : undefined;
+  const requestedItem = initialItemSlug ? bySlug.get(initialItemSlug) : undefined;
   const defaultPrimary =
     (requestedItem?.kind === "weapon" && requestedItem.slot === "Primary" ? requestedItem : undefined) ??
     bySlug.get("ak74") ??
@@ -190,6 +170,7 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
               ? "launcher"
               : "tactical";
 
+  // activeWeaponSlot 决定弹药、弹匣和配件要作用于哪一把武器。
   const [activeTab, setActiveTab] = useState<ArmoryTab>(initialTab);
   const [activeWeaponSlot, setActiveWeaponSlot] = useState<WeaponSlot>(initialTab === "sidearm" ? "sidearm" : initialTab === "launcher" ? "special" : "primary");
   const [equipment, setEquipment] = useState<EquipmentState>(initialEquipment);
@@ -210,33 +191,20 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
   const sidearm = bySlug.get(equipment.sidearm);
   const special = bySlug.get(equipment.special);
   const support = bySlug.get(equipment.support);
-  const gearItems = Object.values(gear).map((slug) => bySlug.get(slug)).filter((item): item is CatalogItem => Boolean(item));
+  const gearItems = Object.values(gear).map((slug) => bySlug.get(slug)).filter((item): item is BuilderItem => Boolean(item));
   const activeWeapon = bySlug.get(equipment[activeWeaponSlot]);
   const activeAttachments = attachmentsBySlot[activeWeaponSlot];
   const activeMagazine = magazinesBySlot[activeWeaponSlot];
 
-  const compatibleAmmo = items.filter((item) => item.kind === "ammo" && item.ammoType !== "magazine" && Boolean(activeWeapon && (activeWeapon.ammoIds.includes(item.slug) || item.compatibleWeaponIds.includes(activeWeapon.slug))));
-  const compatibleMagazines = items.filter((item) => item.kind === "ammo" && item.ammoType === "magazine" && Boolean(activeWeapon && (activeWeapon.attachmentIds.includes(item.slug) || item.compatibleWeaponIds.includes(activeWeapon.slug))));
-  const compatibleAttachments = items.filter((item) => item.kind === "attachment" && Boolean(activeWeapon && (activeWeapon.attachmentIds.includes(item.slug) || item.compatibleWeaponIds.includes(activeWeapon.slug))));
+  // 兼容性以目录中的 ammoIds / attachmentIds 为准；没有选武器时不显示相关选项。
+  const compatibleAmmo = getBuilderOptions(items, "ammo", activeWeapon);
+  const options = getBuilderOptions(items, activeTab, activeWeapon);
 
-  let optionRecords: CatalogItem[] = [];
-  if (activeTab === "primary") optionRecords = items.filter((item) => item.kind === "weapon" && item.slot === "Primary");
-  if (activeTab === "sidearm") optionRecords = items.filter((item) => item.kind === "weapon" && item.slot === "Sidearm");
-  if (activeTab === "launcher") optionRecords = items.filter((item) => item.kind === "weapon" && item.slot === "Specialist");
-  if (activeTab === "ammo") optionRecords = compatibleAmmo;
-  if (activeTab === "magazine") optionRecords = compatibleMagazines;
-  if (activeTab === "attachment") optionRecords = compatibleAttachments;
-  if (activeTab === "medical") optionRecords = items.filter((item) => item.kind === "medical");
-  if (activeTab === "building") optionRecords = items.filter((item) => ["deployable", "supplies"].includes(item.kind));
-  if (activeTab === "recon") optionRecords = items.filter((item) => ["utility", "storage", "armor"].includes(item.kind));
-  if (activeTab === "vehicle") optionRecords = items.filter((item) => item.kind === "vehicle");
-  if (activeTab === "tactical") optionRecords = items.filter((item) => ["throwable", "explosive", "melee"].includes(item.kind));
-  const options = optionRecords.filter((item) => item.image).slice(0, 32);
-
+  // pack 只记录数量，backpackItems 用于把数量还原成带目录信息的展示数据。
   const usedCapacity = Object.values(pack).reduce((total, quantity) => total + quantity, 0);
   const backpackItems = Object.entries(pack)
     .map(([slug, quantity]) => ({ item: bySlug.get(slug), quantity }))
-    .filter((entry): entry is { item: CatalogItem; quantity: number } => Boolean(entry.item));
+    .filter((entry): entry is { item: BuilderItem; quantity: number } => Boolean(entry.item));
   const backpackUnits = backpackItems.flatMap(({ item, quantity }) =>
     Array.from({ length: quantity }, (_, index) => ({ item, index, quantity })),
   );
@@ -244,12 +212,13 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
   const loadedMagazineItems = Object.values(magazinesBySlot).map((magazine) => magazine ? bySlug.get(magazine.slug) : undefined);
   const loadedAmmoItems = Object.values(magazinesBySlot).map((magazine) => magazine?.ammoSlug ? bySlug.get(magazine.ammoSlug) : undefined);
   const equippedItems = [primary, sidearm, special, support, ...gearItems, ...loadedMagazineItems, ...Object.values(attachmentsBySlot).flatMap((slotAttachments) => Object.values(slotAttachments)).map((slug) => bySlug.get(slug))]
-    .filter((item): item is CatalogItem => Boolean(item));
+    .filter((item): item is BuilderItem => Boolean(item));
   const knownCost = equippedItems.reduce((total, item) => total + (item.price && item.price > 0 ? item.price : 0), 0)
     + loadedAmmoItems.reduce((total, item, index) => total + (item?.price && item.price > 0 ? item.price * (Object.values(magazinesBySlot)[index]?.rounds || 0) : 0), 0)
     + backpackItems.reduce((total, { item, quantity }) => total + (item.price && item.price > 0 ? item.price * (item.ammoType === "cartridge" ? looseAmmoRounds[item.slug] || 0 : quantity) : 0), 0);
   const knownWeight = equippedItems.reduce((total, item) => total + (item.weight && item.weight > 0 ? item.weight : 0), 0)
     + backpackItems.reduce((total, { item, quantity }) => total + (item.weight && item.weight > 0 ? item.weight * quantity : 0), 0);
+  const packCapacity = storageCapacity(bySlug.get(gear.backpack)) ?? defaultPackCapacity;
   const remaining = fieldBudget - knownCost;
 
   function openTab(tab: ArmoryTab) {
@@ -264,16 +233,15 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
     setMessage(weapon ? `${weapon.name}: ${tabDescriptions[tab]}` : `Choose a ${slot} weapon before browsing ${tab}.`);
   }
 
-  function isCompatibleMunition(item: CatalogItem, nextEquipment: EquipmentState) {
+  function isCompatibleMunition(item: BuilderItem, nextEquipment: EquipmentState) {
     if (item.kind !== "ammo") return true;
     const nextWeapons = [nextEquipment.primary, nextEquipment.sidearm, nextEquipment.special]
       .map((slug) => bySlug.get(slug))
-      .filter((weapon): weapon is CatalogItem => Boolean(weapon));
-    return nextWeapons.some((weapon) => item.ammoType === "magazine"
-      ? weapon.attachmentIds.includes(item.slug) || item.compatibleWeaponIds.includes(weapon.slug)
-      : weapon.ammoIds.includes(item.slug) || item.compatibleWeaponIds.includes(weapon.slug));
+      .filter((weapon): weapon is BuilderItem => Boolean(weapon));
+    return nextWeapons.some((weapon) => isCompatibleWithWeapon(item, weapon));
   }
 
+  // 更换武器后清理不再兼容的弹药，避免界面显示“幽灵装备”。
   function synchronizeMunitions(nextEquipment: EquipmentState) {
     setPack((current) => Object.fromEntries(
       Object.entries(current).filter(([slug]) => {
@@ -289,7 +257,7 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
     ));
   }
 
-  function selectWeapon(slot: WeaponSlot, item: CatalogItem, canToggle = false) {
+  function selectWeapon(slot: WeaponSlot, item: BuilderItem, canToggle = false) {
     const shouldRemove = canToggle && equipment[slot] === item.slug;
     const nextEquipment = { ...equipment, [slot]: shouldRemove ? "" : item.slug };
     setEquipment(nextEquipment);
@@ -300,7 +268,7 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
     setMessage(`${item.name} ${shouldRemove ? "removed" : "equipped"}. Incompatible ammunition, magazines, and fitted parts were cleared.`);
   }
 
-  function addToPack(item: CatalogItem) {
+  function addToPack(item: BuilderItem) {
     if (item.kind === "ammo" && item.ammoType === "cartridge") {
       addLooseAmmo(item);
       return;
@@ -313,7 +281,7 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
     setMessage(`${item.name} added to backpack.`);
   }
 
-  function addLooseAmmo(item: CatalogItem) {
+  function addLooseAmmo(item: BuilderItem) {
     const rounds = looseAmmoPurchaseSize(activeMagazine);
     const isNewStack = !pack[item.slug];
     if (isNewStack && usedCapacity >= packCapacity) {
@@ -343,7 +311,8 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
     setMessage(`${itemName} removed from backpack.`);
   }
 
-  function chooseItem(item: CatalogItem) {
+  // 根据当前标签把一次点击分派到武器、弹药、配件或背包逻辑。
+  function chooseItem(item: BuilderItem) {
     if (activeTab === "primary") {
       selectWeapon("primary", item);
       return;
@@ -359,8 +328,11 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
     if (activeTab === "ammo") {
       if (activeMagazine && !activeMagazine.ammoSlug) {
         setAmmoBySlot((current) => ({ ...current, [activeWeaponSlot]: item.slug }));
-        setMagazinesBySlot((current) => ({ ...current, [activeWeaponSlot]: { ...activeMagazine, ammoSlug: item.slug, rounds: activeMagazine.capacity } }));
-        setMessage(`${item.name} loaded into ${activeWeapon?.name || activeWeaponSlot}'s ${activeMagazine.capacity || "selected"}-round magazine.`);
+        const rounds = activeMagazine.capacity ?? 0;
+        setMagazinesBySlot((current) => ({ ...current, [activeWeaponSlot]: { ...activeMagazine, ammoSlug: item.slug, rounds } }));
+        setMessage(activeMagazine.capacity
+          ? `${item.name} loaded into ${activeWeapon?.name || activeWeaponSlot}'s ${activeMagazine.capacity}-round magazine.`
+          : `${item.name} selected for ${activeWeapon?.name || activeWeaponSlot}; this magazine's capacity is not yet recorded.`);
         return;
       }
       addLooseAmmo(item);
@@ -377,12 +349,15 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
         return;
       }
       const capacity = magazineCapacity(item);
-      const looseAmmo = compatibleAmmo.find((ammoItem) => (looseAmmoRounds[ammoItem.slug] || 0) >= capacity);
-      setMagazinesBySlot((current) => ({ ...current, [activeWeaponSlot]: { slug: item.slug, ammoSlug: looseAmmo?.slug || "", rounds: looseAmmo ? capacity : 0, capacity } }));
+      const knownCapacity = capacity ?? 0;
+      const looseAmmo = knownCapacity > 0 ? compatibleAmmo.find((ammoItem) => (looseAmmoRounds[ammoItem.slug] || 0) >= knownCapacity) : undefined;
+      setMagazinesBySlot((current) => ({ ...current, [activeWeaponSlot]: { slug: item.slug, ammoSlug: looseAmmo?.slug || "", rounds: looseAmmo ? knownCapacity : 0, capacity } }));
       if (activeMagazine) setPack((current) => ({ ...current, [activeMagazine.slug]: (current[activeMagazine.slug] || 0) + 1 }));
-      if (looseAmmo) setLooseAmmoRounds((current) => ({ ...current, [looseAmmo.slug]: current[looseAmmo.slug] - capacity }));
-      if (looseAmmo && looseAmmoRounds[looseAmmo.slug] === capacity) setPack((current) => Object.fromEntries(Object.entries(current).filter(([slug]) => slug !== looseAmmo.slug)));
-      setMessage(`${item.name} equipped${looseAmmo ? ` and loaded with ${looseAmmo.name}` : ". Choose Ammo to load it."}`);
+      if (looseAmmo) setLooseAmmoRounds((current) => ({ ...current, [looseAmmo.slug]: current[looseAmmo.slug] - knownCapacity }));
+      if (looseAmmo && looseAmmoRounds[looseAmmo.slug] === knownCapacity) setPack((current) => Object.fromEntries(Object.entries(current).filter(([slug]) => slug !== looseAmmo.slug)));
+      setMessage(capacity === null
+        ? `${item.name} equipped. Its capacity is not recorded, so ammunition cost remains unknown.`
+        : `${item.name} equipped${looseAmmo ? ` and loaded with ${looseAmmo.name}` : ". Choose Ammo to load it."}`);
       return;
     }
     if (activeTab === "attachment") {
@@ -428,7 +403,7 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
     addToPack(item);
   }
 
-  function isSelected(item: CatalogItem) {
+  function isSelected(item: BuilderItem) {
     return [equipment.primary, equipment.sidearm, equipment.special, equipment.support, ...Object.values(magazinesBySlot).flatMap((magazine) => magazine ? [magazine.slug, magazine.ammoSlug] : []), ...Object.values(attachmentsBySlot).flatMap((slotAttachments) => Object.values(slotAttachments))].includes(item.slug)
       || Boolean(pack[item.slug]);
   }
@@ -468,13 +443,13 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
 
       <div className={styles.loadoutStage}>
         <aside className={styles.operatorPanel} aria-label="Player gear slots">
-          <div className={styles.playerHeader}><small>Loadout</small><strong>Jonniedw</strong><span>Field operator</span></div>
-          <div className={styles.playerStatus}><span>Health <b>31</b></span><span>Weight <b>{knownWeight.toFixed(1)} kg</b></span></div>
+          <div className={styles.playerHeader}><small>Loadout</small><strong>Field operator</strong><span>Deployment manifest</span></div>
+          <div className={styles.playerStatus}><span>Status <b>Ready</b></span><span>Weight <b>{knownWeight.toFixed(1)} kg</b></span></div>
           <div className={styles.gearHeading}>Gear</div>
           <div className={styles.gearGrid}>
             {([ ["helmet", "Helmet"], ["armor", "Armor"], ["vest", "Vest"], ["backpack", "Storage"], ["traversal", "Traversal"] ] as const).map(([key, label]) => {
               const item = bySlug.get(gear[key]);
-              return <button type="button" className={styles.gearTile} onClick={() => openTab("recon")} key={key} aria-label={`Change ${label}`}><small>{label}</small>{item?.image ? <Image src={item.image} alt="" fill sizes="120px" /> : <PackagePlus />}<strong>{item?.name || label}</strong></button>;
+              return <button type="button" className={styles.gearTile} onClick={() => openTab("recon")} key={key}><span className="sr-only">Change </span><small>{label}</small>{item?.image ? <Image src={item.image} alt="" fill sizes="(max-width: 768px) 48px, 100px" quality={65} /> : <PackagePlus />}<strong>{item?.name || label}</strong></button>;
             })}
           </div>
           <div className={styles.quickSlots}><span>Quick slots</span><i /><i /><i /><i /></div>
@@ -502,7 +477,7 @@ export function EquipmentBuilder({ items, initialItem }: { items: CatalogItem[];
             <strong className={usedCapacity >= packCapacity ? styles.fullCapacity : ""}>CAP. {usedCapacity}/{packCapacity}</strong>
           </div>
           <div className={styles.packInterior}>
-            <Image className={styles.operatorBackdrop} src="/images/home/wardogs-command-overlook.png" alt="" fill sizes="(max-width: 980px) 100vw, 440px" priority />
+            <Image className={styles.operatorBackdrop} src="/images/home/wardogs-command-overlook.png" alt="" fill sizes="(max-width: 980px) 100vw, 440px" quality={55} />
             <div className={styles.packFrame}>
               {backpackUnits.map(({ item, index, quantity }) => (
                 <article className={styles.packItem} key={`${item.slug}-${index}`}>

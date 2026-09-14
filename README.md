@@ -62,3 +62,14 @@ Send the page URL, the value or relationship that needs attention, the game vers
 - [Contact Us](https://wardogsdb.org/contact)
 
 Copyright © 2026 WARDOGS Field Intel. All rights reserved.
+
+## Development
+
+```bash
+npm ci
+npm run dev
+```
+
+Run `npm run check` before committing. It performs the TypeScript check, ESLint, unit tests and catalog integrity validation. Run `npm run build` for the production build. `npm run data:sync` refreshes the community snapshot and validates the resulting catalog and image references.
+
+The production smoke workflow checks the public homepage, robots file, sitemap, Builder and Budget Planner every day. It also fails when a required security response header is missing, so deployment or proxy regressions surface through the repository's Actions notifications.

@@ -1,0 +1,28 @@
+name: Production smoke
+
+on:
+  schedule:
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check public routes and security headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://wardogsdb.org"
+
+          for path in / /robots.txt /sitemap.xml /builder /tools/budget-planner; do
+            curl --fail --silent --show-error --retry 2 --max-time 20 "${base}${path}" > /dev/null
+          done
+
+          headers="$(curl --fail --silent --show-error --head --retry 2 --max-time 20 "${base}/")"
+          for header in content-security-policy strict-transport-security x-content-type-options referrer-policy permissions-policy x-frame-options; do
+            grep --ignore-case --quiet "^${header}:" <<< "${headers}" || {
+              echo "Missing required response header: ${header}"
+              exit 1
+            }
+          done

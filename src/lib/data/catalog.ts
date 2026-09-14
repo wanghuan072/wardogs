@@ -23,8 +23,7 @@ const suppressedDisplaySlugs = new Set([
 ]);
 
 function displayRecordKey(item: CatalogItem) {
-  const { id: _id, slug: _slug, ...displayFields } = item;
-  return JSON.stringify(displayFields);
+  return JSON.stringify(Object.fromEntries(Object.entries(item).filter(([key]) => key !== "id" && key !== "slug")));
 }
 
 const seenDisplayRecords = new Set<string>();

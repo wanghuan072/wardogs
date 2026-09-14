@@ -2,6 +2,7 @@ import { catalogDisplayItems, itemListingHref } from "@/lib/data/catalog";
 import { guides } from "@/lib/data/editorial";
 
 export type SearchResult = {
+  id: string;
   title: string;
   description: string;
   href: string;
@@ -11,9 +12,10 @@ export type SearchResult = {
 
 const index: SearchResult[] = [
   ...catalogDisplayItems.map((item) => ({
+    id: `catalog:${item.slug}`,
     title: item.name,
     description: [item.type || item.kind, item.caliber, item.price === null ? null : `$${item.price.toLocaleString()}`].filter(Boolean).join(" · "),
-    href: itemListingHref(item),
+    href: `${itemListingHref(item)}?q=${encodeURIComponent(item.name)}`,
     group:
       item.kind === "weapon"
         ? "Weapons"
@@ -27,13 +29,14 @@ const index: SearchResult[] = [
     image: item.image,
   })),
   ...guides.map((guide) => ({
+    id: `guide:${guide.slug}`,
     title: guide.title,
     description: guide.description,
     href: `/guides/${guide.slug}`,
     group: "Guides",
     image: guide.image,
   })),
-  { title: "Equipment Builder", description: "Assemble a weapon, compatible ammunition, attachments, armor and field gear with live cost and weight.", href: "/builder", group: "Tools", image: "/images/official/wardogs-12.jpg" },
+  { id: "tool:builder", title: "Equipment Builder", description: "Assemble a weapon, compatible ammunition, attachments, armor and field gear with live cost and weight.", href: "/builder", group: "Tools", image: "/images/official/wardogs-12.jpg" },
 ];
 
 export function searchContent(query: string) {

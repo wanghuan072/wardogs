@@ -25,7 +25,7 @@ export function PageHero({
   return (
     <>
     <section className={styles.pageHero}>
-      <Image className={styles.pageHeroImage} src={image} alt="" fill sizes="100vw" preload />
+      <Image className={styles.pageHeroImage} src={image} alt="" fill sizes="100vw" fetchPriority="high" loading="eager" quality={55} />
       <div className={styles.pageHeroShade} />
       <div className={`${containerClassName || "container"} ${styles.pageHeroInner}`}>
         {crumbs && <Breadcrumb items={crumbs} />}

@@ -4,11 +4,11 @@ import styles from "@/style/common/common.module.css";
 
 export function DataStatus({ compact = false }: { compact?: boolean }) {
   return (
-    <aside className={compact ? styles.dataStatusCompact : styles.dataStatus} aria-label="Current game information">
+    <aside className={compact ? styles.dataStatusCompact : styles.dataStatus} aria-label="Data quality status">
       <span><Radio aria-hidden="true" /> Game state<strong>Early Access</strong></span>
-      <span><Database aria-hidden="true" /> Item info<strong>Early Access review in progress</strong></span>
-      <span><ShieldCheck aria-hidden="true" /> Snapshot date<strong>{siteConfig.dataUpdated}</strong></span>
-      {!compact && <p>Records are being checked against the live Early Access build. Unknown values stay blank until they can be verified.</p>}
+      <span><Database aria-hidden="true" /> Data set<strong>Community beta snapshot</strong></span>
+      <span><ShieldCheck aria-hidden="true" /> Verification<strong>In progress · {siteConfig.dataUpdated}</strong></span>
+      {!compact && <p>Item records are not yet verified against the current Early Access build. Unknown values stay blank instead of becoming estimates.</p>}
     </aside>
   );
 }

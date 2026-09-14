@@ -8,7 +8,7 @@ import styles from "@/style/layout/site-layout.module.css";
 export function SiteFooter() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerImage} />
+      <Image className={styles.footerImage} src="/images/official/wardogs-06.jpg" alt="" fill sizes="100vw" quality={45} />
       <div className={`container ${styles.footerGrid}`}>
         <div className={styles.footerBrand}>
           <div><Image src="/images/logo.png" width={36} height={36} alt="" /><strong>WARDOGS</strong></div>
@@ -25,11 +25,11 @@ export function SiteFooter() {
           <p>Copyright © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.<br />WARDOGS Field Intel is an independent fan site and is not affiliated with, endorsed by, or connected to the official WARDOGS game or its rights holders.</p>
           <nav className={styles.footerLinks} aria-label="Legal information">
             <span>Legal</span>
-            <a href="/privacy" rel="noopener noreferrer nofollow">Privacy Policy</a>
-            <a href="/terms" rel="noopener noreferrer nofollow">Terms of Service</a>
-            <a href="/copyright" rel="noopener noreferrer nofollow">Copyright</a>
-            <a href="/about" rel="noopener noreferrer nofollow">About Us</a>
-            <a href="/contact" rel="noopener noreferrer nofollow">Contact Us</a>
+            <Link href="/privacy" rel="nofollow">Privacy Policy</Link>
+            <Link href="/terms" rel="nofollow">Terms of Service</Link>
+            <Link href="/copyright" rel="nofollow">Copyright</Link>
+            <Link href="/about" rel="nofollow">About Us</Link>
+            <Link href="/contact" rel="nofollow">Contact Us</Link>
           </nav>
         </div>
       </div>

@@ -51,7 +51,7 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <section className={styles.hero}>
-        <Image src="/images/home/wardogs-command-overlook.png" alt="WARDOGS soldiers overlooking a mountain battlefield" fill sizes="100vw" preload className={styles.heroImage} />
+        <Image src="/images/home/wardogs-command-overlook.png" alt="WARDOGS soldiers overlooking a mountain battlefield" fill sizes="100vw" fetchPriority="high" loading="eager" quality={55} className={styles.heroImage} />
         <div className={styles.heroShade} />
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroCopy}>
@@ -87,9 +87,9 @@ export default function HomePage() {
 
       <section className={`container ${styles.commandDeck}`}>
         <Link href="/builder" className={styles.builderPanel}>
-          <Image src="/images/official/wardogs-03.jpg" alt="WARDOGS operator preparing equipment" fill sizes="(max-width: 800px) 100vw, 620px" />
+          <Image src="/images/official/wardogs-03.jpg" alt="WARDOGS operator preparing equipment" fill sizes="(max-width: 800px) 100vw, 620px" quality={55} />
           <span className={styles.builderShade} />
-          <div><span>Field kit / live compatibility</span><h2>Build your kit</h2><p>Select a weapon, then see only the linked ammunition and attachments. Price and carried weight update as you assemble the kit.</p><b>Enter equipment builder <ArrowRight aria-hidden="true" /></b></div>
+          <div><span>Field kit / snapshot compatibility</span><h2>Build your kit</h2><p>Select a weapon, then see the ammunition and attachments linked in the community snapshot. Price and carried weight update as you assemble the kit.</p><b>Enter equipment builder <ArrowRight aria-hidden="true" /></b></div>
         </Link>
         <div className={styles.commandBrief}>
           <span>Start here</span>
@@ -102,7 +102,7 @@ export default function HomePage() {
         <SectionHeading eyebrow="Decision support" title="Useful tools" description="Compare weapons, check your budget, or jump straight into a guide." href="/tools" />
         <div className={styles.operationsGrid}>
           {operations.map((operation) => <Link key={operation.href} href={operation.href} className={styles.operationCard}>
-            <Image src={operation.image} alt="" fill sizes="(max-width: 700px) 100vw, 400px" /><span /><operation.icon aria-hidden="true" /><div><h3>{operation.title}</h3><p>{operation.text}</p></div><ArrowRight aria-hidden="true" />
+            <Image src={operation.image} alt="" fill sizes="(max-width: 700px) 100vw, 400px" quality={55} /><span /><operation.icon aria-hidden="true" /><div><h3>{operation.title}</h3><p>{operation.text}</p></div><ArrowRight aria-hidden="true" />
           </Link>)}
           <Link href={`/guides/${featuredGuide.slug}`} className={styles.guideFeature}>
             <Image src={featuredGuide.image} alt="" fill sizes="(max-width: 700px) 100vw, 460px" /><span /><div><small>Field guide / {dateLabel(featuredGuide.updatedAt)}</small><h3>{featuredGuide.title}</h3><p>{featuredGuide.description}</p><b>Read guide <ArrowRight aria-hidden="true" /></b></div>

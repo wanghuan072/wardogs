@@ -67,7 +67,7 @@ function TierBoard({ items, section, showEmpty = false }: { items: CatalogItem[]
             <header><strong>{row.key}</strong><span>{row.label}</span></header>
             <div className={styles.tierItems}>
               {rowItems.map((item) => (
-                <Link className={styles.tierItem} href={itemListingHref(item)} key={item.slug}>
+                <Link className={styles.tierItem} href={`${itemListingHref(item)}?q=${encodeURIComponent(item.name)}`} key={item.slug}>
                   <div className={styles.itemThumb}>
                     <Image src={item.image || "/images/official/wardogs-09.jpg"} alt={`${item.name} WARDOGS record`} fill sizes="132px" />
                     <span>{item.dataStatus}</span>

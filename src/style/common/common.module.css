@@ -128,7 +128,7 @@
 @media (max-width: 768px) {
   .pageHero { min-height: 300px; }
   .pageHeroInner { padding-block: 38px 42px; }
-  .pageHeroInner h1 { font-size: clamp(44px, 15vw, 66px); }
+  .pageHeroInner h1 { font-size: clamp(38px, 11vw, 54px); }
   .pageHeroCopy > p { font-size: 15px; }
   .pageHeroContent { grid-template-columns: 1fr; gap: 16px; }
   .pageHeroRail { min-height: 0; grid-template-columns: auto 1fr auto; align-items: center; padding: 9px 0 0; gap: 8px; border-top: 1px solid rgba(203,211,205,.32); border-left: 0; }

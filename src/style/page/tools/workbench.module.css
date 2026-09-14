@@ -48,7 +48,7 @@
 .listToolbar input { width: 100%; min-width: 0; color: var(--bone); border: 0; outline: 0; background: transparent; font: inherit; font-size: 14px; }
 .listToolbar > span { flex: none; color: var(--muted); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
 .recordList { max-height: 570px; overflow: auto; border: 1px solid var(--line); background: rgba(7,18,23,.72); scrollbar-color: var(--line-strong) transparent; }
-.recordRow, .recordRowActive { position: relative; display: grid; grid-template-columns: 74px minmax(0,1fr) auto; width: 100%; min-height: 76px; padding: 8px 13px; align-items: center; gap: 12px; color: var(--fog); border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer; transition: background 160ms ease, color 160ms ease; }
+.recordRow, .recordRowActive { position: relative; display: grid; grid-template-columns: 74px minmax(0,1fr) auto; width: 100%; min-height: 76px; padding: 8px 13px; align-items: center; gap: 12px; color: var(--fog); border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer; transition: background 160ms ease, color 160ms ease; content-visibility: auto; contain-intrinsic-size: 76px; }
 .recordRow:last-child, .recordRowActive:last-child { border-bottom: 0; }
 .recordRow:hover { color: var(--bone); background: rgba(202,220,220,.05); }
 .recordRowActive { color: var(--bone); background: rgba(101,209,136,.09); box-shadow: inset 3px 0 var(--status); }
@@ -67,6 +67,9 @@
 .filterChips { display: flex; flex-wrap: wrap; margin-bottom: 12px; gap: 6px; }
 .filterChips button { min-height: 34px; padding-inline: 10px; color: var(--fog); border: 1px solid var(--line); background: transparent; font-family: var(--font-hud); font-size: 12px; text-transform: uppercase; cursor: pointer; }
 .filterChips button:hover, .filterChips .chipActive { color: var(--night); border-color: var(--ice); background: var(--ice); }
+.showMore { display: flex; width: 100%; min-height: 44px; align-items: center; justify-content: space-between; padding-inline: 13px; color: var(--cash-pale); border: 1px solid var(--line); border-top: 0; background: rgba(11,27,33,.9); font-family: var(--font-hud); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.showMore:hover { color: var(--night); background: var(--cash-pale); }
+.showMore span { color: inherit; font-family: var(--font-mono); font-weight: 400; }
 .selectedManifest { margin-bottom: 12px; border: 1px solid var(--line); background: rgba(7,18,23,.72); }
 .selectedManifest > button { display: grid; grid-template-columns: 58px minmax(0,1fr) auto 18px; width: 100%; min-height: 62px; padding: 8px 11px; align-items: center; gap: 9px; color: var(--bone); border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer; }
 .selectedManifest > button:hover { background: rgba(237,133,97,.08); }.selectedManifest > button:last-child { border-bottom: 0; }

@@ -4,6 +4,7 @@ import { CatalogCard } from "@/components/content/CatalogCard";
 import { CatalogSort } from "@/components/content/CatalogSort";
 import { PageHero } from "@/components/common/PageHero";
 import { catalogDisplayItems, equipmentCategoryMap, getAmmunitionFacet, listingGroups, vehicleCategoryMap, weaponCategoryMap } from "@/lib/data/catalog";
+import { countCatalogType, matchesPriceRange, normalizeCatalogSort, sortCatalogItems } from "@/lib/catalog/listing";
 import { formatCaliber, titleFromSlug } from "@/lib/formatting/format-values";
 import type { CatalogItem } from "@/types/catalog";
 import styles from "@/style/page/wiki/wiki-listing.module.css";
@@ -63,10 +64,10 @@ export function WikiListingPage({ segments, searchParams }: { segments: string[]
   const category = value(searchParams, "category");
   const type = value(searchParams, "type");
   const caliber = value(searchParams, "caliber");
-  const price = value(searchParams, "price");
+  const requestedPrice = value(searchParams, "price");
+  const price = requestedPrice === "under-1000" ? "up-to-1000" : requestedPrice;
   const status = value(searchParams, "status");
-  const requestedSort = value(searchParams, "sort") || "name";
-  const sort = requestedSort === "rpm" && context.section !== "weapons" ? "name" : requestedSort;
+  const sort = normalizeCatalogSort(value(searchParams, "sort") || "name", context.section === "weapons");
   const view = value(searchParams, "view") || "grid";
 
   const categoryConfig = listingCategories[context.section]?.find((entry) => entry.slug === category);
@@ -76,21 +77,26 @@ export function WikiListingPage({ segments, searchParams }: { segments: string[]
     const matchesQuery = !q || `${item.name} ${item.type} ${item.caliber} ${item.summary}`.toLowerCase().includes(q);
     const matchesType = !type || item.type === type || item.kind === type || item.slot === type;
     const matchesCaliber = !caliber || item.caliber === caliber;
-    const matchesPrice = !price || (item.price !== null && (price === "under-1000" ? item.price < 1000 : price === "1000-2500" ? item.price >= 1000 && item.price <= 2500 : price === "2501-5000" ? item.price > 2500 && item.price <= 5000 : item.price > 5000));
+    const matchesPrice = matchesPriceRange(item.price, price);
     const matchesStatus = !status || item.dataStatus === status;
     return matchesQuery && matchesType && matchesCaliber && matchesPrice && matchesStatus;
   });
 
-  filtered = [...filtered].sort((a, b) => sort === "price-asc" ? (a.price ?? Infinity) - (b.price ?? Infinity) : sort === "price-desc" ? (b.price ?? -1) - (a.price ?? -1) : sort === "rpm" ? (b.stats.rpm ?? -1) - (a.stats.rpm ?? -1) : a.name.localeCompare(b.name));
-  const visible = filtered;
+  filtered = sortCatalogItems(filtered, sort);
   const types = [...new Set(categoryItems.map((item) => item.type || item.kind).filter(Boolean))].sort();
   const calibers = [...new Set(categoryItems.map((item) => item.caliber).filter((entry): entry is string => Boolean(entry)))].sort();
   const preserved = new URLSearchParams();
   for (const key of ["q", "category", "type", "caliber", "price", "status", "sort", "view"]) if (value(searchParams, key)) preserved.set(key, value(searchParams, key));
-  const countBy = (key: "type" | "caliber" | "dataStatus", entry: string) => categoryItems.filter((item) => item[key] === entry).length;
+  const pageSize = 48;
+  const parsedPage = Number.parseInt(value(searchParams, "page"), 10);
+  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const currentPage = Math.min(Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1, pageCount);
+  const firstVisible = (currentPage - 1) * pageSize;
+  const visible = filtered.slice(firstVisible, firstVisible + pageSize);
+  const countBy = (key: "type" | "caliber" | "dataStatus", entry: string) => key === "type" ? countCatalogType(categoryItems, entry) : categoryItems.filter((item) => item[key] === entry).length;
   const priceOptions = [
-    { value: "under-1000", label: "$0 – $1,000", count: categoryItems.filter((item) => item.price !== null && item.price < 1000).length },
-    { value: "1000-2500", label: "$1,001 – $2,500", count: categoryItems.filter((item) => item.price !== null && item.price >= 1000 && item.price <= 2500).length },
+    { value: "up-to-1000", label: "$0 – $1,000", count: categoryItems.filter((item) => matchesPriceRange(item.price, "up-to-1000")).length },
+    { value: "1000-2500", label: "$1,001 – $2,500", count: categoryItems.filter((item) => matchesPriceRange(item.price, "1000-2500")).length },
     { value: "2501-5000", label: "$2,501 – $5,000", count: categoryItems.filter((item) => item.price !== null && item.price > 2500 && item.price <= 5000).length },
     { value: "5001", label: "$5,001+", count: categoryItems.filter((item) => item.price !== null && item.price > 5000).length },
   ];
@@ -109,10 +115,10 @@ export function WikiListingPage({ segments, searchParams }: { segments: string[]
         </aside>
 
         <div className={styles.results}>
-          <div className={styles.resultIntro}><div><h2>All {context.title} ({filtered.length})</h2><span>All matching records are shown below</span></div><p>{context.section === "weapons" ? "Use this WARDOGS weapons list to compare a kit before you buy." : "Compare the details that matter to your kit."}</p></div>
-          <div className={styles.databaseToolbar}><form className={styles.primarySearch} action={context.canonical}><Search aria-hidden="true" /><input name="q" defaultValue={value(searchParams, "q")} placeholder={`Search ${context.section} by name, caliber, or keyword...`} /><input type="hidden" name="category" value={category} /><input type="hidden" name="type" value={type} /><input type="hidden" name="caliber" value={caliber} /><input type="hidden" name="price" value={price} /><input type="hidden" name="status" value={status} /><input type="hidden" name="sort" value={sort} /><button type="submit" aria-label="Search database">Search</button></form><CatalogSort value={sort} showRateOfFire={context.section === "weapons"} /><div className={styles.viewToggle}><Link className={view === "grid" ? styles.activeView : ""} href={linkWith(context.canonical, preserved, { view: "grid" })} aria-label="Grid view"><Grid3X3 size={17} /><span>Grid</span></Link><Link className={view === "list" ? styles.activeView : ""} href={linkWith(context.canonical, preserved, { view: "list" })} aria-label="List view"><List size={17} /><span>List</span></Link></div></div>
-          <div className={styles.quickFilters}><Link href={linkWith(context.canonical, preserved, { sort: "price-asc" })}>★ Best budget</Link><Link href={linkWith(context.canonical, preserved, { price: "under-1000" })}>● Beginner picks</Link>{context.section === "weapons" && <Link href={linkWith(context.canonical, preserved, { sort: "rpm" })}>◆ High fire rate</Link>}<Link href={linkWith(context.canonical, preserved, { sort: "" })}>◷ Recently checked</Link></div>
-          {visible.length ? <div className={view === "list" ? styles.listView : styles.cardGrid}>{visible.map((item) => <CatalogCard key={item.slug} item={item} view={view === "list" ? "list" : "grid"} />)}</div> : <div className={styles.empty}><Search aria-hidden="true" /><h2>No records on this frequency</h2><p>Clear one or more filters to return to the full database.</p><Link href={context.canonical}>Reset filters</Link></div>}
+          <div className={styles.resultIntro}><div><h2>All {context.title} ({filtered.length})</h2><span>{filtered.length ? `Showing ${firstVisible + 1}–${firstVisible + visible.length} of ${filtered.length}` : "No matching records"}</span></div><p>{context.section === "weapons" ? "Use this WARDOGS weapons list to compare a kit before you buy." : "Compare the details that matter to your kit."}</p></div>
+          <div className={styles.databaseToolbar}><form className={styles.primarySearch} action={context.canonical} role="search"><Search aria-hidden="true" /><label className="sr-only" htmlFor={`catalog-search-${context.section}`}>Search {context.section}</label><input id={`catalog-search-${context.section}`} type="search" name="q" defaultValue={value(searchParams, "q")} placeholder={`Search ${context.section} by name, caliber, or keyword…`} autoComplete="off" spellCheck={false} /><input type="hidden" name="category" value={category} /><input type="hidden" name="type" value={type} /><input type="hidden" name="caliber" value={caliber} /><input type="hidden" name="price" value={price} /><input type="hidden" name="status" value={status} /><input type="hidden" name="sort" value={sort} /><button type="submit" aria-label="Search database">Search</button></form><CatalogSort value={sort} showRateOfFire={context.section === "weapons"} /><div className={styles.viewToggle}><Link className={view === "grid" ? styles.activeView : ""} href={linkWith(context.canonical, preserved, { view: "grid" })} aria-label="Grid view"><Grid3X3 size={17} /><span>Grid</span></Link><Link className={view === "list" ? styles.activeView : ""} href={linkWith(context.canonical, preserved, { view: "list" })} aria-label="List view"><List size={17} /><span>List</span></Link></div></div>
+          <div className={styles.quickFilters}><Link href={linkWith(context.canonical, preserved, { sort: "price-asc" })}>★ Best budget</Link><Link href={linkWith(context.canonical, preserved, { price: "up-to-1000" })}>● Beginner picks</Link>{context.section === "weapons" && <Link href={linkWith(context.canonical, preserved, { sort: "rpm" })}>◆ High fire rate</Link>}<Link href={linkWith(context.canonical, preserved, { sort: "recent" })}>◷ Recently checked</Link></div>
+          {visible.length ? <><div className={view === "list" ? styles.listView : styles.cardGrid}>{visible.map((item) => <CatalogCard key={item.slug} item={item} view={view === "list" ? "list" : "grid"} />)}</div>{pageCount > 1 && <nav className={styles.pagination} aria-label={`${context.title} pages`}>{currentPage > 1 ? <Link href={linkWith(context.canonical, preserved, { page: String(currentPage - 1) })}>Previous</Link> : <span aria-hidden="true" />}<strong>Page {currentPage} of {pageCount}</strong>{currentPage < pageCount ? <Link href={linkWith(context.canonical, preserved, { page: String(currentPage + 1) })}>Next</Link> : <span aria-hidden="true" />}</nav>}</> : <div className={styles.empty}><Search aria-hidden="true" /><h2>No records on this frequency</h2><p>Clear one or more filters to return to the full database.</p><Link href={context.canonical}>Reset filters</Link></div>}
           {context.section === "weapons" && <section className={styles.seoSection} aria-labelledby="choosing-wardogs-weapons"><h2 id="choosing-wardogs-weapons">Choose WARDOGS weapons for the job</h2><div><p>Start with the job, not a tier label. A cheap rifle that uses ammunition your squad already carries can be a stronger pick than an expensive gun that drains your reserve after one death. Use the filters to narrow the field by type, caliber and price, then compare the key stats beside each item.</p><p>Range, recoil and magazine size all matter, but so does whether you can keep the weapon fed. Check compatible ammunition before buying a primary, and leave enough cash for armor, medical supplies or the role your team needs.</p></div></section>}
         </div>
       </section>

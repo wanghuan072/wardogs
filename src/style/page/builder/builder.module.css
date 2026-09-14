@@ -2,8 +2,11 @@
   min-height: calc(100vh - 70px);
   padding: 22px 0 72px;
   background:
-    linear-gradient(rgba(4, 9, 10, .86), rgba(4, 9, 10, .94)),
-    url("/images/official/wardogs-12.jpg") center 20% / cover fixed;
+    radial-gradient(circle at 78% 8%, rgba(102, 126, 127, .13), transparent 36rem),
+    linear-gradient(180deg, rgba(16, 27, 30, .96), rgba(4, 9, 10, .98));
+  font-family: var(--font-hud);
+  font-size: 16px;
+  text-transform: uppercase;
 }
 
 .builderContainer {
@@ -1150,7 +1153,9 @@ button.scrollHint:disabled {
 .loadoutStage {
   grid-template-columns: 270px minmax(390px, 1fr) minmax(330px, .76fr);
   min-height: 502px;
-  background: linear-gradient(rgba(7, 9, 9, .67), rgba(7, 9, 9, .82)), url("/images/home/wardogs-command-overlook.png") center / cover;
+  background:
+    radial-gradient(circle at 58% 42%, rgba(77, 99, 98, .18), transparent 38%),
+    linear-gradient(145deg, rgba(22, 28, 27, .98), rgba(7, 10, 10, .99));
 }
 
 .operatorPanel {

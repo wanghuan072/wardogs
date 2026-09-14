@@ -3,20 +3,26 @@ export type ToolItem = {
   name: string;
   kind: string;
   type: string | null;
-  role: string | null;
-  slot: string | null;
   caliber: string | null;
   price: number | null;
-  weight: number | null;
   image: string | null;
-  rpm: number | null;
-  damage: number | null;
-  range: number | null;
-  velocity: number | null;
-  recoil: number | null;
-  ammoIds: string[];
-  compatibleWeaponIds: string[];
+  role?: string | null;
+  slot?: string | null;
+  weight?: number | null;
+  rpm?: number | null;
+  damage?: number | null;
+  range?: number | null;
+  velocity?: number | null;
+  recoil?: number | null;
+  ammoIds?: string[];
+  compatibleWeaponIds?: string[];
 };
+
+const budgetItemKinds = new Set(["weapon", "ammo", "attachment", "armor", "medical", "storage", "utility", "supplies", "throwable", "explosive", "deployable", "melee", "vehicle"]);
+
+export function isBudgetItem(item: Pick<ToolItem, "kind">) {
+  return budgetItemKinds.has(item.kind);
+}
 
 export function calculateBudget(cash: number, selected: ToolItem[]) {
   const knownPrices = selected.filter((item) => item.price !== null);

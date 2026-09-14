@@ -1,0 +1,10 @@
+[
+  { "id": "primary", "label": "Primary weapons", "shortLabel": "Primary", "description": "Select the main weapon carried in the primary sling." },
+  { "id": "sidearm", "label": "Sidearms", "shortLabel": "Sidearm", "description": "Choose a compact backup weapon for close emergencies." },
+  { "id": "launcher", "label": "Launchers", "shortLabel": "Launcher", "description": "Equip one specialist launcher in the utility slot." },
+  { "id": "medical", "label": "Medical", "shortLabel": "Medical", "description": "Add trauma supplies to the pack. Every unit uses one capacity." },
+  { "id": "building", "label": "Building", "shortLabel": "Building", "description": "Pack field construction and repair equipment." },
+  { "id": "recon", "label": "Recon", "shortLabel": "Recon", "description": "Carry navigation, observation and survival equipment." },
+  { "id": "vehicle", "label": "Vehicles", "shortLabel": "Vehicle", "description": "Choose one vehicle requisition for this deployment." },
+  { "id": "tactical", "label": "Tactical gear", "shortLabel": "Tactical", "description": "Equip an explosive or pack grenades and tactical tools." }
+]
