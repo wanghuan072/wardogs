@@ -10,9 +10,9 @@
     "category": "Getting Started",
     "image": "/images/official/wardogs-04.jpg",
     "publishedAt": "2026-08-20",
-    "updatedAt": "2026-09-10",
-    "patchVersion": "Early Access",
-    "quickAnswer": "Start with a kit you can afford to replace, move with a squad, and contribute to the Control Zone through pressure, revives, transport or logistics. Your persistent cash makes each life a tactical investment, so buy for the job you intend to do.",
+    "updatedAt": "2026-09-30",
+    "patchVersion": "Early Access · September 2026",
+    "quickAnswer": "Start with a kit you can afford to replace, move with a squad, and contribute to the Control Zone through pressure, revives, transport or logistics. Carry only what supports that job, then use the re-buy option only after checking whether the last route still makes sense.",
     "sections": [
       {
         "heading": "Understand the match before buying",
@@ -58,8 +58,9 @@
       {
         "heading": "A simple first-session routine",
         "body": [
-          "For the first few deployments, use a repeatable loop: read the objective, choose a squad need, assemble a modest kit, move with teammates, and review the result before purchasing again. This creates reliable feedback without changing weapon, role and route all at once.",
-          "Use the Wiki when you need an item record, the Builder when you need a compatible kit, and the Guides when you need a decision framework. Recheck the in-game menu after a patch before committing to an expensive purchase."
+          "For the first few deployments, use a repeatable loop: read the objective, choose a squad need, assemble a modest kit, move with teammates, and review the result before purchasing again. This creates useful feedback without changing weapon, role and route all at once.",
+          "Keep spare magazines practical, then add loose ammunition when storage allows. Loose rounds can refill compatible magazines from the inventory, which can be cheaper and easier to carry than buying every refill as another magazine. Check the live inventory prompts before relying on the habit in a serious match.",
+          "Use the re-buy option as a shortcut, not an autopilot button. Before repeating a purchase, check whether the objective, transport route and squad job are still the same. Use the Wiki when you need an item record and the Builder when you need a compatible kit."
         ]
       }
     ],
@@ -68,7 +69,8 @@
     "faq": [
       { "question": "How much cash does a new WARDOGS player start with?", "answer": "Players begin with $10,000. Treat it as a reserve for multiple lives, not a target to spend in one purchase." },
       { "question": "What is the best beginner role?", "answer": "There is no fixed best role. Start with a clear, observable job such as staying with infantry, reviving nearby teammates or driving a safe reinforcement route, then expand as you understand the map." },
-      { "question": "Should I buy every available attachment?", "answer": "No. Equip a part only when its recorded effect supports the intended engagement and the complete kit remains affordable to replace." }
+      { "question": "Should I buy every available attachment?", "answer": "No. Equip a part only when its listed effect supports the intended engagement and the complete kit remains affordable to replace." },
+      { "question": "Why carry loose ammunition?", "answer": "Loose ammunition can refill compatible magazines from the inventory. It is useful when you need sustained ammunition without filling every storage slot with spare magazines." }
     ]
   },
   {
@@ -82,8 +84,8 @@
     "category": "Economy",
     "image": "/images/official/wardogs-12.jpg",
     "publishedAt": "2026-08-22",
-    "updatedAt": "2026-09-10",
-    "patchVersion": "Early Access",
+    "updatedAt": "2026-09-30",
+    "patchVersion": "Early Access · September 2026",
     "quickAnswer": "Treat cash as future battlefield access. Price the weapon, ammunition, protection, utility and transport together; protect a reserve of several dependable lives; and spend above that reserve only when the purchase has a clear team purpose and an exit plan.",
     "sections": [
       {
@@ -114,8 +116,9 @@
       {
         "heading": "Earn through repeatable team actions",
         "body": [
-          "Objective play, revives and transport all support the economy. Build a role around actions the match will repeatedly need rather than relying on a single high-risk engagement to fund the next purchase.",
-          "When the battlefield changes, change the income route. A blocked transport corridor may make medical support more reliable; a secured approach may create a window for supplies or construction. Economic play and tactical play are the same decision viewed over several lives."
+          "Objective presence, enemy spotting, revives, transport and logistics can all support the economy. Build a role around actions the match repeatedly needs rather than relying on one high-risk engagement to fund the next purchase.",
+          "When the battlefield changes, change the income route. A blocked transport corridor may make medical support more useful; a secured approach may create a window for supplies or construction. Economic play and tactical play are the same decision viewed over several lives.",
+          "Do not turn a single reported payout into a permanent plan. Reward values can move with an update, and a good money route only works while the team can safely use it. The durable principle is simple: choose a useful job, keep the kit replaceable and avoid paying for the same failed route twice."
         ]
       },
       {
@@ -133,7 +136,8 @@
     "faq": [
       { "question": "Does WARDOGS cash persist between matches?", "answer": "Yes. Cash carries forward, which makes replacement cost and reserve planning important beyond a single round." },
       { "question": "How much of my bank should one life cost?", "answer": "There is no universal percentage. Protect several copies of a reliable fallback kit, then spend the amount above that floor when a more expensive purchase has a clear battlefield purpose." },
-      { "question": "Are missing prices counted as zero?", "answer": "No. The Builder only totals items with a listed price, so an incomplete total is a minimum rather than the final bill." }
+      { "question": "Are missing prices counted as zero?", "answer": "No. The Builder only totals items with a listed price, so an incomplete total is a minimum rather than the final bill." },
+      { "question": "Is there one fastest way to make cash?", "answer": "No single route stays best in every match. Pick a repeatable team job that the current fight needs, protect the cost of your kit and change plans when the route becomes unsafe." }
     ]
   },
   {
@@ -147,8 +151,8 @@
     "category": "Vehicles",
     "image": "/images/official/wardogs-06.jpg",
     "publishedAt": "2026-08-28",
-    "updatedAt": "2026-09-10",
-    "patchVersion": "Early Access",
+    "updatedAt": "2026-09-30",
+    "patchVersion": "Early Access · September 2026",
     "quickAnswer": "Use the current in-game bindings as the authority, learn lift, pitch, roll and yaw separately, and practice a low-risk circuit before carrying passengers. A safe pilot plans the route, landing zone and escape before takeoff.",
     "sections": [
       {
@@ -165,6 +169,13 @@
         "body": [
           "Increase lift gradually and keep corrections small. Practice holding a low hover without adding forward speed, then use yaw to turn the nose while maintaining position. Large alternating inputs usually create a growing oscillation instead of cancelling the first mistake.",
           "Pick a visual point near the horizon and another on the ground. The horizon helps read attitude; the ground point reveals sideways drift. Hold the hover for several seconds before adding the next control axis."
+        ]
+      },
+      {
+        "heading": "Set up keyboard and controller separately",
+        "body": [
+          "Do not force one sensitivity plan onto every input method. Keyboard and mouse players should set enough headroom for small corrections without needing repeated full swipes. Controller players should check each stick axis, dead zone and trigger response before taking passengers.",
+          "Start with one input device at a time. Change one setting, repeat the same low hover and note whether the correction became easier to stop. Keep a short written note of settings that work so a reset or update does not send you back to guesswork."
         ]
       },
       {
@@ -205,7 +216,8 @@
     "faq": [
       { "question": "What are the exact helicopter keys?", "answer": "Check the current in-game bindings. Controls can change between builds and player configurations, so this guide teaches the control axes and flight sequence rather than publishing a brittle key chart." },
       { "question": "What should I practice first?", "answer": "Learn a stable low hover, then add yaw, gentle forward movement, a wide turn and a controlled landing in that order." },
-      { "question": "When should I abort a landing?", "answer": "Abort when the zone becomes unsafe, the approach is unstable, drift cannot be corrected with small inputs or the exit route is no longer clear." }
+      { "question": "When should I abort a landing?", "answer": "Abort when the zone becomes unsafe, the approach is unstable, drift cannot be corrected with small inputs or the exit route is no longer clear." },
+      { "question": "Should controller and keyboard use the same sensitivity?", "answer": "No. Tune each input method separately, beginning with a low-risk hover. The right setting is the one that lets you make a small correction and stop it cleanly." }
     ]
   },
   {
@@ -219,8 +231,8 @@
     "category": "Strategy",
     "image": "/images/official/wardogs-05.jpg",
     "publishedAt": "2026-09-02",
-    "updatedAt": "2026-09-10",
-    "patchVersion": "Early Access",
+    "updatedAt": "2026-09-30",
+    "patchVersion": "Early Access · September 2026",
     "quickAnswer": "Win the route into the Control Zone as well as the ground inside it. Presence creates progress, but transport, spawn access, supplies, cover and safe reinforcement paths determine whether that presence survives long enough to matter.",
     "sections": [
       {
@@ -265,7 +277,7 @@
         "caption": "A controlled rotation preserves vehicles, specialist gear and the ability to contest the next approach."
       },
       {
-        "heading": "Review the objective with evidence",
+        "heading": "Review the objective after the match",
         "body": [
           "After the match, separate reliable patterns from assumptions about a particular route or location. Treat terrain markers as flexible callouts rather than fixed tactical facts.",
           "Use the review to form a conditional plan: if the zone favors open approaches, bring transport and long-range support; if it compresses around structures, prioritize safe access, medical support and short reinforcement time."
@@ -278,6 +290,150 @@
       { "question": "How do teams score in the Control Zone?", "answer": "Progress comes from team presence in the active zone. Exact scoring behavior can change with balance and interface updates, so check the match HUD when a patch lands." },
       { "question": "Should everyone stay inside the objective?", "answer": "No. Some players need to protect approaches, transport reinforcements, sustain supplies or stop an enemy flank. Those jobs should still directly support continued presence." },
       { "question": "Why are fixed tactical markers not shown on the map?", "answer": "The map image is there to help you read the battlefield, not to promise exact spawn, supply or objective coordinates." }
+    ]
+  },
+  {
+    "slug": "best-settings",
+    "title": "WARDOGS Best Settings Guide",
+    "description": "A practical settings routine for improving frame-time consistency, enemy visibility and input feel without pretending one preset fits every PC.",
+    "seo": {
+      "title": "WARDOGS Best Settings - FPS, Visibility and Input Guide",
+      "description": "Set up WARDOGS for steadier FPS, clearer enemy visibility and lower input delay. Test graphics, display and control options one change at a time on your PC."
+    },
+    "category": "PC Performance",
+    "image": "/images/official/wardogs-10.jpg",
+    "publishedAt": "2026-09-30",
+    "updatedAt": "2026-09-30",
+    "patchVersion": "Early Access · September 2026",
+    "quickAnswer": "Use a custom preset, preserve the settings that help you read the battlefield, then lower the options that create unstable frame time. Change one setting at a time and test it in the same scenario; a number from another PC is a starting point, not your final answer.",
+    "sections": [
+      {
+        "heading": "Measure your baseline before changing settings",
+        "body": [
+          "Start with the same resolution, map area and type of fight for every test. Write down the frame rate range, how the game feels while turning and whether explosions or dense terrain create hitching. A repeatable comparison is more useful than a single high number in an empty scene.",
+          "Keep drivers, Windows updates and background programs in mind while testing. If several things change at once, you cannot tell whether a new setting, a driver change or a background process caused the improvement."
+        ],
+        "image": "/images/official/wardogs-10.jpg",
+        "caption": "Use the same kind of combat scene whenever you compare performance changes."
+      },
+      {
+        "heading": "Build a visibility-first custom preset",
+        "body": [
+          "Start from a custom preset instead of assuming Low, High or Ultra is best. Keep the settings that make distant movement and terrain readable, then reduce effects that obscure the screen or add a heavy frame-time cost on your hardware.",
+          "Avoid chasing visual sharpness at the cost of a noisy image. Check a familiar sight line after every change: can you still read player movement, cover edges and the route your squad needs to use?"
+        ]
+      },
+      {
+        "heading": "Prioritize stable frame time over a peak FPS number",
+        "body": [
+          "A high peak frame rate does not help much if the game stutters whenever vehicles, smoke or a busy objective enter view. Lower one demanding group at a time, test again, and stop when the slowest moments become predictable enough to aim and move cleanly.",
+          "Frame caps, sync options and upscaling can all change how a game feels. Try them deliberately with your monitor's refresh rate in mind. If a setting improves the displayed FPS but makes input feel worse, keep the option that gives you the more controllable fight."
+        ],
+        "image": "/images/official/wardogs-07.jpg",
+        "caption": "The target is a repeatable response during a crowded fight, not a benchmark screenshot."
+      },
+      {
+        "heading": "Tune display and input without changing everything at once",
+        "body": [
+          "Set your display mode, resolution and field of view first. Then tune mouse or controller sensitivity in a low-pressure space before judging it in a match. Large setting changes at the same time can make aim feel unfamiliar even when performance improves.",
+          "For controller play, test dead zones and each axis separately. For mouse input, make sure the sensitivity allows a quick turn without making a small correction impossible. Use the same short drill before deciding whether a change helped."
+        ]
+      },
+      {
+        "heading": "Use a safe troubleshooting order for stutter or crashes",
+        "body": [
+          "If performance suddenly drops, first return any experimental graphics change to the previous working value. Then close nonessential overlays and recording tools, verify the game installation through Steam and restart the PC before making deeper changes.",
+          "Do not combine a graphics tuning session with operating-system changes, driver cleanup or launch-error fixes. Treat those as separate problems so you can undo one step without losing a known-good settings profile."
+        ],
+        "image": "/images/official/wardogs-08.jpg",
+        "caption": "Keep performance tuning and launch-error diagnosis as separate, reversible checklists."
+      },
+      {
+        "heading": "Keep a settings note after every major update",
+        "body": [
+          "Save your preferred display, graphics and input values after a stable session. A patch, driver update or reset can make it hard to remember which combination worked, especially if you were changing settings during a problem.",
+          "Re-test only the settings affected by the update. A working configuration does not need to be rebuilt from zero just because a new version arrives."
+        ]
+      }
+    ],
+    "relatedWiki": ["/wiki/weapons", "/wiki/vehicles", "/wiki/equipment"],
+    "relatedTools": ["/tools/weapon-compare", "/builder"],
+    "faq": [
+      { "question": "What are the best WARDOGS settings?", "answer": "The best settings are the ones that keep your frame time stable and the battlefield readable on your own PC. Start with a custom preset and test one change at a time in the same scenario." },
+      { "question": "Should I use a frame cap?", "answer": "Test a frame cap against your monitor refresh rate and choose the option that keeps input and frame pacing consistent during busy fights." },
+      { "question": "Why did WARDOGS start stuttering after an update?", "answer": "Return recent experimental changes first, then check background software and verify the installation. Keep driver, operating-system and graphics changes separate so the cause stays clear." }
+    ]
+  },
+  {
+    "slug": "wd-l020-not-launching",
+    "title": "WARDOGS WD-L020 Launch Error Guide",
+    "description": "A careful WARDOGS launch-error checklist for WD-L020, crashes and failed startup, focused on reversible checks before you change your PC.",
+    "seo": {
+      "title": "WARDOGS WD-L020 Error - Safe Launch Fix Checklist",
+      "description": "Work through a safe WARDOGS WD-L020 and launch-error checklist: capture the code, verify files, remove conflicts and collect the details needed for support."
+    },
+    "category": "Troubleshooting",
+    "image": "/images/official/wardogs-08.jpg",
+    "publishedAt": "2026-09-30",
+    "updatedAt": "2026-09-30",
+    "patchVersion": "Early Access · September 2026",
+    "quickAnswer": "Write down the full error code, restart once, verify the WARDOGS files in Steam and remove obvious overlay or compatibility conflicts before attempting major system changes. If the error remains, keep the code, build and system details together for the support request.",
+    "sections": [
+      {
+        "heading": "Capture the whole error before trying a fix",
+        "body": [
+          "Take a screenshot of the error and write down the full code, including any characters after WD-L020. Also note when it appears: before the launcher, after pressing Play, while loading the game or after joining a server. Those details separate different failures that can share a similar headline.",
+          "Record the game build, Windows version, graphics driver version and any recent change to the PC. This takes less time than repeating random fixes and gives support a useful starting point if the first checks do not work."
+        ],
+        "image": "/images/official/wardogs-08.jpg",
+        "caption": "Keep the full code and the point of failure before changing the system."
+      },
+      {
+        "heading": "Start with the reversible Steam checks",
+        "body": [
+          "Fully exit Steam and the game, then restart the PC once. After Steam reopens, use its installed-file verification for WARDOGS and let it finish before launching again. This is a low-risk way to replace a damaged or incomplete game file.",
+          "Do not delete game folders manually while verification is available. Keep the Steam installation path intact so a successful check can repair the files without creating another variable."
+        ]
+      },
+      {
+        "heading": "Remove common launch conflicts one at a time",
+        "body": [
+          "Temporarily close nonessential overlays, recording utilities, hardware tuning tools and custom compatibility settings. Then try one clean launch. If that works, restore programs one by one until the conflict is clear instead of leaving your system permanently stripped down.",
+          "Avoid unofficial launchers, altered executable files and unknown configuration downloads. They can make a launch issue harder to identify and may interfere with the game's security checks."
+        ],
+        "image": "/images/official/wardogs-01.jpg",
+        "caption": "A clean launch test helps isolate a conflict without making a permanent system change."
+      },
+      {
+        "heading": "Update carefully and keep a rollback point",
+        "body": [
+          "Use normal Windows and graphics-driver update paths, then restart before retesting. If the problem began immediately after an update, do not follow an unverified removal recipe from a comment thread. First collect the exact version information and look for current game support guidance.",
+          "Major operating-system changes, registry edits and security-software exclusions should be a last step, not the first. Make a restore point and understand the consequence before changing system-level protection."
+        ]
+      },
+      {
+        "heading": "Separate launch errors from performance problems",
+        "body": [
+          "A crash, a WD-L020 message and poor frame rate are different symptoms. If the game reaches the menu but plays badly, use the Performance Settings Guide instead of applying launch-error steps. Mixing the two paths often hides the original cause.",
+          "After each change, test the same action once and record the result. A short list of clear attempts is far more useful than a long sequence of overlapping fixes."
+        ],
+        "image": "/images/official/wardogs-07.jpg",
+        "caption": "Test one change against one symptom so the result stays understandable."
+      },
+      {
+        "heading": "Prepare a useful support report",
+        "body": [
+          "If the error remains, send the full code, screenshot, time of failure, game build, Windows version, graphics driver version and the reversible steps already tried. Include whether the issue began after an update or after adding a program or device.",
+          "Keep the request factual and concise. Support can act faster on a reproducible sequence than on a list of guesses, especially when a new game build is changing quickly."
+        ]
+      }
+    ],
+    "relatedWiki": ["/wiki/weapons", "/wiki/equipment"],
+    "relatedTools": ["/builder", "/tools/budget-planner"],
+    "faq": [
+      { "question": "What does the WARDOGS WD-L020 error mean?", "answer": "It is a launch failure label, not a complete diagnosis by itself. Keep the full code and the point where it appears, then start with verification and clean-launch checks." },
+      { "question": "Should I uninstall a Windows update to fix WD-L020?", "answer": "Do not treat a forum workaround as a universal fix. Check current support guidance first and make system-level changes only when you understand the risk and can undo them." },
+      { "question": "What should I include in a support report?", "answer": "Include the full error code, a screenshot, game build, Windows version, graphics driver version, time of failure and the steps you already tried." }
     ]
   }
 ]

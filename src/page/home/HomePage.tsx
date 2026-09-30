@@ -40,7 +40,7 @@ const databaseStats = [
 const homeFaq = [
   { question: "What is WARDOGS?", answer: "WARDOGS is a large-scale tactical FPS where three teams fight for Control Zones. You can buy gear, use vehicles, build defenses and choose how you help your team win." },
   { question: "How does cash work in WARDOGS?", answer: "Every player starts with $10,000 and buys a kit for each life. Cash carries between matches, so the cost of a weapon, vehicle or field kit matters beyond one round." },
-  { question: "What can I do on this site?", answer: "Use the item lists to check gear, build a compatible kit, compare weapons, plan a budget and read guides for your first matches, the cash system, helicopters and Control Zones." },
+  { question: "What can I do on this site?", answer: "Use the item lists to check gear, build a compatible kit, compare weapons, plan a budget and read guides for your first matches, cash, helicopters, Control Zones, PC settings and launch problems." },
   { question: "Will item values change during Early Access?", answer: "Yes. Prices, compatibility and other item details can change with game updates. Check the latest in-game build before making an expensive choice." },
 ];
 
@@ -132,7 +132,7 @@ export default function HomePage() {
           <Link href="/updates" className={styles.updateLink}><span>Release log</span><strong>{latestUpdate.version}</strong><p>{latestUpdate.label} · {dateLabel(latestUpdate.date)}</p><ArrowRight aria-hidden="true" /></Link>
         </div>
         <aside className={styles.guideRail}>
-          <SectionHeading eyebrow="Four field guides" title="Guides for new players" href="/guides" />
+          <SectionHeading eyebrow="Field guides" title="Guides for your next match" href="/guides" />
           <div className={styles.guideList}>{guides.map((guide) => <Link href={`/guides/${guide.slug}`} key={guide.slug}><Image src={guide.image} alt="" width={88} height={54} /><div><strong>{guide.title}</strong><span>{dateLabel(guide.updatedAt)} · WARDOGS guide</span></div><ArrowRight aria-hidden="true" /></Link>)}</div>
         </aside>
       </section>

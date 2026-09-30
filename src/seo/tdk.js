@@ -19,8 +19,8 @@ export const tdk = {
     vehicles: { title: "WARDOGS Vehicles - Ground, Air and Full List", description: "Compare WARDOGS vehicles across ground transport, armored platforms, helicopters and logistics. Check role, crew space, cost and use details before committing." },
   },
   guides: {
-    title: "WARDOGS Guides - Learn the Systems, Win More Fights",
-    description: "Read focused WARDOGS guides for your first match, cash economy, helicopter controls and Control Zone play, written to help you make better calls under pressure.",
+    title: "WARDOGS Guides - Builds, Cash, Settings and Tactics",
+    description: "Read practical WARDOGS guides for your first match, cash economy, helicopters, Control Zone play, PC settings and launch errors before your next deployment.",
     path: "/guides",
   },
   builder: {
