@@ -2,13 +2,16 @@ import type { NextConfig } from "next";
 
 const developmentDirectives = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
 const developmentConnections = process.env.NODE_ENV === "development" ? " ws:" : "";
+const analyticsAndAdScripts = "https://www.googletagmanager.com https://pl31790058.profitableratecpmnetwork.com https://pl31790059.profitableratecpmnetwork.com https://www.highrevenueformat.com";
+const analyticsAndAdConnections = "https://www.google-analytics.com https://region1.google-analytics.com https://pl31790058.profitableratecpmnetwork.com https://pl31790059.profitableratecpmnetwork.com https://www.highrevenueformat.com";
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${developmentDirectives}`,
+  `script-src 'self' 'unsafe-inline' ${analyticsAndAdScripts}${developmentDirectives}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  `connect-src 'self'${developmentConnections}`,
+  `connect-src 'self' ${analyticsAndAdConnections}${developmentConnections}`,
+  "frame-src 'self' https:",
   "media-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",

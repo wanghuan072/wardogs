@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { formatCaliber, formatCatalogLabel, formatMoney, formatNumber, formatStatEffect } from "@/lib/formatting/format-values";
 import type { CatalogItem } from "@/types/catalog";
 import styles from "@/style/common/common.module.css";
@@ -35,7 +34,7 @@ export function CatalogCard({ item, compact = false, view = "grid", href }: { it
         </dl>}
       </article>
     );
-    return href ? <Link className={styles.catalogCardLink} href={href} aria-label={`Open ${item.name}`}>{card}</Link> : card;
+    return href ? <a className={styles.catalogCardLink} href={href} aria-label={`Open ${item.name}`}>{card}</a> : card;
   }
   const card = (
     <article className={compact ? styles.catalogCardCompact : styles.catalogCard}>
@@ -72,5 +71,5 @@ export function CatalogCard({ item, compact = false, view = "grid", href }: { it
       </div>
     </article>
   );
-  return href ? <Link className={styles.catalogCardLink} href={href} aria-label={`Open ${item.name}`}>{card}</Link> : card;
+  return href ? <a className={styles.catalogCardLink} href={href} aria-label={`Open ${item.name}`}>{card}</a> : card;
 }

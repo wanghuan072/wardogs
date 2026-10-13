@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, ShieldCheck } from "lucide-react";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { SectionHeading } from "@/components/common/SectionHeading";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { guides } from "@/lib/data/editorial";
 import { dateLabel } from "@/lib/formatting/format-values";
 import JsonLd from "@/seo/JsonLd";
@@ -26,12 +27,16 @@ export function GuideDetailPage({ guide }: { guide: Guide }) {
           <div className={styles.meta}><span><Clock3 /> Updated {dateLabel(guide.updatedAt)}</span><span>{guide.patchVersion}</span><span className={styles.author}>Written by <strong>Frontline Pathfinder</strong></span></div>
         </div>
       </header>
+      {/* 指南广告位 1：完整 Hero 结束后，正文开始前展示。 */}
+      <AdSlot placement="guide-after-hero" />
       <div className={`container ${styles.pageGrid}`}>
         <article className={styles.article}>
           <section className={styles.quickAnswer}><CheckCircle2 aria-hidden="true" /><div><span>Quick answer</span><p>{guide.quickAnswer}</p></div></section>
           {guide.sections.map((section, index) => <section key={section.heading} id={anchor(section.heading)} className={styles.guideSection}><span>{String(index + 1).padStart(2, "0")} / guide section</span><h2>{section.heading}</h2>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{section.image && <figure><div><Image src={section.image} alt="" fill sizes="(max-width: 900px) 100vw, 860px" /></div>{section.caption && <figcaption><small>IN GAME / {String(index + 1).padStart(2, "0")}</small>{section.caption}</figcaption>}</figure>}</section>)}
           <section className={styles.evidence}><ShieldCheck aria-hidden="true" /><div><h2>Check after an update</h2><p>WARDOGS is in Early Access, so prices, item details and balance can move between updates. These guides focus on practical decisions; check the current game build before you commit to an expensive purchase or a system-level PC change.</p></div></section>
           {guide.faq && <section className={styles.faq}><SectionHeading eyebrow="Direct answers" title="Frequently asked questions" />{guide.faq.map((entry) => <details key={entry.question}><summary>{entry.question}</summary><p>{entry.answer}</p></details>)}</section>}
+          {/* 指南广告位 2：全文与常见问题完成后，和 Hero 广告保留完整正文间隔。 */}
+          <AdSlot placement="guide-after-content" />
         </article>
         <aside className={styles.sidebar}>
           <nav className={styles.toc} aria-label="Table of contents"><span>In this guide</span>{guide.sections.map((section, index) => <a key={section.heading} href={`#${anchor(section.heading)}`}><small>{String(index + 1).padStart(2, "0")}</small>{section.heading}</a>)}</nav>

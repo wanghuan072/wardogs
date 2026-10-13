@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, Backpack, Boxes, Crosshair, SlidersHorizontal, Wrench } from "lucide-react";
 import { Breadcrumb } from "@/components/common/Breadcrumb";
+import { AdSlot } from "@/components/ads/AdSlot";
 import JsonLd from "@/seo/JsonLd";
 import { siteConfig } from "@/config/site";
 import { attachmentGroupsForWeapon, getWeaponRelations, weapons } from "@/lib/data/catalog";
@@ -13,12 +13,12 @@ import styles from "@/style/page/wiki/weapon-detail.module.css";
 type RecordLinkProps = { item: CatalogItem; href: string };
 
 function RecordLink({ item, href }: RecordLinkProps) {
-  return <Link href={href} className={styles.recordLink}>
+  return <a href={href} className={styles.recordLink}>
     {item.image && <span><Image src={item.image} alt="" fill sizes="64px" /></span>}
     <b>{item.name}</b>
     <small>{item.type || item.ammoType || item.kind}{item.price !== null ? ` · ${formatMoney(item.price)}` : ""}</small>
     <ArrowRight aria-hidden="true" />
-  </Link>;
+  </a>;
 }
 
 function weaponListingSearch(item: CatalogItem) {
@@ -44,8 +44,8 @@ export function WeaponDetailPage({ weapon }: { weapon: CatalogItem }) {
               <h1>{weapon.name}</h1>
               <p>{weaponBriefing(weapon)}</p>
               <div className={styles.heroActions}>
-                <Link href={`/builder?item=${weapon.slug}`}>Build with {weapon.name}<ArrowRight aria-hidden="true" /></Link>
-                <Link href="/wiki/weapons">Back to weapon list</Link>
+                <a href={`/builder?item=${weapon.slug}`}>Build with {weapon.name}<ArrowRight aria-hidden="true" /></a>
+                <a href="/wiki/weapons">Back to weapon list</a>
               </div>
             </div>
             <div className={styles.weaponRender}>
@@ -61,6 +61,9 @@ export function WeaponDetailPage({ weapon }: { weapon: CatalogItem }) {
         </div>
       </header>
 
+      {/* 武器页广告位 1：完整 Hero 结束后，数据内容开始前展示。 */}
+      <AdSlot placement="weapon-after-hero" />
+
       <div className={`container ${styles.pageGrid}`}>
         <article className={styles.article}>
           <section className={styles.section} aria-labelledby="weapon-readout">
@@ -68,19 +71,22 @@ export function WeaponDetailPage({ weapon }: { weapon: CatalogItem }) {
             <dl className={styles.readout}>{weaponReadout(weapon).map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
           </section>
 
+          {/* 武器页广告位：数据概览之后、兼容关系之前，不占用标题两侧。 */}
+          <AdSlot placement="weapon-after-readout" />
+
           <section className={styles.section} aria-labelledby="weapon-compatibility">
             <div className={styles.sectionHeading}><span>Loadout links</span><h2 id="weapon-compatibility">What the {weapon.name} can use</h2><p>Check ammunition, magazines and parts together before spending the rest of your cash on a kit.</p></div>
             <div className={styles.compatibilityGrid}>
               <div className={styles.compatibilityPanel}><div><Boxes aria-hidden="true" /><h3>Ammunition</h3><small>{relations.ammunition.length} recorded options</small></div>{relations.ammunition.length ? relations.ammunition.map((item) => <RecordLink item={item} href={weaponListingSearch(item)} key={item.slug} />) : <p>No compatible loose ammunition is recorded for this weapon.</p>}</div>
               <div className={styles.compatibilityPanel}><div><Backpack aria-hidden="true" /><h3>Magazines</h3><small>{relations.magazines.length} recorded options</small></div>{relations.magazines.length ? relations.magazines.map((item) => <RecordLink item={item} href={weaponListingSearch(item)} key={item.slug} />) : <p>No compatible magazine is recorded for this weapon.</p>}</div>
             </div>
-            <div className={styles.attachmentBlock}><div className={styles.attachmentHeading}><Wrench aria-hidden="true" /><div><h3>Attachments</h3><p>{relations.attachments.length} parts are available to browse by slot. Open the Builder to assemble them into a kit.</p></div><Link href={`/builder?item=${weapon.slug}`}>Open in Builder <ArrowRight aria-hidden="true" /></Link></div>{attachmentGroups.length ? <div className={styles.attachmentGroups}>{attachmentGroups.map(([label, items]) => <details key={label}><summary>{formatCatalogLabel(label)} <span>{items.length}</span></summary><div>{items.map((item) => <RecordLink item={item} href={weaponListingSearch(item)} key={item.slug} />)}</div></details>)}</div> : <p className={styles.emptyCopy}>No compatible attachments are available for this weapon.</p>}</div>
+            <div className={styles.attachmentBlock}><div className={styles.attachmentHeading}><Wrench aria-hidden="true" /><div><h3>Attachments</h3><p>{relations.attachments.length} parts are available to browse by slot. Open the Builder to assemble them into a kit.</p></div><a href={`/builder?item=${weapon.slug}`}>Open in Builder <ArrowRight aria-hidden="true" /></a></div>{attachmentGroups.length ? <div className={styles.attachmentGroups}>{attachmentGroups.map(([label, items]) => <details key={label}><summary>{formatCatalogLabel(label)} <span>{items.length}</span></summary><div>{items.map((item) => <RecordLink item={item} href={weaponListingSearch(item)} key={item.slug} />)}</div></details>)}</div> : <p className={styles.emptyCopy}>No compatible attachments are available for this weapon.</p>}</div>
           </section>
         </article>
 
         <aside className={styles.sidebar}>
-          <section className={styles.sidebarPanel}><SlidersHorizontal aria-hidden="true" /><span>Use it in a kit</span><p>Open the Builder with this weapon selected, then choose ammunition, magazines and parts for the job you are taking.</p><Link href={`/builder?item=${weapon.slug}`}>Start {weapon.name} build <ArrowRight aria-hidden="true" /></Link></section>
-          {peers.length ? <section className={styles.sidebarPanel}><Crosshair aria-hidden="true" /><span>Same class</span>{peers.map((item) => <Link href={`/wiki/weapons/${item.slug}`} key={item.slug}><b>{item.name}</b><small>{formatMoney(item.price)} · {item.caliber || "caliber not recorded"}</small><ArrowRight aria-hidden="true" /></Link>)}</section> : null}
+          <section className={styles.sidebarPanel}><SlidersHorizontal aria-hidden="true" /><span>Use it in a kit</span><p>Open the Builder with this weapon selected, then choose ammunition, magazines and parts for the job you are taking.</p><a href={`/builder?item=${weapon.slug}`}>Start {weapon.name} build <ArrowRight aria-hidden="true" /></a></section>
+          {peers.length ? <section className={styles.sidebarPanel}><Crosshair aria-hidden="true" /><span>Same class</span>{peers.map((item) => <a href={`/wiki/weapons/${item.slug}`} key={item.slug}><b>{item.name}</b><small>{formatMoney(item.price)} · {item.caliber || "caliber not recorded"}</small><ArrowRight aria-hidden="true" /></a>)}</section> : null}
         </aside>
       </div>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: `${weapon.name} WARDOGS weapon record`, description: weaponBriefing(weapon), dateModified: weapon.lastChecked, author: { "@type": "Organization", name: siteConfig.name }, mainEntityOfPage: `${siteConfig.url}/wiki/weapons/${weapon.slug}` }} />

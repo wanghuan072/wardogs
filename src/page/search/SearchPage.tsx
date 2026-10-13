@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 import { GlobalSearch } from "@/components/common/GlobalSearch";
 import { PageHero } from "@/components/common/PageHero";
@@ -38,7 +37,7 @@ export function SearchPage({ query }: { query: string }) {
           <div className={styles.empty}>
             <h2>Nothing matched that search</h2>
             <p>Try a weapon name, caliber, vehicle, item type or guide topic.</p>
-            <Link href="/wiki">Browse game items <ArrowRight aria-hidden="true" /></Link>
+            <a href="/wiki">Browse game items <ArrowRight aria-hidden="true" /></a>
           </div>
         )}
         {groups.map((group) => {
@@ -50,16 +49,16 @@ export function SearchPage({ query }: { query: string }) {
               <div className={styles.groupResults}>
                 <div className={styles.resultGrid}>
                   {groupResults.slice(0, 12).map((result) => (
-                    <Link href={result.href} key={result.id}>
+                    <a href={result.href} key={result.id}>
                       <div>{result.image ? <Image src={result.image} alt="" fill sizes="110px" /> : <Search aria-hidden="true" />}</div>
                       <span>{result.group}</span><h3>{result.title}</h3><p>{result.description}</p><ArrowRight aria-hidden="true" />
-                    </Link>
+                    </a>
                   ))}
                 </div>
                 {listing && groupResults.length > 12 && (
-                  <Link className={styles.moreResults} href={`${listing}?q=${encodeURIComponent(query)}`}>
+                  <a className={styles.moreResults} href={`${listing}?q=${encodeURIComponent(query)}`}>
                     View all {groupResults.length} matching {group.toLowerCase()} <ArrowRight aria-hidden="true" />
-                  </Link>
+                  </a>
                 )}
               </div>
             </section>

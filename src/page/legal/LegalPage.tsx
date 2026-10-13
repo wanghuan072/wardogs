@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowUpRight, Database, ExternalLink, FileCheck2, Mail, Radio, ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { siteConfig } from "@/config/site";
@@ -76,7 +75,7 @@ export function LegalPage({ slug }: { slug: string }) {
   return <main id="main-content">
     <PageHero eyebrow={page.eyebrow} title={page.title} description={page.description} image="/images/official/wardogs-13.jpg" crumbs={[{ label: page.title }]} />
     <section className={`container ${styles.layout}`}>
-      <article className={styles.document}>{page.sections.map((section, index) => { const Icon = icons[index % icons.length]; return <section key={section.title}><div className={styles.number}><Icon aria-hidden="true" /><span>{String(index + 1).padStart(2, "0")}</span></div><div><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{section.links && <div className={styles.links}>{section.links.map((link) => <Link key={link.href} href={link.href}>{link.label}{link.href.startsWith("http") || link.href.startsWith("mailto:") ? <ExternalLink size={13} /> : <ArrowUpRight size={13} />}</Link>)}</div>}</div></section>; })}</article>
+      <article className={styles.document}>{page.sections.map((section, index) => { const Icon = icons[index % icons.length]; return <section key={section.title}><div className={styles.number}><Icon aria-hidden="true" /><span>{String(index + 1).padStart(2, "0")}</span></div><div><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{section.links && <div className={styles.links}>{section.links.map((link) => <a key={link.href} href={link.href}>{link.label}{link.href.startsWith("http") || link.href.startsWith("mailto:") ? <ExternalLink size={13} /> : <ArrowUpRight size={13} />}</a>)}</div>}</div></section>; })}</article>
       <aside className={styles.rail}><Mail aria-hidden="true" /><span>Project desk</span><h2>Independent. Useful. Correctable.</h2><p>Send a page URL and enough context to check it properly. This site is maintained for WARDOGS players, not as an official game service.</p><a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a><small>Last policy review · September 11, 2026</small></aside>
     </section>
   </main>;

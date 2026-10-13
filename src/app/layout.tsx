@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { siteConfig } from "@/config/site";
@@ -54,6 +55,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         {children}
         <SiteFooter />
+        {/* Google Analytics：全站只加载一次，避免重复统计。 */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-BDJC0P6XXW" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-BDJC0P6XXW');
+        `}</Script>
+        {/* 联盟 Popunder：延迟至浏览器空闲，避免影响首屏内容。 */}
+        <Script id="affiliate-popunder" src="https://pl31790058.profitableratecpmnetwork.com/b3/9e/3e/b39e3e0171f747fd46e7826163472742.js" strategy="lazyOnload" />
         <JsonLd
           data={{
             "@context": "https://schema.org",

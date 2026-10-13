@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, BarChart3, CheckCircle2, Layers3, Scale } from "lucide-react";
 import { PageHero } from "@/components/common/PageHero";
 import { SectionHeading } from "@/components/common/SectionHeading";
@@ -67,14 +66,14 @@ function TierBoard({ items, section, showEmpty = false }: { items: CatalogItem[]
             <header><strong>{row.key}</strong><span>{row.label}</span></header>
             <div className={styles.tierItems}>
               {rowItems.map((item) => (
-                <Link className={styles.tierItem} href={itemHref(item)} key={item.slug}>
+                <a className={styles.tierItem} href={itemHref(item)} key={item.slug}>
                   <div className={styles.itemThumb}>
                     <Image src={item.image || "/images/official/wardogs-09.jpg"} alt={`${item.name} WARDOGS record`} fill sizes="132px" />
                   </div>
                   <strong>{item.name}</strong>
                   <span>{formatCatalogLabel(item.type || item.category, item.kind)}</span>
                   <small>{formatMoney(item.price)} <i /> {metricFor(section, item)}</small>
-                </Link>
+                </a>
               ))}
               {!rowItems.length && <p className={styles.emptyLane}>No current placement</p>}
             </div>
@@ -101,11 +100,11 @@ export function TierListPage({ section, searchParams = {} }: { section?: string;
 
       <nav className={`container ${styles.categoryBar}`} aria-label={`${data.label} categories`}>
         <span>Filter class</span>
-        <Link className={!activeCategory ? styles.active : ""} href={`/tier-list/${section}`}>All <b>{data.items.length}</b></Link>
+        <a className={!activeCategory ? styles.active : ""} href={`/tier-list/${section}`}>All <b>{data.items.length}</b></a>
         {categories.map((category) => {
           const slug = facetSlug(category);
           const count = data.items.filter((item) => categoryName(section, item) === category).length;
-          return <Link className={activeCategory === slug ? styles.active : ""} href={`/tier-list/${section}?category=${slug}`} key={category}>{category} <b>{count}</b></Link>;
+          return <a className={activeCategory === slug ? styles.active : ""} href={`/tier-list/${section}?category=${slug}`} key={category}>{category} <b>{count}</b></a>;
         })}
       </nav>
 
@@ -139,7 +138,7 @@ function TierHub() {
     <main id="main-content">
       <PageHero eyebrow="Reviewed weapon placements" title="WARDOGS Weapons Tier List" description="A compact field ranking for weapons with an editorial placement. Use it as a starting point, then check your budget, role and the current game build." image="/images/official/wardogs-09.jpg" crumbs={[{ label: "Tier List" }]} />
       <section className={`container ${styles.hubBoard}`}>
-        <header><div><span>Featured board / weapons</span><h2>Current field ranking</h2><p>A compact preview of records with an editorial placement.</p></div><Link href="/tier-list/weapons">Open all 38 weapons <ArrowRight /></Link></header>
+        <header><div><span>Featured board / weapons</span><h2>Current field ranking</h2><p>A compact preview of records with an editorial placement.</p></div><a href="/tier-list/weapons">Open all 38 weapons <ArrowRight /></a></header>
         <TierBoard items={preview} section="weapons" showEmpty />
       </section>
       <section className={`container ${styles.methodology}`}><SectionHeading eyebrow="Ranking discipline" title="How to read the board" /><div><article><Scale /><h3>Compare by role</h3><p>Each weapon is placed for how it performs in its intended job, not against unrelated classes.</p></article><article><BarChart3 /><h3>Compare the stats</h3><p>Price and rate of fire stay visible beside every placement for a quick comparison.</p></article><article><CheckCircle2 /><h3>Use your own kit</h3><p>Try a weapon with your budget, role and preferred range before making it a regular pick.</p></article></div></section>

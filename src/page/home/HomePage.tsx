@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, Backpack, CircleDollarSign, Crosshair, GitCompareArrows, Plane, Shield, Sparkles, Wrench } from "lucide-react";
 import { CatalogCard } from "@/components/content/CatalogCard";
 import { GlobalSearch } from "@/components/common/GlobalSearch";
@@ -11,6 +10,7 @@ import { dateLabel } from "@/lib/formatting/format-values";
 import { buildMetadata } from "@/seo/metadata";
 import { tdk } from "@/seo/tdk";
 import JsonLd from "@/seo/JsonLd";
+import { AdSlot } from "@/components/ads/AdSlot";
 import styles from "@/style/page/home/home.module.css";
 
 export const metadata: Metadata = buildMetadata(tdk.home);
@@ -59,17 +59,20 @@ export default function HomePage() {
             <h1><span>WARDOGS Game</span>{" "}Plan your next<br />deployment.</h1>
             <p>Find the gear you want, build a kit that fits, and get ready for your next WARDOGS match with practical guides and current update notes.</p>
             <GlobalSearch />
-            <div className={styles.heroActions}><Link href="/wiki">Browse the database <ArrowRight aria-hidden="true" /></Link><Link href="/builder">Open builder</Link></div>
+            <div className={styles.heroActions}><a href="/wiki">Browse the database <ArrowRight aria-hidden="true" /></a><a href="/builder">Open builder</a></div>
           </div>
           <aside className={styles.releaseDossier}>
             <span>Latest update</span>
             <strong>{latestUpdate.version}</strong>
             <time dateTime={latestUpdate.date}>{dateLabel(latestUpdate.date)}</time>
             <b>{latestUpdate.title}</b>
-            <Link href="/updates">Read release log <ArrowRight aria-hidden="true" /></Link>
+            <a href="/updates">Read release log <ArrowRight aria-hidden="true" /></a>
           </aside>
         </div>
       </section>
+
+      {/* 首页广告位 1：完整 Hero 结束后，先展示一条横幅再进入页面内容。 */}
+      <AdSlot placement="home-after-hero" />
 
       <section className={styles.statBand} aria-label="Database totals"><div className="container">
         {databaseStats.map(({ icon: Icon, value, label }) => <div key={label} className={styles.statItem}><Icon aria-hidden="true" /><strong>{value}</strong><span>{label}</span></div>)}
@@ -78,19 +81,22 @@ export default function HomePage() {
       <section className={`container ${styles.catalogueSection}`}>
         <SectionHeading eyebrow="Game items" title="Browse game items" description="Weapons, ammo, gear and vehicles in one place. Check the important details directly from each list." href="/wiki" />
         <div className={styles.exploreGrid}>
-          {explore.map((item) => <Link key={item.href} href={item.href} className={styles.exploreCard}>
+          {explore.map((item) => <a key={item.href} href={item.href} className={styles.exploreCard}>
             <div className={styles.exploreMedia}><Image src={item.image} alt="" fill sizes="(max-width: 700px) 50vw, 220px" /><item.icon aria-hidden="true" /></div>
             <div><span>{item.count} items</span><h3>{item.title}</h3><p>{item.text}</p></div><ArrowRight aria-hidden="true" />
-          </Link>)}
+          </a>)}
         </div>
       </section>
 
+      {/* 首页广告位 2：数据总览与物品入口两个完整区块结束后。 */}
+      <AdSlot placement="home-after-catalogue" />
+
       <section className={`container ${styles.commandDeck}`}>
-        <Link href="/builder" className={styles.builderPanel}>
+        <a href="/builder" className={styles.builderPanel}>
           <Image src="/images/official/wardogs-03.jpg" alt="WARDOGS operator preparing equipment" fill sizes="(max-width: 800px) 100vw, 620px" quality={55} />
           <span className={styles.builderShade} />
           <div><span>Field kit / compatible gear</span><h2>Build your kit</h2><p>Select a weapon, then see the ammunition and attachments that fit it. Price and carried weight update as you assemble the kit.</p><b>Enter equipment builder <ArrowRight aria-hidden="true" /></b></div>
-        </Link>
+        </a>
         <div className={styles.commandBrief}>
           <span>Start here</span>
           <h2>How to use the site</h2>
@@ -101,14 +107,17 @@ export default function HomePage() {
       <section className={`container ${styles.operationsSection}`}>
         <SectionHeading eyebrow="Decision support" title="Useful tools" description="Compare weapons, check your budget, or jump straight into a guide." href="/tools" />
         <div className={styles.operationsGrid}>
-          {operations.map((operation) => <Link key={operation.href} href={operation.href} className={styles.operationCard}>
+          {operations.map((operation) => <a key={operation.href} href={operation.href} className={styles.operationCard}>
             <Image src={operation.image} alt="" fill sizes="(max-width: 700px) 100vw, 400px" quality={55} /><span /><operation.icon aria-hidden="true" /><div><h3>{operation.title}</h3><p>{operation.text}</p></div><ArrowRight aria-hidden="true" />
-          </Link>)}
-          <Link href={`/guides/${featuredGuide.slug}`} className={styles.guideFeature}>
+          </a>)}
+          <a href={`/guides/${featuredGuide.slug}`} className={styles.guideFeature}>
             <Image src={featuredGuide.image} alt="" fill sizes="(max-width: 700px) 100vw, 460px" /><span /><div><small>Field guide / {dateLabel(featuredGuide.updatedAt)}</small><h3>{featuredGuide.title}</h3><p>{featuredGuide.description}</p><b>Read guide <ArrowRight aria-hidden="true" /></b></div>
-          </Link>
+          </a>
         </div>
       </section>
+
+      {/* 首页广告位 3：配装与工具两个完整区块结束后。 */}
+      <AdSlot placement="home-after-tools" />
 
       <section className={`container ${styles.aboutFaq}`}>
         <div className={styles.aboutCopy}>
@@ -116,7 +125,7 @@ export default function HomePage() {
           <h2>Built for the questions players ask between matches.</h2>
           <p>WARDOGS Field Intel is an independent WARDOGS game companion with item lists, a kit builder, practical tools and a small set of long-form guides. It is built to help you spend less time hunting through menus and more time deciding what to take into the next round.</p>
           <p>The game is in Early Access, so some prices, compatibility details and balance values can change. We update pages as the game changes and leave uncertain values blank rather than filling them in with a guess.</p>
-          <Link href="/about">How the site stays up to date <ArrowRight aria-hidden="true" /></Link>
+          <a href="/about">How the site stays up to date <ArrowRight aria-hidden="true" /></a>
         </div>
         <div className={styles.faqPanel}>
           <span>Quick answers</span>
@@ -129,11 +138,11 @@ export default function HomePage() {
         <div>
           <SectionHeading eyebrow="Popular picks" title="Popular weapons" description="A quick look at the weapons players search for most." href="/wiki/weapons" />
           <div className={styles.weaponGrid}>{popularItems.map((item) => <CatalogCard key={item.slug} item={item} compact href={itemHref(item)} />)}</div>
-          <Link href="/updates" className={styles.updateLink}><span>Release log</span><strong>{latestUpdate.version}</strong><p>{latestUpdate.label} · {dateLabel(latestUpdate.date)}</p><ArrowRight aria-hidden="true" /></Link>
+          <a href="/updates" className={styles.updateLink}><span>Release log</span><strong>{latestUpdate.version}</strong><p>{latestUpdate.label} · {dateLabel(latestUpdate.date)}</p><ArrowRight aria-hidden="true" /></a>
         </div>
         <aside className={styles.guideRail}>
           <SectionHeading eyebrow="Field guides" title="Guides for your next match" href="/guides" />
-          <div className={styles.guideList}>{guides.map((guide) => <Link href={`/guides/${guide.slug}`} key={guide.slug}><Image src={guide.image} alt="" width={88} height={54} /><div><strong>{guide.title}</strong><span>{dateLabel(guide.updatedAt)} · WARDOGS guide</span></div><ArrowRight aria-hidden="true" /></Link>)}</div>
+          <div className={styles.guideList}>{guides.map((guide) => <a href={`/guides/${guide.slug}`} key={guide.slug}><Image src={guide.image} alt="" width={88} height={54} /><div><strong>{guide.title}</strong><span>{dateLabel(guide.updatedAt)} · WARDOGS guide</span></div><ArrowRight aria-hidden="true" /></a>)}</div>
         </aside>
       </section>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: homeFaq.map((entry) => ({ "@type": "Question", name: entry.question, acceptedAnswer: { "@type": "Answer", text: entry.answer } })) }} />

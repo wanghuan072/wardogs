@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import styles from "@/style/common/common.module.css";
@@ -9,11 +8,11 @@ export function RelatedLinks({ links, title = "Keep exploring" }: { links: { lab
       <SectionHeading eyebrow="Next action" title={title} />
       <div className={styles.relatedGrid}>
         {links.map((link) => (
-          <Link href={link.href} key={link.href}>
+          <a href={link.href} key={link.href}>
             <span>{link.label}</span>
             <p>{link.text}</p>
             <ArrowRight aria-hidden="true" />
-          </Link>
+          </a>
         ))}
       </div>
     </section>

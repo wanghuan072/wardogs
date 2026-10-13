@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, Backpack, Boxes, Crosshair, Database, Plane, Shield, Wrench } from "lucide-react";
 import { CatalogCard } from "@/components/content/CatalogCard";
 import { GlobalSearch } from "@/components/common/GlobalSearch";
@@ -49,19 +48,19 @@ export default function WikiPage() {
         <div className={styles.searchDock}>
           <div className={styles.searchTitle}><span>Search game items</span><strong>Start with what you need</strong><p>Weapons, calibers, gear and vehicles are all in one place.</p></div>
           <GlobalSearch />
-          <nav className={styles.quickLinks} aria-label="Quick wiki links"><Link href="/wiki/weapons">Weapons</Link><Link href="/wiki/ammunition">Ammunition</Link><Link href="/wiki/vehicles">Vehicles</Link></nav>
+          <nav className={styles.quickLinks} aria-label="Quick wiki links"><a href="/wiki/weapons">Weapons</a><a href="/wiki/ammunition">Ammunition</a><a href="/wiki/vehicles">Vehicles</a></nav>
         </div>
         <div className={styles.summary} aria-label="Database summary">
           {databaseSummary.map(({ icon: Icon, count, label }) => <div key={label}><Icon aria-hidden="true" /><strong>{count}</strong><span>{label}</span></div>)}
         </div>
       </section>
-      <section className={`container ${styles.section}`}><SectionHeading eyebrow="Browse by category" title="Choose what you want to check" description="Open a category, then filter the list by the details that matter to your kit." /><div className={styles.groupGrid}>{groups.map((group) => <article key={group.title} className={styles.groupCard}><header><span>{group.label}</span><group.icon aria-hidden="true" /></header><h3>{group.title}</h3><p>{group.description}</p><div>{group.links.map(([label, href, count]) => <Link href={href} key={href}><span>{label}</span><small>{count}</small><ArrowRight size={14} /></Link>)}</div></article>)}</div></section>
+      <section className={`container ${styles.section}`}><SectionHeading eyebrow="Browse by category" title="Choose what you want to check" description="Open a category, then filter the list by the details that matter to your kit." /><div className={styles.groupGrid}>{groups.map((group) => <article key={group.title} className={styles.groupCard}><header><span>{group.label}</span><group.icon aria-hidden="true" /></header><h3>{group.title}</h3><p>{group.description}</p><div>{group.links.map(([label, href, count]) => <a href={href} key={href}><span>{label}</span><small>{count}</small><ArrowRight size={14} /></a>)}</div></article>)}</div></section>
       <section className={`container ${styles.intelGrid}`}>
         <div className={styles.popularPanel}><SectionHeading eyebrow="Popular picks" title="Items players check often" description="A quick look at common weapons, vehicles and equipment choices." href="/wiki/weapons" /><div className={styles.popularGrid}>{popular.map((item) => <CatalogCard item={item} key={item.slug} compact href={itemHref(item)} />)}</div></div>
-        <aside className={styles.updatePanel}><SectionHeading eyebrow="Start your kit" title="Useful first picks" description="A practical set of entries to open when you are putting together a straightforward field kit." /><div className={styles.updatedList}>{kitStarters.map((item, index) => <Link href={itemHref(item)} key={item.slug}><span>{String(index + 1).padStart(2, "0")}</span>{item.image && <Image src={item.image} alt="" width={70} height={45} />}<div><strong>{item.name}</strong><small>{item.type || item.kind}{item.price !== null ? ` · $${item.price.toLocaleString()}` : ""}</small></div><ArrowRight size={14} aria-hidden="true" /></Link>)}</div></aside>
+        <aside className={styles.updatePanel}><SectionHeading eyebrow="Start your kit" title="Useful first picks" description="A practical set of entries to open when you are putting together a straightforward field kit." /><div className={styles.updatedList}>{kitStarters.map((item, index) => <a href={itemHref(item)} key={item.slug}><span>{String(index + 1).padStart(2, "0")}</span>{item.image && <Image src={item.image} alt="" width={70} height={45} />}<div><strong>{item.name}</strong><small>{item.type || item.kind}{item.price !== null ? ` · $${item.price.toLocaleString()}` : ""}</small></div><ArrowRight size={14} aria-hidden="true" /></a>)}</div></aside>
       </section>
-      <section className={`container ${styles.guideStrip}`}><SectionHeading eyebrow="Learn the game" title="Guides for your next match" description="Practical guides for the game systems that matter when you are playing." href="/guides" /><div>{guides.slice(0, 4).map((guide) => <Link key={guide.slug} href={`/guides/${guide.slug}`}><Image src={guide.image} alt="" fill sizes="330px" /><span /><div><small>{guide.category}</small><h3>{guide.title}</h3><p>{guide.description}</p><b>Read guide <ArrowRight size={13} aria-hidden="true" /></b></div></Link>)}</div></section>
-      <section className={`container ${styles.actionBand}`}><div><span>What next?</span><h2>Use the information in your next match</h2></div><div>{actions.map((action) => <Link href={action.href} key={action.href}><span>{action.label}</span><p>{action.text}</p><ArrowRight aria-hidden="true" /></Link>)}</div></section>
+      <section className={`container ${styles.guideStrip}`}><SectionHeading eyebrow="Learn the game" title="Guides for your next match" description="Practical guides for the game systems that matter when you are playing." href="/guides" /><div>{guides.slice(0, 4).map((guide) => <a key={guide.slug} href={`/guides/${guide.slug}`}><Image src={guide.image} alt="" fill sizes="330px" /><span /><div><small>{guide.category}</small><h3>{guide.title}</h3><p>{guide.description}</p><b>Read guide <ArrowRight size={13} aria-hidden="true" /></b></div></a>)}</div></section>
+      <section className={`container ${styles.actionBand}`}><div><span>What next?</span><h2>Use the information in your next match</h2></div><div>{actions.map((action) => <a href={action.href} key={action.href}><span>{action.label}</span><p>{action.text}</p><ArrowRight aria-hidden="true" /></a>)}</div></section>
     </main>
   );
 }

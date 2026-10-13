@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { Breadcrumb, type Crumb } from "@/components/common/Breadcrumb";
+import { AdSlot } from "@/components/ads/AdSlot";
 import styles from "@/style/common/common.module.css";
 
 export function PageHero({
@@ -45,6 +46,8 @@ export function PageHero({
       </div>
     </section>
     {children ? <div className={`${containerClassName || "container"} ${styles.pageHeroAfter}`}>{children}</div> : null}
+    {/* 内页首个广告：置于完整首屏信息之后，不放在标题上下。 */}
+    <AdSlot placement="page-hero-after" />
     </>
   );
 }

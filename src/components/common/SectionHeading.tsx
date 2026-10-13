@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styles from "@/style/common/common.module.css";
 
 export function SectionHeading({
@@ -21,7 +20,7 @@ export function SectionHeading({
         <h2>{title}</h2>
         {description && <p>{description}</p>}
       </div>
-      {href && <Link href={href}>{linkLabel} <span aria-hidden="true">→</span></Link>}
+      {href && <a href={href}>{linkLabel} <span aria-hidden="true">→</span></a>}
     </div>
   );
 }

@@ -1,11 +1,10 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import styles from "@/style/page/wiki/wiki-listing.module.css";
 
 export function CatalogSort({ value, showRateOfFire = false }: { value: string; showRateOfFire?: boolean }) {
   const pathname = usePathname();
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   return (
@@ -16,7 +15,8 @@ export function CatalogSort({ value, showRateOfFire = false }: { value: string; 
         onChange={(event) => {
           const query = new URLSearchParams(searchParams.toString());
           query.set("sort", event.target.value);
-          router.push(`${pathname}?${query.toString()}`);
+          // 排序会改变独立 URL；使用完整文档导航以重新初始化统计与广告位。
+          window.location.assign(`${pathname}?${query.toString()}`);
         }}
       >
         <option value="name">Name</option>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowRight, BookOpenText, Crosshair, Wrench } from "lucide-react";
 import { GlobalSearch } from "@/components/common/GlobalSearch";
 import styles from "@/style/page/not-found/not-found.module.css";
@@ -18,8 +17,8 @@ export default function NotFound() {
         <h1>Intel Not Found</h1>
         <p>The requested route is outside the current operations board. Search the database or redeploy through a known section.</p>
         <GlobalSearch />
-        <div className={styles.grid}>{exits.map((exit) => <Link key={exit.href} href={exit.href}><exit.icon aria-hidden="true" /><div><strong>{exit.label}</strong><span>{exit.text}</span></div><ArrowRight aria-hidden="true" /></Link>)}</div>
-        <Link className={styles.home} href="/">Return to command overview <ArrowRight size={15} /></Link>
+        <div className={styles.grid}>{exits.map((exit) => <a key={exit.href} href={exit.href}><exit.icon aria-hidden="true" /><div><strong>{exit.label}</strong><span>{exit.text}</span></div><ArrowRight aria-hidden="true" /></a>)}</div>
+        <a className={styles.home} href="/">Return to command overview <ArrowRight size={15} /></a>
       </section>
     </main>
   );
