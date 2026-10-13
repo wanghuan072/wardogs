@@ -43,7 +43,6 @@ export function AdSlot({ placement }: { placement: string }) {
           srcDoc={isMobile ? mobileBannerDocument : desktopBannerDocument}
           width={isMobile ? 300 : 728}
           height={isMobile ? 250 : 90}
-          sandbox="allow-scripts allow-popups"
           referrerPolicy="strict-origin-when-cross-origin"
           scrolling="no"
         />
